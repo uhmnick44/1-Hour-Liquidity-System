@@ -90,7 +90,7 @@ class Roll:
 
 
 def roll_schedule(front_contracts: List[str], sessions: List[Session]) -> List[Roll]:
-    nyse = mcal.get_calendar("NYSE").valid_days("2025-01-01", "2027-12-31").tz_localize(None)
+    nyse = mcal.get_calendar("NYSE").valid_days("2015-01-01", "2030-12-31").tz_localize(None)
     sess_dates = pd.DatetimeIndex([s.date for s in sessions])
     rolls = []
     for old, new in zip(front_contracts[:-1], front_contracts[1:]):

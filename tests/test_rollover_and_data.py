@@ -11,7 +11,7 @@ def test_third_friday_and_holiday_shift():
     assert third_friday(2025, 12) == pd.Timestamp("2025-12-19")
     assert third_friday(2026, 6) == pd.Timestamp("2026-06-19")
     import pandas_market_calendars as mcal
-    nyse = mcal.get_calendar("NYSE").valid_days("2025-01-01", "2027-12-31").tz_localize(None)
+    nyse = mcal.get_calendar("NYSE").valid_days("2015-01-01", "2030-12-31").tz_localize(None)
     assert expiry_date("MNQM6", nyse) == pd.Timestamp("2026-06-18")    # Juneteenth
     assert expiry_date("MNQZ5", nyse) == pd.Timestamp("2025-12-19")
 
