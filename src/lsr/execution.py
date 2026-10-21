@@ -218,6 +218,10 @@ class Simulator:
                                         planned_contracts=0, planned_stop_distance=0.0, planned_risk_usd=0.0,
                                         equity_at_creation=self.equity)
             return
+        if self.cfg.strategy.entry_mode == "market_only":
+            # V2: no EQ limit orders. The setup is skipped and the system stays free.
+            self._record_event(sig.close_ts, sig, "skipped", "limit_entries_disabled")
+            return
         # limit at EQ: sell limit rounds up, buy limit rounds down
         lp = self.cfg.instrument.round_to_tick(sig.eq, "up" if sig.direction == SHORT else "down")
         stop, target, dist = self.stop_and_target(sig.direction, lp, sig.extreme)

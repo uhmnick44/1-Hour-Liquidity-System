@@ -24,16 +24,20 @@ def main() -> int:
     ap.add_argument("--label", default=None)
     ap.add_argument("--out", default=str(ROOT / "results"))
     ap.add_argument("--sensitivity", action="store_true")
+    ap.add_argument("--entry-mode", default="market_and_limit", choices=["market_and_limit", "market_only"],
+                    help="market_and_limit = V1 baseline; market_only = V2 experiment")
+    ap.add_argument("--prefix", default="", help="results sub-directory prefix, e.g. v2_")
     args = ap.parse_args()
     base = BacktestConfig()
+    base = dataclasses.replace(base, strategy=dataclasses.replace(base.strategy, entry_mode=args.entry_mode))
     md = build_market_data(base.data, base.strategy)
     runs = [(1, "optimistic_1tick"), (2, "baseline_2ticks"), (4, "conservative_4ticks")] if args.sensitivity \
         else [(args.slippage_ticks, args.label or f"slippage_{args.slippage_ticks}ticks")]
     for ticks, label in runs:
         cfg = dataclasses.replace(base, costs=dataclasses.replace(base.costs, slippage_ticks=ticks))
         res = run_backtest(md, cfg)
-        out = Path(args.out) / label
-        rep = write_outputs(res, md, out, label)
+        out = Path(args.out) / (args.prefix + label)
+        rep = write_outputs(res, md, out, args.prefix + label)
         md_text = render_markdown(rep)
         (out / "summary.md").write_text(md_text)
         print(md_text)

@@ -243,3 +243,24 @@ def test_missed_flatten_is_forced_at_last_bar_of_session():
     t = s.trades[-1]
     assert t.exit_reason == "flatten" and "flatten_forced_last_bar" in t.trade_flags and t.exit_price == 100.5
     assert t.exit_ts == T0 + pd.Timedelta(minutes=291)
+
+
+# ------------------------------------------------------------- V2 entry mode
+def test_v2_market_only_skips_limit_setups_without_occupying():
+    import dataclasses
+    from lsr.config import StrategyConfig
+    v2 = sim(strategy=StrategyConfig(entry_mode="market_only"))
+    v2.on_signal(mk_signal(SHORT, high=120.0, low=100.0, close=105.0), first_session(v2))     # would be a sell limit
+    assert v2.pending is None and v2.events[-1].outcome == "skipped" and v2.events[-1].reason == "limit_entries_disabled"
+    v2.on_signal(mk_signal(LONG, high=120.0, low=100.0, close=105.0, close_minute=120), first_session(v2))   # market long next hour
+    assert v2.pending is not None and v2.pending.kind == "market"
+    # V1 on the same two signals: the limit occupies the slot and the second signal is skipped as occupied
+    v1 = sim()
+    v1.on_signal(mk_signal(SHORT, high=120.0, low=100.0, close=105.0), first_session(v1))
+    v1.on_signal(mk_signal(LONG, high=120.0, low=100.0, close=105.0, close_minute=120), first_session(v1))
+    assert v1.pending.kind == "limit" and v1.events[-1].reason == "occupied"
+
+
+def test_v1_default_is_unchanged():
+    from lsr.config import StrategyConfig
+    assert StrategyConfig().entry_mode == "market_and_limit"

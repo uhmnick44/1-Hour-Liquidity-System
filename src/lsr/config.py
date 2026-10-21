@@ -83,6 +83,15 @@ class StrategyConfig:
     max_levels: int = 8
     sweep_mode: str = "Wick"
     on_sweep: str = "Keep & recolor"
+    # Entry mode. V1 (immutable baseline): "market_and_limit". V2 experiment
+    # (approved 2026-10-21): "market_only", which skips every setup that would
+    # have produced an EQ limit order and leaves the system available for the
+    # next signal. Nothing else differs between V1 and V2.
+    entry_mode: str = "market_and_limit"
+
+    def __post_init__(self) -> None:
+        if self.entry_mode not in ("market_and_limit", "market_only"):
+            raise ValueError(f"unknown entry_mode {self.entry_mode!r}")
 
 
 @dataclass(frozen=True)

@@ -1,0 +1,337 @@
+{
+  "label": "v2_baseline_2ticks",
+  "config": {
+    "slippage_ticks": 2,
+    "fees_per_side": 0.94,
+    "starting_equity": 50000.0,
+    "risk_fraction": 0.01,
+    "max_contracts": 10,
+    "min_stop_points": 10.0,
+    "limit_window_candles": 3
+  },
+  "data": {
+    "h1_bars": 6228,
+    "m1_bars": 373500,
+    "first_bar": "2025-10-01 00:00:00+00:00",
+    "last_bar_close": "2026-10-21 00:00:00+00:00",
+    "engine_new_levels": 731,
+    "engine_sweeps": 502
+  },
+  "split": {
+    "boundary_utc": "2026-06-14 16:00:00+00:00",
+    "boundary_et": "2026-06-14 12:00:00-04:00",
+    "dev_fraction": 0.6666666666666666
+  },
+  "full_sample": {
+    "performance": {
+      "total_trades": 121,
+      "winning_trades": 68,
+      "losing_trades": 53,
+      "win_rate": 0.5619834710743802,
+      "win_rate_ci95": [
+        0.47302233622056394,
+        0.6471299207194305
+      ],
+      "avg_win_r": 0.9406274118569834,
+      "avg_loss_r": -0.9821924192059368,
+      "avg_win_usd": 401.1158823529412,
+      "avg_loss_usd": -414.72415094339624,
+      "expectancy_r": 0.09840054370545637,
+      "expectancy_r_ci95": [
+        -0.07935779940360417,
+        0.26855615804676763
+      ],
+      "expectancy_usd": 43.76446280991737,
+      "profit_factor": 1.2409194017573855,
+      "gross_pnl_usd": 6282.5,
+      "fees_usd": 986.9999999999998,
+      "slippage_usd": 752.0,
+      "net_pnl_usd": 5295.500000000002,
+      "ending_equity": 55295.5,
+      "max_drawdown_usd": -3366.3600000000006,
+      "max_drawdown_pct": -0.0651361249736852,
+      "longest_losing_streak": 6,
+      "avg_contracts": 4.338842975206612,
+      "avg_planned_risk_usd": 422.72727272727286,
+      "avg_planned_risk_pct_of_equity": 0.008194164545822297,
+      "avg_stop_distance_points": 85.76446280991736,
+      "exit_reasons": {
+        "target": 67,
+        "stop": 52,
+        "flatten": 2
+      },
+      "by_entry_type": {
+        "market": {
+          "trades": 121,
+          "win_rate": 0.5619834710743802,
+          "expectancy_r": 0.09840054370545637
+        }
+      },
+      "by_direction": {
+        "long": {
+          "trades": 60,
+          "win_rate": 0.5,
+          "expectancy_r": 0.000862436863739822
+        },
+        "short": {
+          "trades": 61,
+          "win_rate": 0.6229508196721312,
+          "expectancy_r": 0.19433966518911194
+        }
+      }
+    },
+    "orders": {
+      "signals": 268,
+      "limit_orders_placed": 0,
+      "limit_orders_filled": 0,
+      "limit_fill_rate": NaN,
+      "expired_orders": 0,
+      "invalidated_orders": 0,
+      "flatten_cancelled_orders": 0,
+      "invalidation_reasons": {},
+      "skipped_setups_by_reason": {
+        "limit_entries_disabled": 134,
+        "size_below_min": 7,
+        "occupied": 3,
+        "min_stop": 1,
+        "dual_side_sweep": 1,
+        "pre_closure_window": 1,
+        "market_open_outside_zone": 1
+      },
+      "no_setup_by_reason": {
+        "sweep_without_close_back": 232
+      }
+    }
+  },
+  "development": {
+    "performance": {
+      "total_trades": 84,
+      "winning_trades": 48,
+      "losing_trades": 36,
+      "win_rate": 0.5714285714285714,
+      "win_rate_ci95": [
+        0.4647675967027547,
+        0.6718419368212247
+      ],
+      "avg_win_r": 0.9345443052995998,
+      "avg_loss_r": -0.9737832838309625,
+      "avg_win_usd": 388.73583333333335,
+      "avg_loss_usd": -412.6483333333333,
+      "expectancy_r": 0.1166896242436445,
+      "expectancy_r_ci95": [
+        -0.09546055788216652,
+        0.3236325465683206
+      ],
+      "expectancy_usd": 45.285476190476196,
+      "profit_factor": 1.256068188274385,
+      "gross_pnl_usd": 4563.5,
+      "fees_usd": 759.5199999999999,
+      "slippage_usd": 598.0,
+      "net_pnl_usd": 3803.9800000000005,
+      "ending_equity": 53803.979999999996,
+      "max_drawdown_usd": -3366.3600000000006,
+      "max_drawdown_pct": -0.0651361249736852,
+      "longest_losing_streak": 5,
+      "avg_contracts": 4.809523809523809,
+      "avg_planned_risk_usd": 416.54190476190473,
+      "avg_planned_risk_pct_of_equity": 0.008161576551292302,
+      "avg_stop_distance_points": 78.97619047619048,
+      "exit_reasons": {
+        "target": 47,
+        "stop": 35,
+        "flatten": 2
+      },
+      "by_entry_type": {
+        "market": {
+          "trades": 84,
+          "win_rate": 0.5714285714285714,
+          "expectancy_r": 0.1166896242436445
+        }
+      },
+      "by_direction": {
+        "long": {
+          "trades": 38,
+          "win_rate": 0.5263157894736842,
+          "expectancy_r": 0.0621054858779397
+        },
+        "short": {
+          "trades": 46,
+          "win_rate": 0.6086956521739131,
+          "expectancy_r": 0.16178086898053107
+        }
+      }
+    },
+    "orders": {
+      "signals": 186,
+      "limit_orders_placed": 0,
+      "limit_orders_filled": 0,
+      "limit_fill_rate": NaN,
+      "expired_orders": 0,
+      "invalidated_orders": 0,
+      "flatten_cancelled_orders": 0,
+      "invalidation_reasons": {},
+      "skipped_setups_by_reason": {
+        "limit_entries_disabled": 95,
+        "size_below_min": 4,
+        "occupied": 2,
+        "min_stop": 1,
+        "dual_side_sweep": 1
+      },
+      "no_setup_by_reason": {
+        "sweep_without_close_back": 145
+      }
+    }
+  },
+  "out_of_sample": {
+    "performance": {
+      "total_trades": 37,
+      "winning_trades": 20,
+      "losing_trades": 17,
+      "win_rate": 0.5405405405405406,
+      "win_rate_ci95": [
+        0.38383779524767364,
+        0.6896167217154228
+      ],
+      "avg_win_r": 0.9552268675947039,
+      "avg_loss_r": -1.0,
+      "avg_win_usd": 430.828,
+      "avg_loss_usd": -419.12,
+      "expectancy_r": 0.056879387889029194,
+      "expectancy_r_ci95": [
+        -0.26051171001034085,
+        0.3743185036169929
+      ],
+      "expectancy_usd": 40.31135135135136,
+      "profit_factor": 1.2093349651370378,
+      "gross_pnl_usd": 1719.0,
+      "fees_usd": 227.47999999999996,
+      "slippage_usd": 154.0,
+      "net_pnl_usd": 1491.5200000000004,
+      "ending_equity": 55295.49999999998,
+      "max_drawdown_usd": -3300.479999999996,
+      "max_drawdown_pct": -0.06086618799605639,
+      "longest_losing_streak": 6,
+      "avg_contracts": 3.27027027027027,
+      "avg_planned_risk_usd": 436.7697297297297,
+      "avg_planned_risk_pct_of_equity": 0.008268148100971477,
+      "avg_stop_distance_points": 101.17567567567568,
+      "exit_reasons": {
+        "target": 20,
+        "stop": 17
+      },
+      "by_entry_type": {
+        "market": {
+          "trades": 37,
+          "win_rate": 0.5405405405405406,
+          "expectancy_r": 0.056879387889029194
+        }
+      },
+      "by_direction": {
+        "long": {
+          "trades": 22,
+          "win_rate": 0.45454545454545453,
+          "expectancy_r": -0.10492101143351446
+        },
+        "short": {
+          "trades": 15,
+          "win_rate": 0.6666666666666666,
+          "expectancy_r": 0.29418664022876
+        }
+      }
+    },
+    "orders": {
+      "signals": 82,
+      "limit_orders_placed": 0,
+      "limit_orders_filled": 0,
+      "limit_fill_rate": NaN,
+      "expired_orders": 0,
+      "invalidated_orders": 0,
+      "flatten_cancelled_orders": 0,
+      "invalidation_reasons": {},
+      "skipped_setups_by_reason": {
+        "limit_entries_disabled": 39,
+        "size_below_min": 3,
+        "occupied": 1,
+        "pre_closure_window": 1,
+        "market_open_outside_zone": 1
+      },
+      "no_setup_by_reason": {
+        "sweep_without_close_back": 87
+      }
+    }
+  },
+  "ambiguity": {
+    "fill_vs_invalidation": 0,
+    "stop_vs_target": 0,
+    "entry_and_exit_same_minute": 2
+  },
+  "flagged_trades": {
+    "entry_and_exit_same_minute": 2
+  },
+  "rolls": [
+    {
+      "old": "MNQZ5",
+      "new": "MNQH6",
+      "roll_session": "2025-12-12",
+      "expiry": "2025-12-19",
+      "old_close": 25203.0,
+      "new_close": 25456.25,
+      "offset": 253.25,
+      "old_volume": 2191361,
+      "new_volume": 75307,
+      "old_close_ts_et": "2025-12-12 16:59:00-05:00",
+      "new_close_ts_et": "2025-12-12 16:59:00-05:00"
+    },
+    {
+      "old": "MNQH6",
+      "new": "MNQM6",
+      "roll_session": "2026-03-13",
+      "expiry": "2026-03-20",
+      "old_close": 24335.25,
+      "new_close": 24549.5,
+      "offset": 214.25,
+      "old_volume": 2333203,
+      "new_volume": 29552,
+      "old_close_ts_et": "2026-03-13 16:59:00-04:00",
+      "new_close_ts_et": "2026-03-13 16:59:00-04:00"
+    },
+    {
+      "old": "MNQM6",
+      "new": "MNQU6",
+      "roll_session": "2026-06-12",
+      "expiry": "2026-06-18",
+      "old_close": 29677.0,
+      "new_close": 29970.25,
+      "offset": 293.25,
+      "old_volume": 2520398,
+      "new_volume": 519730,
+      "old_close_ts_et": "2026-06-12 16:59:00-04:00",
+      "new_close_ts_et": "2026-06-12 16:59:00-04:00"
+    },
+    {
+      "old": "MNQU6",
+      "new": "MNQZ6",
+      "roll_session": "2026-09-11",
+      "expiry": "2026-09-18",
+      "old_close": 29392.75,
+      "new_close": 29692.5,
+      "offset": 299.75,
+      "old_volume": 2216394,
+      "new_volume": 34625,
+      "old_close_ts_et": "2026-09-11 16:59:00-04:00",
+      "new_close_ts_et": "2026-09-11 16:59:00-04:00"
+    }
+  ],
+  "calendar_overrides": [
+    {
+      "date": "2025-11-28",
+      "close_et": "2025-11-28 13:15:00-05:00",
+      "note": "User-verified CME Equity Index Globex close 1:15 PM ET (2026-10-21). Databento and TradingView both show the last traded minute at 13:14 ET. pandas_market_calendars CME_Equity 5.5.0 says 13:00 ET."
+    },
+    {
+      "date": "2025-12-24",
+      "close_et": "2025-12-24 13:15:00-05:00",
+      "note": "User-verified CME Equity Index Globex close 1:15 PM ET (2026-10-21). Databento and TradingView both show the last traded minute at 13:14 ET. pandas_market_calendars CME_Equity 5.5.0 says 13:00 ET."
+    }
+  ]
+}
