@@ -102,10 +102,24 @@ class StrategyConfig:
 
 @dataclass(frozen=True)
 class DataConfig:
+    """One Databento batch. ``front_contracts`` is the liquid front-month chain in
+    expiry order; back months in the batch that never become front are ignored."""
+    name: str = "2025_2026"
     databento_dir: Path = REPO_ROOT / "data" / "databento"
-    contracts: Tuple[str, ...] = ("MNQZ5", "MNQH6", "MNQM6", "MNQU6", "MNQZ6", "MNQH7", "MNQM7", "MNQU7")
+    front_contracts: Tuple[str, ...] = ("MNQZ5", "MNQH6", "MNQM6", "MNQU6", "MNQZ6")
     start_utc: str = "2025-10-01T00:00:00Z"
     end_utc: str = "2026-10-21T00:00:00Z"
+
+
+DATASETS = {
+    # The year V1 was specified on and V2/V3 were selected from. Development + out-of-sample split.
+    "2025_2026": DataConfig(),
+    # Clean history for testing the frozen V2 rule. Ends before 2025-10-01 so nothing overlaps.
+    "2022_2025": DataConfig(name="2022_2025", databento_dir=REPO_ROOT / "data" / "databento_2022_2025",
+                            front_contracts=("MNQZ2", "MNQH3", "MNQM3", "MNQU3", "MNQZ3", "MNQH4", "MNQM4", "MNQU4",
+                                             "MNQZ4", "MNQH5", "MNQM5", "MNQU5", "MNQZ5"),
+                            start_utc="2022-10-02T00:00:00Z", end_utc="2025-10-01T00:00:00Z"),
+}
 
 
 @dataclass(frozen=True)
@@ -117,13 +131,29 @@ class SplitConfig:
 
 # Explicit calendar overrides. Each entry: session date (YYYY-MM-DD, exchange
 # local date of the close) -> (close time 'HH:MM' America/New_York, source note).
+_VERIFIED = ("User-verified CME Equity Index Globex close 1:15 PM ET (2026-10-21). Databento and TradingView "
+             "both show the last traded minute at 13:14 ET. pandas_market_calendars CME_Equity 5.5.0 says 13:00 ET.")
+_PRE_HOLIDAY = ("Day-before-holiday early close. Databento shows the last traded minute at 13:14 ET; the calendar "
+                "library says 13:00 ET. Same convention as the two user-verified 2025 dates. PENDING user verification "
+                "against CME's holiday schedule for that year.")
 CALENDAR_OVERRIDES: Dict[str, Tuple[str, str]] = {
-    "2025-11-28": ("13:15", "User-verified CME Equity Index Globex close 1:15 PM ET (2026-10-21). "
-                             "Databento and TradingView both show the last traded minute at 13:14 ET. "
-                             "pandas_market_calendars CME_Equity 5.5.0 says 13:00 ET."),
-    "2025-12-24": ("13:15", "User-verified CME Equity Index Globex close 1:15 PM ET (2026-10-21). "
-                             "Databento and TradingView both show the last traded minute at 13:14 ET. "
-                             "pandas_market_calendars CME_Equity 5.5.0 says 13:00 ET."),
+    "2025-11-28": ("13:15", _VERIFIED),
+    "2025-12-24": ("13:15", _VERIFIED),
+    "2022-11-25": ("13:15", _PRE_HOLIDAY),   # day after Thanksgiving
+    "2023-07-03": ("13:15", _PRE_HOLIDAY),   # day before Independence Day
+    "2023-11-24": ("13:15", _PRE_HOLIDAY),
+    "2024-07-03": ("13:15", _PRE_HOLIDAY),
+    "2024-11-29": ("13:15", _PRE_HOLIDAY),
+    "2024-12-24": ("13:15", _PRE_HOLIDAY),   # Christmas Eve
+    "2025-07-03": ("13:15", _PRE_HOLIDAY),
+}
+
+# Sessions the calendar library omits entirely. date -> (open, close, note), times America/New_York.
+ADDED_SESSIONS: Dict[str, Tuple[str, str, str]] = {
+    "2025-01-09": ("2025-01-08 18:00", "2025-01-09 09:30",
+                   "National Day of Mourning (Carter). NYSE closed; the library marks CME closed. Databento shows "
+                   "CME equity index futures trading from 18:00 ET on 01-08 to 09:29 ET on 01-09, then reopening "
+                   "18:00 ET for the 01-10 session. PENDING user verification against CME's notice."),
 }
 
 

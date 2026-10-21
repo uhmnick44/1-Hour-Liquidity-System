@@ -42,7 +42,7 @@ def load_contract(path: Path) -> pd.DataFrame:
 
 def load_all_contracts(cfg: DataConfig) -> Dict[str, pd.DataFrame]:
     out = {}
-    for sym in cfg.contracts:
+    for sym in cfg.front_contracts:
         files = sorted(cfg.databento_dir.glob(f"*.ohlcv-1m.{sym}.dbn.zst"))
         if not files:
             raise FileNotFoundError(f"no file for {sym} in {cfg.databento_dir}")
@@ -119,8 +119,9 @@ class MarketData:
 
 
 def build_market_data(cfg: DataConfig, scfg: StrategyConfig,
-                      front_contracts: Tuple[str, ...] = ("MNQZ5", "MNQH6", "MNQM6", "MNQU6", "MNQZ6"),
+                      front_contracts: Optional[Tuple[str, ...]] = None,
                       contracts: Optional[Dict[str, pd.DataFrame]] = None) -> MarketData:
+    front_contracts = front_contracts or cfg.front_contracts
     contracts = contracts or {s: d for s, d in load_all_contracts(cfg).items() if s in front_contracts}
     base_sessions = build_sessions(cfg.start_utc, cfg.end_utc, scfg)
     rolls = roll_schedule(list(front_contracts), base_sessions)

@@ -110,6 +110,18 @@ def monthly_table(tr: pd.DataFrame) -> pd.DataFrame:
                                   net_pnl_usd=("net_pnl_usd", "sum"), expectancy_r=("r_net", "mean")).reset_index()
 
 
+def yearly_table(tr: pd.DataFrame) -> pd.DataFrame:
+    if tr.empty:
+        return pd.DataFrame()
+    m = tr.assign(year=tr.exit_ts.dt.tz_convert(NY).dt.year)
+    g = m.groupby("year")
+    out = g.agg(trades=("net_pnl_usd", "size"), wins=("net_pnl_usd", lambda s: int((s > 0).sum())),
+                net_pnl_usd=("net_pnl_usd", "sum"), expectancy_r=("r_net", "mean")).reset_index()
+    out["win_rate"] = out.wins / out.trades
+    out["profit_factor"] = [g.get_group(yv).net_pnl_usd.clip(lower=0).sum() / max(1e-9, -g.get_group(yv).net_pnl_usd.clip(upper=0).sum()) for yv in out.year]
+    return out
+
+
 def hourly_table(tr: pd.DataFrame) -> pd.DataFrame:
     if tr.empty:
         return pd.DataFrame()
@@ -165,6 +177,7 @@ def write_outputs(res: BacktestResult, md: MarketData, out_dir: Path, label: str
     res.equity_curve.to_csv(out_dir / "equity_curve.csv", index=False)
     monthly_table(res.trades).to_csv(out_dir / "monthly.csv", index=False)
     hourly_table(res.trades).to_csv(out_dir / "hourly_et.csv", index=False)
+    yearly_table(res.trades).to_csv(out_dir / "yearly.csv", index=False)
     pd.DataFrame(md.validation.get("rolls")).to_csv(out_dir / "rolls.csv", index=False)
     return rep
 

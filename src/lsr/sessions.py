@@ -20,7 +20,7 @@ import numpy as np
 import pandas as pd
 import pandas_market_calendars as mcal
 
-from .config import CALENDAR_OVERRIDES, StrategyConfig
+from .config import ADDED_SESSIONS, CALENDAR_OVERRIDES, StrategyConfig
 
 NY = "America/New_York"
 
@@ -60,6 +60,14 @@ def build_sessions(start: str, end: str, cfg: StrategyConfig,
         if s.date in roll_set:
             s.roll_boundary = True
         sessions.append(s)
+    for key, (o, c, note) in ADDED_SESSIONS.items():
+        d = pd.Timestamp(key)
+        if not (sessions[0].date <= d <= sessions[-1].date) or any(x.date == d for x in sessions):
+            continue
+        o_utc = pd.Timestamp(o, tz=NY).tz_convert("UTC"); c_utc = pd.Timestamp(c, tz=NY).tz_convert("UTC")
+        sessions.append(Session(date=d, open=o_utc, close=c_utc, break_start=o_utc, break_end=o_utc,
+                                override_note=note, roll_boundary=d in roll_set))
+    sessions.sort(key=lambda x: x.open)
     # closures and flatten cutoffs
     thresh = pd.Timedelta(hours=cfg.extended_closure_hours)
     cut = pd.Timedelta(minutes=cfg.flatten_minutes_before_close)
