@@ -91,6 +91,8 @@ class Position:
     flags: List[str] = field(default_factory=list)
     order_created_ts: Optional[pd.Timestamp] = None
     gap_fill: bool = False
+    be_level: Optional[float] = None      # +1R price that arms break-even (exit_mode be_at_1r_tp_2r)
+    be_armed: bool = False
 
 
 @dataclass
@@ -196,7 +198,8 @@ class Simulator:
         d = direction * (fill - extreme)
         dist = 2.0 * d
         stop = fill - direction * dist
-        target = fill + direction * dist
+        mult = 2.0 if self.cfg.strategy.exit_mode == "be_at_1r_tp_2r" else 1.0
+        target = fill + direction * mult * dist
         return stop, target, dist
 
     def _record_event(self, ts, sig: Optional[Signal], outcome: str, reason: str, detail: str = ""):
@@ -303,6 +306,7 @@ class Simulator:
                                  target=target, stop_distance=dist, contracts=n, planned_risk_usd=n * rpc,
                                  planned_risk_per_contract=rpc, equity_at_entry=self.equity, contract=bar.contract,
                                  cum_offset=bar.cum_offset, order_created_ts=p.created_ts)
+        self._arm_exit_mode(self.position)
         self._manage_position(bar, False, from_open=False)
 
     def _try_limit(self, bar: MinuteBar) -> None:
@@ -354,19 +358,26 @@ class Simulator:
                                  planned_risk_per_contract=p.planned_risk_usd / n, equity_at_entry=p.equity_at_creation,
                                  contract=bar.contract, cum_offset=bar.cum_offset, flags=flags,
                                  order_created_ts=p.created_ts, gap_fill=gap)
+        self._arm_exit_mode(self.position)
         self._manage_position(bar, False, from_open=False)
 
     # ----------------------------------------------------------- exits
+    def _arm_exit_mode(self, pos: Position) -> None:
+        if self.cfg.strategy.exit_mode == "be_at_1r_tp_2r":
+            pos.be_level = pos.entry_price + pos.direction * pos.stop_distance
+
     def _manage_position(self, bar: MinuteBar, flatten_due: bool, from_open: bool) -> None:
         pos = self.position; d = pos.direction; S = pos.stop; T = pos.target
         slip_ticks = self.cfg.costs.slippage_ticks
+        be_mode = self.cfg.strategy.exit_mode == "be_at_1r_tp_2r"
+        stop_reason = "breakeven" if (be_mode and pos.be_armed) else "stop"
         if from_open:
             if flatten_due:
                 self._close(bar, bar.open - d * self.slip, "flatten", slip_ticks)
                 return
             if d * (bar.open - S) <= 0:
                 pos.flags.append("gap_stop")
-                self._close(bar, bar.open - d * self.slip, "stop", slip_ticks)
+                self._close(bar, bar.open - d * self.slip, stop_reason, slip_ticks)
                 return
             if d * (bar.open - T) >= self.tick:
                 pos.flags.append("gap_target")
@@ -376,13 +387,34 @@ class Simulator:
         fav = bar.low if d == SHORT else bar.high
         stop_hit = d * (adv - S) <= 0
         tp_hit = d * (fav - T) >= self.tick
+        if be_mode and not pos.be_armed:
+            be_touch = d * (fav - pos.be_level) >= 0
+            if stop_hit:
+                if be_touch or tp_hit:
+                    self.ambiguity["stop_vs_target"] += 1; pos.flags.append("ambiguous_stop_vs_target")
+                if not from_open:
+                    self.ambiguity["entry_and_exit_same_minute"] += 1; pos.flags.append("entry_and_exit_same_minute")
+                self._close(bar, S - d * self.slip, "stop", slip_ticks)
+                return
+            if not be_touch:
+                return
+            # +1R touched this minute: stop moves to entry. Adverse-first for the rest of the minute.
+            pos.be_armed = True; pos.stop = pos.entry_price; pos.flags.append("be_armed")
+            S = pos.stop
+            be_hit = d * (adv - S) <= 0
+            if be_hit:
+                self.ambiguity["stop_vs_target"] += 1; pos.flags.append("ambiguous_be_arm_and_hit_same_minute")
+                self._close(bar, S - d * self.slip, "breakeven", slip_ticks)
+            elif tp_hit:
+                self._close(bar, T, "target", 0)
+            return
         if stop_hit and tp_hit:
             self.ambiguity["stop_vs_target"] += 1
             pos.flags.append("ambiguous_stop_vs_target")
         if stop_hit:
             if not from_open:
                 self.ambiguity["entry_and_exit_same_minute"] += 1; pos.flags.append("entry_and_exit_same_minute")
-            self._close(bar, S - d * self.slip, "stop", slip_ticks)
+            self._close(bar, S - d * self.slip, stop_reason, slip_ticks)
         elif tp_hit:
             if not from_open:
                 self.ambiguity["entry_and_exit_same_minute"] += 1; pos.flags.append("entry_and_exit_same_minute")

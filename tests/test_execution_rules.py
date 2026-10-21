@@ -264,3 +264,47 @@ def test_v2_market_only_skips_limit_setups_without_occupying():
 def test_v1_default_is_unchanged():
     from lsr.config import StrategyConfig
     assert StrategyConfig().entry_mode == "market_and_limit"
+
+
+# ------------------------------------------------------------- V3 exit mode
+def v3_short():
+    from lsr.config import StrategyConfig
+    s = sim(strategy=StrategyConfig(entry_mode="market_only", exit_mode="be_at_1r_tp_2r"))
+    s.on_signal(mk_signal(SHORT, high=120.0, low=100.0, close=115.0), first_session(s))   # market short
+    s.on_minute(mb(60, 110.0, 110.0, 109.0, 109.5))    # fill 109.5, dist 21, stop 130.5, 1R 88.5, target 2R 67.5
+    p = s.position
+    assert (p.entry_price, p.stop, p.be_level, p.target) == (109.5, 130.5, 88.5, 67.5) and not p.be_armed
+    return s
+
+
+def test_v3_breakeven_arms_on_1r_touch_and_scratches_on_return_to_entry():
+    s = v3_short()
+    s.on_minute(mb(61, 100.0, 101.0, 88.5, 95.0))      # touches 1R exactly -> stop to entry
+    assert s.position.be_armed and s.position.stop == 109.5 and s.position is not None
+    s.on_minute(mb(62, 95.0, 109.5, 94.0, 100.0))      # high touches entry -> breakeven stop, 2 ticks slippage
+    t = s.trades[-1]
+    assert t.exit_reason == "breakeven" and t.exit_price == 110.0 and t.pnl_points == -0.5
+    assert math.isclose(t.net_pnl_usd, -0.5 * 2 * t.contracts - 1.88 * t.contracts)
+
+
+def test_v3_target_at_2r_and_original_stop_before_arming():
+    s = v3_short()
+    s.on_minute(mb(61, 100.0, 101.0, 88.5, 95.0))
+    s.on_minute(mb(62, 90.0, 91.0, 67.25, 70.0))       # trade-through 2R
+    assert s.trades[-1].exit_reason == "target" and s.trades[-1].exit_price == 67.5 and math.isclose(s.trades[-1].r_price, 2.0)
+    s = v3_short()
+    s.on_minute(mb(61, 100.0, 130.5, 99.0, 120.0))     # original stop hit before 1R ever touched
+    assert s.trades[-1].exit_reason == "stop" and s.trades[-1].exit_price == 131.0
+
+
+def test_v3_same_minute_arm_and_hit_is_scratch_adverse_first():
+    s = v3_short()
+    s.on_minute(mb(61, 100.0, 112.0, 88.0, 95.0))      # reaches 1R and also trades above entry in the same minute
+    t = s.trades[-1]
+    assert t.exit_reason == "breakeven" and "ambiguous_be_arm_and_hit_same_minute" in t.trade_flags
+    assert s.ambiguity["stop_vs_target"] == 1
+
+
+def test_v1_v2_exit_mode_default_unchanged():
+    from lsr.config import StrategyConfig
+    assert StrategyConfig().exit_mode == "fixed_1r"

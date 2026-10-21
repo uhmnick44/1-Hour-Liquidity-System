@@ -88,10 +88,16 @@ class StrategyConfig:
     # have produced an EQ limit order and leaves the system available for the
     # next signal. Nothing else differs between V1 and V2.
     entry_mode: str = "market_and_limit"
+    # Exit mode. V1/V2: "fixed_1r" (1:1 target, no stop changes). V3 experiment
+    # (requested 2026-10-21): "be_at_1r_tp_2r": when price touches +1R the stop
+    # moves to the entry fill; the target is a limit at +2R.
+    exit_mode: str = "fixed_1r"
 
     def __post_init__(self) -> None:
         if self.entry_mode not in ("market_and_limit", "market_only"):
             raise ValueError(f"unknown entry_mode {self.entry_mode!r}")
+        if self.exit_mode not in ("fixed_1r", "be_at_1r_tp_2r"):
+            raise ValueError(f"unknown exit_mode {self.exit_mode!r}")
 
 
 @dataclass(frozen=True)

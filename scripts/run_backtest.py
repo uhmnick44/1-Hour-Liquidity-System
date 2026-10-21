@@ -26,10 +26,12 @@ def main() -> int:
     ap.add_argument("--sensitivity", action="store_true")
     ap.add_argument("--entry-mode", default="market_and_limit", choices=["market_and_limit", "market_only"],
                     help="market_and_limit = V1 baseline; market_only = V2 experiment")
+    ap.add_argument("--exit-mode", default="fixed_1r", choices=["fixed_1r", "be_at_1r_tp_2r"],
+                    help="fixed_1r = V1/V2; be_at_1r_tp_2r = V3 experiment")
     ap.add_argument("--prefix", default="", help="results sub-directory prefix, e.g. v2_")
     args = ap.parse_args()
     base = BacktestConfig()
-    base = dataclasses.replace(base, strategy=dataclasses.replace(base.strategy, entry_mode=args.entry_mode))
+    base = dataclasses.replace(base, strategy=dataclasses.replace(base.strategy, entry_mode=args.entry_mode, exit_mode=args.exit_mode))
     md = build_market_data(base.data, base.strategy)
     runs = [(1, "optimistic_1tick"), (2, "baseline_2ticks"), (4, "conservative_4ticks")] if args.sensitivity \
         else [(args.slippage_ticks, args.label or f"slippage_{args.slippage_ticks}ticks")]
