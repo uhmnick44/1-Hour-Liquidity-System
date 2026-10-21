@@ -14,6 +14,22 @@ existing Buy/Sell-Side Liquidity engine (`engine/bsl_ssl.pine`).
 | `scripts/run_parity.py` | Replays an export through the port and reports convergence / mismatches. |
 | `tests/` | pytest suite. |
 
+## Backtest
+
+```
+pip install -r requirements.txt
+python -m pytest -q                      # 40 tests: rules, parity, determinism, no-lookahead, trade audit
+python scripts/run_backtest.py --sensitivity   # 1, 2 and 4 ticks slippage -> results/<label>/
+```
+
+Results and the limitations report: `results/REPORT.md`.
+
+Modules under `src/lsr/`: `config.py` (approved inputs and calendar overrides), `sessions.py`
+(CME sessions, flatten cutoffs), `data.py` (Databento loading, expiries, fixed-Friday roll,
+forward adjustment, 1H aggregation), `liquidity_engine.py` (verified engine port), `signals.py`
+(same-candle sweep confirmation, EQ zones), `execution.py` (orders, fills, exits, sizing),
+`backtest.py` (chronological loop), `report.py` (metrics, split, tables).
+
 ## Engine parity
 
 ```
