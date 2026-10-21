@@ -1,0 +1,230 @@
+// PARITY EXPORT HARNESS for the Buy/Sell-Side Liquidity engine.
+// Purpose: expose the engine's internal level state on every bar as plots so that
+// TradingView "Export chart data" writes them to CSV for comparison with the Python port.
+// The detection, sweep, reclaim, equal-high and eviction logic below is the original
+// engine code, unchanged. Only the block marked "PARITY EXPORT" at the bottom is new.
+// overlay=false so the 0/1 flags and counters do not distort the price scale.
+//@version=6
+indicator(title = "BSL/SSL Parity Export", shorttitle = "BSL/SSL export", overlay = false, max_lines_count = 500, max_labels_count = 500)
+
+// ---------------- Detection ----------------
+g_det = "Detection"
+i_len     = input.int(5, "Swing Strength", minval = 1, maxval = 50, group = g_det, tooltip = "Bars required on each side to confirm a swing high/low. Higher = fewer, more significant levels. Levels confirm this many bars after the actual pivot.")
+i_showBSL = input.bool(true, "Show Buy-Side Liquidity (highs)", group = g_det)
+i_showSSL = input.bool(true, "Show Sell-Side Liquidity (lows)", group = g_det)
+i_maxLvls = input.int(8, "Max Levels per Side", minval = 1, maxval = 50, group = g_det, tooltip = "Oldest level on a side is removed once this many are drawn.")
+
+// ---------------- Sweep ----------------
+g_sweep = "Sweep"
+i_sweepMode = input.string("Wick", "Sweep Trigger", options = ["Wick", "Close"], group = g_sweep, tooltip = "Wick: swept when price trades through (any penetration). Close: swept only when a candle closes beyond.")
+i_onSweep   = input.string("Keep & recolor", "On Sweep", options = ["Keep & recolor", "Delete"], group = g_sweep, tooltip = "Keep & recolor freezes the line where taken and recolors it; Delete removes it.")
+i_reclaimOn = input.bool(true, "Flag Sweep + Reclaim", group = g_sweep, tooltip = "After a level is swept, if price closes back through it (failed sweep / stop-run reversal) the line is recolored to the opposite side and alerts. Buy-side reclaim = bearish, sell-side reclaim = bullish. Requires 'Keep & recolor'.")
+
+// ---------------- Equal Highs / Lows ----------------
+g_eq = "Equal Highs / Lows"
+i_eqOn    = input.bool(true, "Detect Equal Highs/Lows", group = g_eq, tooltip = "Marks a swing at nearly the same level as the prior same-side swing as EQH/EQL — a stronger liquidity pool.")
+i_eqTicks = input.int(4, "Equal Tolerance (ticks)", minval = 0, maxval = 200, group = g_eq, tooltip = "How close two swings must be, in ticks, to count as equal.")
+
+// ---------------- Style ----------------
+g_style = "Style"
+i_bslCol   = input.color(color.new(#26a69a, 0), "Buy-Side", inline = "c1", group = g_style)
+i_sslCol   = input.color(color.new(#ef5350, 0), "Sell-Side", inline = "c1", group = g_style)
+i_sweptCol = input.color(color.new(color.gray, 35), "Swept", inline = "c1", group = g_style)
+i_width    = input.int(1, "Line Width", minval = 1, maxval = 4, group = g_style)
+i_style    = input.string("Solid", "Active Line Style", options = ["Solid", "Dashed", "Dotted"], group = g_style)
+i_labels   = input.bool(true, "Show Labels", group = g_style)
+i_labelSz  = input.string("Small", "Label Size", options = ["Tiny", "Small", "Normal"], group = g_style)
+
+styleConst = i_style == "Solid" ? line.style_solid : i_style == "Dashed" ? line.style_dashed : line.style_dotted
+labelSzConst = i_labelSz == "Tiny" ? size.tiny : i_labelSz == "Small" ? size.small : size.normal
+float eqTol = i_eqTicks * syminfo.mintick
+
+// ---------------- State ----------------
+var array<float> bslPx    = array.new<float>()
+var array<line>  bslLn    = array.new<line>()
+var array<label> bslLb    = array.new<label>()
+var array<bool>  bslSwept = array.new<bool>()
+var array<bool>  bslEq    = array.new<bool>()
+var array<bool>  bslRecl  = array.new<bool>()
+
+var array<float> sslPx    = array.new<float>()
+var array<line>  sslLn    = array.new<line>()
+var array<label> sslLb    = array.new<label>()
+var array<bool>  sslSwept = array.new<bool>()
+var array<bool>  sslEq    = array.new<bool>()
+var array<bool>  sslRecl  = array.new<bool>()
+
+bool bslTakenNow = false
+bool sslTakenNow = false
+bool bslReclNow  = false
+bool sslReclNow  = false
+
+// ---------------- Pivots ----------------
+float ph = ta.pivothigh(i_len, i_len)
+float pl = ta.pivotlow(i_len, i_len)
+int pivotBar = bar_index - i_len
+
+// ---------------- New Buy-Side level ----------------
+if i_showBSL and not na(ph)
+    bool isEq = false
+    if i_eqOn and array.size(bslPx) > 0
+        int last = array.size(bslPx) - 1
+        if not array.get(bslSwept, last) and math.abs(ph - array.get(bslPx, last)) <= eqTol
+            isEq := true
+            array.set(bslEq, last, true)
+            line.set_width(array.get(bslLn, last), i_width + 1)
+            if i_labels and not na(array.get(bslLb, last))
+                label.set_text(array.get(bslLb, last), "EQH")
+    line ln = line.new(pivotBar, ph, bar_index, ph, color = i_bslCol, width = isEq ? i_width + 1 : i_width, style = styleConst)
+    label lb = na
+    if i_labels
+        lb := label.new(bar_index, ph, isEq ? "EQH" : "BSL", style = label.style_none, textcolor = i_bslCol, size = labelSzConst, color = color.new(color.white, 100))
+    array.push(bslPx, ph), array.push(bslLn, ln), array.push(bslLb, lb), array.push(bslSwept, false), array.push(bslEq, isEq), array.push(bslRecl, false)
+    if array.size(bslPx) > i_maxLvls
+        line.delete(array.get(bslLn, 0)), label.delete(array.get(bslLb, 0))
+        array.shift(bslPx), array.shift(bslLn), array.shift(bslLb), array.shift(bslSwept), array.shift(bslEq), array.shift(bslRecl)
+
+// ---------------- New Sell-Side level ----------------
+if i_showSSL and not na(pl)
+    bool isEq = false
+    if i_eqOn and array.size(sslPx) > 0
+        int last = array.size(sslPx) - 1
+        if not array.get(sslSwept, last) and math.abs(pl - array.get(sslPx, last)) <= eqTol
+            isEq := true
+            array.set(sslEq, last, true)
+            line.set_width(array.get(sslLn, last), i_width + 1)
+            if i_labels and not na(array.get(sslLb, last))
+                label.set_text(array.get(sslLb, last), "EQL")
+    line ln = line.new(pivotBar, pl, bar_index, pl, color = i_sslCol, width = isEq ? i_width + 1 : i_width, style = styleConst)
+    label lb = na
+    if i_labels
+        lb := label.new(bar_index, pl, isEq ? "EQL" : "SSL", style = label.style_none, textcolor = i_sslCol, size = labelSzConst, color = color.new(color.white, 100))
+    array.push(sslPx, pl), array.push(sslLn, ln), array.push(sslLb, lb), array.push(sslSwept, false), array.push(sslEq, isEq), array.push(sslRecl, false)
+    if array.size(sslPx) > i_maxLvls
+        line.delete(array.get(sslLn, 0)), label.delete(array.get(sslLb, 0))
+        array.shift(sslPx), array.shift(sslLn), array.shift(sslLb), array.shift(sslSwept), array.shift(sslEq), array.shift(sslRecl)
+
+// ---------------- Extend / sweep / reclaim: Buy-Side ----------------
+if array.size(bslPx) > 0
+    for i = array.size(bslPx) - 1 to 0
+        line ln = array.get(bslLn, i)
+        float px = array.get(bslPx, i)
+        if not array.get(bslSwept, i)
+            line.set_x2(ln, bar_index)
+            if i_labels and not na(array.get(bslLb, i))
+                label.set_x(array.get(bslLb, i), bar_index)
+            bool taken = i_sweepMode == "Wick" ? high > px : close > px
+            if taken
+                array.set(bslSwept, i, true)
+                bslTakenNow := true
+                if i_onSweep == "Delete"
+                    line.delete(ln), label.delete(array.get(bslLb, i))
+                    array.remove(bslPx, i), array.remove(bslLn, i), array.remove(bslLb, i), array.remove(bslSwept, i), array.remove(bslEq, i), array.remove(bslRecl, i)
+                else
+                    line.set_x2(ln, bar_index)
+                    line.set_color(ln, i_sweptCol)
+                    line.set_style(ln, line.style_dashed)
+                    if i_labels and not na(array.get(bslLb, i))
+                        label.set_text(array.get(bslLb, i), (array.get(bslEq, i) ? "EQH" : "BSL") + " swept")
+                        label.set_textcolor(array.get(bslLb, i), i_sweptCol)
+        else if i_reclaimOn and i_onSweep != "Delete" and not array.get(bslRecl, i)
+            if close < px
+                array.set(bslRecl, i, true)
+                bslReclNow := true
+                line.set_x2(ln, bar_index)
+                line.set_color(ln, i_sslCol)
+                line.set_style(ln, line.style_solid)
+                if i_labels and not na(array.get(bslLb, i))
+                    label.set_text(array.get(bslLb, i), "BSL reclaim")
+                    label.set_textcolor(array.get(bslLb, i), i_sslCol)
+                    label.set_x(array.get(bslLb, i), bar_index)
+
+// ---------------- Extend / sweep / reclaim: Sell-Side ----------------
+if array.size(sslPx) > 0
+    for i = array.size(sslPx) - 1 to 0
+        line ln = array.get(sslLn, i)
+        float px = array.get(sslPx, i)
+        if not array.get(sslSwept, i)
+            line.set_x2(ln, bar_index)
+            if i_labels and not na(array.get(sslLb, i))
+                label.set_x(array.get(sslLb, i), bar_index)
+            bool taken = i_sweepMode == "Wick" ? low < px : close < px
+            if taken
+                array.set(sslSwept, i, true)
+                sslTakenNow := true
+                if i_onSweep == "Delete"
+                    line.delete(ln), label.delete(array.get(sslLb, i))
+                    array.remove(sslPx, i), array.remove(sslLn, i), array.remove(sslLb, i), array.remove(sslSwept, i), array.remove(sslEq, i), array.remove(sslRecl, i)
+                else
+                    line.set_x2(ln, bar_index)
+                    line.set_color(ln, i_sweptCol)
+                    line.set_style(ln, line.style_dashed)
+                    if i_labels and not na(array.get(sslLb, i))
+                        label.set_text(array.get(sslLb, i), (array.get(sslEq, i) ? "EQL" : "SSL") + " swept")
+                        label.set_textcolor(array.get(sslLb, i), i_sweptCol)
+        else if i_reclaimOn and i_onSweep != "Delete" and not array.get(sslRecl, i)
+            if close > px
+                array.set(sslRecl, i, true)
+                sslReclNow := true
+                line.set_x2(ln, bar_index)
+                line.set_color(ln, i_bslCol)
+                line.set_style(ln, line.style_solid)
+                if i_labels and not na(array.get(sslLb, i))
+                    label.set_text(array.get(sslLb, i), "SSL reclaim")
+                    label.set_textcolor(array.get(sslLb, i), i_bslCol)
+                    label.set_x(array.get(sslLb, i), bar_index)
+
+// ======================================================================
+// PARITY EXPORT (new). Reads the arrays after the engine has finished the bar.
+// Slot k holds the k-th oldest level currently tracked (0 = oldest). na = slot empty.
+// ======================================================================
+f_px(array<float> arr, int idx) =>
+    array.size(arr) > idx ? array.get(arr, idx) : na
+f_flag(array<bool> arr, int idx) =>
+    float r = na
+    if array.size(arr) > idx
+        r := array.get(arr, idx) ? 1.0 : 0.0
+    r
+
+plot(i_showBSL and not na(ph) ? ph : na, title = "new_bsl_px", color = i_bslCol, style = plot.style_circles)
+plot(i_showSSL and not na(pl) ? pl : na, title = "new_ssl_px", color = i_sslCol, style = plot.style_circles)
+plot(bslTakenNow ? 1 : 0, title = "bsl_swept_now", color = color.new(color.gray, 70))
+plot(sslTakenNow ? 1 : 0, title = "ssl_swept_now", color = color.new(color.gray, 70))
+plot(bslReclNow ? 1 : 0,  title = "bsl_reclaim_now", color = color.new(color.gray, 70))
+plot(sslReclNow ? 1 : 0,  title = "ssl_reclaim_now", color = color.new(color.gray, 70))
+plot(array.size(bslPx), title = "bsl_count", color = color.new(color.gray, 70))
+plot(array.size(sslPx), title = "ssl_count", color = color.new(color.gray, 70))
+
+plot(f_px(bslPx, 0), title = "bsl_px_0", color = color.new(color.white, 100))
+plot(f_px(bslPx, 1), title = "bsl_px_1", color = color.new(color.white, 100))
+plot(f_px(bslPx, 2), title = "bsl_px_2", color = color.new(color.white, 100))
+plot(f_px(bslPx, 3), title = "bsl_px_3", color = color.new(color.white, 100))
+plot(f_px(bslPx, 4), title = "bsl_px_4", color = color.new(color.white, 100))
+plot(f_px(bslPx, 5), title = "bsl_px_5", color = color.new(color.white, 100))
+plot(f_px(bslPx, 6), title = "bsl_px_6", color = color.new(color.white, 100))
+plot(f_px(bslPx, 7), title = "bsl_px_7", color = color.new(color.white, 100))
+plot(f_flag(bslSwept, 0), title = "bsl_swept_0", color = color.new(color.white, 100))
+plot(f_flag(bslSwept, 1), title = "bsl_swept_1", color = color.new(color.white, 100))
+plot(f_flag(bslSwept, 2), title = "bsl_swept_2", color = color.new(color.white, 100))
+plot(f_flag(bslSwept, 3), title = "bsl_swept_3", color = color.new(color.white, 100))
+plot(f_flag(bslSwept, 4), title = "bsl_swept_4", color = color.new(color.white, 100))
+plot(f_flag(bslSwept, 5), title = "bsl_swept_5", color = color.new(color.white, 100))
+plot(f_flag(bslSwept, 6), title = "bsl_swept_6", color = color.new(color.white, 100))
+plot(f_flag(bslSwept, 7), title = "bsl_swept_7", color = color.new(color.white, 100))
+
+plot(f_px(sslPx, 0), title = "ssl_px_0", color = color.new(color.white, 100))
+plot(f_px(sslPx, 1), title = "ssl_px_1", color = color.new(color.white, 100))
+plot(f_px(sslPx, 2), title = "ssl_px_2", color = color.new(color.white, 100))
+plot(f_px(sslPx, 3), title = "ssl_px_3", color = color.new(color.white, 100))
+plot(f_px(sslPx, 4), title = "ssl_px_4", color = color.new(color.white, 100))
+plot(f_px(sslPx, 5), title = "ssl_px_5", color = color.new(color.white, 100))
+plot(f_px(sslPx, 6), title = "ssl_px_6", color = color.new(color.white, 100))
+plot(f_px(sslPx, 7), title = "ssl_px_7", color = color.new(color.white, 100))
+plot(f_flag(sslSwept, 0), title = "ssl_swept_0", color = color.new(color.white, 100))
+plot(f_flag(sslSwept, 1), title = "ssl_swept_1", color = color.new(color.white, 100))
+plot(f_flag(sslSwept, 2), title = "ssl_swept_2", color = color.new(color.white, 100))
+plot(f_flag(sslSwept, 3), title = "ssl_swept_3", color = color.new(color.white, 100))
+plot(f_flag(sslSwept, 4), title = "ssl_swept_4", color = color.new(color.white, 100))
+plot(f_flag(sslSwept, 5), title = "ssl_swept_5", color = color.new(color.white, 100))
+plot(f_flag(sslSwept, 6), title = "ssl_swept_6", color = color.new(color.white, 100))
+plot(f_flag(sslSwept, 7), title = "ssl_swept_7", color = color.new(color.white, 100))

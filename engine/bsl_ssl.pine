@@ -1,0 +1,212 @@
+// Buy-Side / Sell-Side Liquidity
+// Detects swing highs (buy-side liquidity) and swing lows (sell-side liquidity),
+// extends each level until price takes it, flags sweeps and sweep+reclaims, and alerts.
+//@version=6
+indicator(title = "Buy/Sell-Side Liquidity", shorttitle = "BSL/SSL", overlay = true, max_lines_count = 500, max_labels_count = 500)
+
+// ---------------- Detection ----------------
+g_det = "Detection"
+i_len     = input.int(5, "Swing Strength", minval = 1, maxval = 50, group = g_det, tooltip = "Bars required on each side to confirm a swing high/low. Higher = fewer, more significant levels. Levels confirm this many bars after the actual pivot.")
+i_showBSL = input.bool(true, "Show Buy-Side Liquidity (highs)", group = g_det)
+i_showSSL = input.bool(true, "Show Sell-Side Liquidity (lows)", group = g_det)
+i_maxLvls = input.int(8, "Max Levels per Side", minval = 1, maxval = 50, group = g_det, tooltip = "Oldest level on a side is removed once this many are drawn.")
+
+// ---------------- Sweep ----------------
+g_sweep = "Sweep"
+i_sweepMode = input.string("Wick", "Sweep Trigger", options = ["Wick", "Close"], group = g_sweep, tooltip = "Wick: swept when price trades through (any penetration). Close: swept only when a candle closes beyond.")
+i_onSweep   = input.string("Keep & recolor", "On Sweep", options = ["Keep & recolor", "Delete"], group = g_sweep, tooltip = "Keep & recolor freezes the line where taken and recolors it; Delete removes it.")
+i_reclaimOn = input.bool(true, "Flag Sweep + Reclaim", group = g_sweep, tooltip = "After a level is swept, if price closes back through it (failed sweep / stop-run reversal) the line is recolored to the opposite side and alerts. Buy-side reclaim = bearish, sell-side reclaim = bullish. Requires 'Keep & recolor'.")
+
+// ---------------- Equal Highs / Lows ----------------
+g_eq = "Equal Highs / Lows"
+i_eqOn    = input.bool(true, "Detect Equal Highs/Lows", group = g_eq, tooltip = "Marks a swing at nearly the same level as the prior same-side swing as EQH/EQL — a stronger liquidity pool.")
+i_eqTicks = input.int(4, "Equal Tolerance (ticks)", minval = 0, maxval = 200, group = g_eq, tooltip = "How close two swings must be, in ticks, to count as equal.")
+
+// ---------------- Dashboard ----------------
+g_dash = "Dashboard"
+i_dash    = input.bool(false, "Show Nearest-Level Table", group = g_dash, tooltip = "Compact table showing the nearest un-swept buy-side level above price and sell-side level below price, with distance in ticks.")
+i_dashPos = input.string("Top Right", "Position", options = ["Top Right", "Middle Right", "Bottom Right", "Top Left", "Bottom Left"], group = g_dash)
+
+// ---------------- Style ----------------
+g_style = "Style"
+i_bslCol   = input.color(color.new(#26a69a, 0), "Buy-Side", inline = "c1", group = g_style)
+i_sslCol   = input.color(color.new(#ef5350, 0), "Sell-Side", inline = "c1", group = g_style)
+i_sweptCol = input.color(color.new(color.gray, 35), "Swept", inline = "c1", group = g_style)
+i_width    = input.int(1, "Line Width", minval = 1, maxval = 4, group = g_style)
+i_style    = input.string("Solid", "Active Line Style", options = ["Solid", "Dashed", "Dotted"], group = g_style)
+i_labels   = input.bool(true, "Show Labels", group = g_style)
+i_labelSz  = input.string("Small", "Label Size", options = ["Tiny", "Small", "Normal"], group = g_style)
+
+styleConst = i_style == "Solid" ? line.style_solid : i_style == "Dashed" ? line.style_dashed : line.style_dotted
+labelSzConst = i_labelSz == "Tiny" ? size.tiny : i_labelSz == "Small" ? size.small : size.normal
+dashPosConst = i_dashPos == "Top Right" ? position.top_right : i_dashPos == "Middle Right" ? position.middle_right : i_dashPos == "Bottom Right" ? position.bottom_right : i_dashPos == "Top Left" ? position.top_left : position.bottom_left
+float eqTol = i_eqTicks * syminfo.mintick
+
+// ---------------- State ----------------
+var array<float> bslPx    = array.new<float>()
+var array<line>  bslLn    = array.new<line>()
+var array<label> bslLb    = array.new<label>()
+var array<bool>  bslSwept = array.new<bool>()
+var array<bool>  bslEq    = array.new<bool>()
+var array<bool>  bslRecl  = array.new<bool>()
+
+var array<float> sslPx    = array.new<float>()
+var array<line>  sslLn    = array.new<line>()
+var array<label> sslLb    = array.new<label>()
+var array<bool>  sslSwept = array.new<bool>()
+var array<bool>  sslEq    = array.new<bool>()
+var array<bool>  sslRecl  = array.new<bool>()
+
+bool bslTakenNow = false
+bool sslTakenNow = false
+bool bslReclNow  = false
+bool sslReclNow  = false
+
+// ---------------- Pivots ----------------
+float ph = ta.pivothigh(i_len, i_len)
+float pl = ta.pivotlow(i_len, i_len)
+int pivotBar = bar_index - i_len
+
+// ---------------- New Buy-Side level ----------------
+if i_showBSL and not na(ph)
+    bool isEq = false
+    if i_eqOn and array.size(bslPx) > 0
+        int last = array.size(bslPx) - 1
+        if not array.get(bslSwept, last) and math.abs(ph - array.get(bslPx, last)) <= eqTol
+            isEq := true
+            array.set(bslEq, last, true)
+            line.set_width(array.get(bslLn, last), i_width + 1)
+            if i_labels and not na(array.get(bslLb, last))
+                label.set_text(array.get(bslLb, last), "EQH")
+    line ln = line.new(pivotBar, ph, bar_index, ph, color = i_bslCol, width = isEq ? i_width + 1 : i_width, style = styleConst)
+    label lb = na
+    if i_labels
+        lb := label.new(bar_index, ph, isEq ? "EQH" : "BSL", style = label.style_none, textcolor = i_bslCol, size = labelSzConst, color = color.new(color.white, 100))
+    array.push(bslPx, ph), array.push(bslLn, ln), array.push(bslLb, lb), array.push(bslSwept, false), array.push(bslEq, isEq), array.push(bslRecl, false)
+    if array.size(bslPx) > i_maxLvls
+        line.delete(array.get(bslLn, 0)), label.delete(array.get(bslLb, 0))
+        array.shift(bslPx), array.shift(bslLn), array.shift(bslLb), array.shift(bslSwept), array.shift(bslEq), array.shift(bslRecl)
+
+// ---------------- New Sell-Side level ----------------
+if i_showSSL and not na(pl)
+    bool isEq = false
+    if i_eqOn and array.size(sslPx) > 0
+        int last = array.size(sslPx) - 1
+        if not array.get(sslSwept, last) and math.abs(pl - array.get(sslPx, last)) <= eqTol
+            isEq := true
+            array.set(sslEq, last, true)
+            line.set_width(array.get(sslLn, last), i_width + 1)
+            if i_labels and not na(array.get(sslLb, last))
+                label.set_text(array.get(sslLb, last), "EQL")
+    line ln = line.new(pivotBar, pl, bar_index, pl, color = i_sslCol, width = isEq ? i_width + 1 : i_width, style = styleConst)
+    label lb = na
+    if i_labels
+        lb := label.new(bar_index, pl, isEq ? "EQL" : "SSL", style = label.style_none, textcolor = i_sslCol, size = labelSzConst, color = color.new(color.white, 100))
+    array.push(sslPx, pl), array.push(sslLn, ln), array.push(sslLb, lb), array.push(sslSwept, false), array.push(sslEq, isEq), array.push(sslRecl, false)
+    if array.size(sslPx) > i_maxLvls
+        line.delete(array.get(sslLn, 0)), label.delete(array.get(sslLb, 0))
+        array.shift(sslPx), array.shift(sslLn), array.shift(sslLb), array.shift(sslSwept), array.shift(sslEq), array.shift(sslRecl)
+
+// ---------------- Extend / sweep / reclaim: Buy-Side ----------------
+if array.size(bslPx) > 0
+    for i = array.size(bslPx) - 1 to 0
+        line ln = array.get(bslLn, i)
+        float px = array.get(bslPx, i)
+        if not array.get(bslSwept, i)
+            line.set_x2(ln, bar_index)
+            if i_labels and not na(array.get(bslLb, i))
+                label.set_x(array.get(bslLb, i), bar_index)
+            bool taken = i_sweepMode == "Wick" ? high > px : close > px
+            if taken
+                array.set(bslSwept, i, true)
+                bslTakenNow := true
+                if i_onSweep == "Delete"
+                    line.delete(ln), label.delete(array.get(bslLb, i))
+                    array.remove(bslPx, i), array.remove(bslLn, i), array.remove(bslLb, i), array.remove(bslSwept, i), array.remove(bslEq, i), array.remove(bslRecl, i)
+                else
+                    line.set_x2(ln, bar_index)
+                    line.set_color(ln, i_sweptCol)
+                    line.set_style(ln, line.style_dashed)
+                    if i_labels and not na(array.get(bslLb, i))
+                        label.set_text(array.get(bslLb, i), (array.get(bslEq, i) ? "EQH" : "BSL") + " swept")
+                        label.set_textcolor(array.get(bslLb, i), i_sweptCol)
+        else if i_reclaimOn and i_onSweep != "Delete" and not array.get(bslRecl, i)
+            if close < px
+                array.set(bslRecl, i, true)
+                bslReclNow := true
+                line.set_x2(ln, bar_index)
+                line.set_color(ln, i_sslCol)
+                line.set_style(ln, line.style_solid)
+                if i_labels and not na(array.get(bslLb, i))
+                    label.set_text(array.get(bslLb, i), "BSL reclaim")
+                    label.set_textcolor(array.get(bslLb, i), i_sslCol)
+                    label.set_x(array.get(bslLb, i), bar_index)
+
+// ---------------- Extend / sweep / reclaim: Sell-Side ----------------
+if array.size(sslPx) > 0
+    for i = array.size(sslPx) - 1 to 0
+        line ln = array.get(sslLn, i)
+        float px = array.get(sslPx, i)
+        if not array.get(sslSwept, i)
+            line.set_x2(ln, bar_index)
+            if i_labels and not na(array.get(sslLb, i))
+                label.set_x(array.get(sslLb, i), bar_index)
+            bool taken = i_sweepMode == "Wick" ? low < px : close < px
+            if taken
+                array.set(sslSwept, i, true)
+                sslTakenNow := true
+                if i_onSweep == "Delete"
+                    line.delete(ln), label.delete(array.get(sslLb, i))
+                    array.remove(sslPx, i), array.remove(sslLn, i), array.remove(sslLb, i), array.remove(sslSwept, i), array.remove(sslEq, i), array.remove(sslRecl, i)
+                else
+                    line.set_x2(ln, bar_index)
+                    line.set_color(ln, i_sweptCol)
+                    line.set_style(ln, line.style_dashed)
+                    if i_labels and not na(array.get(sslLb, i))
+                        label.set_text(array.get(sslLb, i), (array.get(sslEq, i) ? "EQL" : "SSL") + " swept")
+                        label.set_textcolor(array.get(sslLb, i), i_sweptCol)
+        else if i_reclaimOn and i_onSweep != "Delete" and not array.get(sslRecl, i)
+            if close > px
+                array.set(sslRecl, i, true)
+                sslReclNow := true
+                line.set_x2(ln, bar_index)
+                line.set_color(ln, i_bslCol)
+                line.set_style(ln, line.style_solid)
+                if i_labels and not na(array.get(sslLb, i))
+                    label.set_text(array.get(sslLb, i), "SSL reclaim")
+                    label.set_textcolor(array.get(sslLb, i), i_bslCol)
+                    label.set_x(array.get(sslLb, i), bar_index)
+
+// ---------------- Dashboard ----------------
+var table dash = na
+if i_dash and barstate.islast
+    float nBsl = na
+    if array.size(bslPx) > 0
+        for i = 0 to array.size(bslPx) - 1
+            if not array.get(bslSwept, i) and array.get(bslPx, i) >= close
+                float p = array.get(bslPx, i)
+                nBsl := na(nBsl) ? p : math.min(nBsl, p)
+    float nSsl = na
+    if array.size(sslPx) > 0
+        for i = 0 to array.size(sslPx) - 1
+            if not array.get(sslSwept, i) and array.get(sslPx, i) <= close
+                float p = array.get(sslPx, i)
+                nSsl := na(nSsl) ? p : math.max(nSsl, p)
+    if na(dash)
+        dash := table.new(dashPosConst, 3, 3, border_width = 1)
+    table.cell(dash, 0, 0, "Liquidity", text_color = color.white, text_size = size.small, bgcolor = color.new(color.gray, 60))
+    table.cell(dash, 1, 0, "Price",     text_color = color.white, text_size = size.small, bgcolor = color.new(color.gray, 60))
+    table.cell(dash, 2, 0, "Ticks",     text_color = color.white, text_size = size.small, bgcolor = color.new(color.gray, 60))
+    table.cell(dash, 0, 1, "Buy-side",  text_color = i_bslCol, text_size = size.small, bgcolor = color.new(color.black, 30))
+    table.cell(dash, 1, 1, na(nBsl) ? "—" : str.tostring(nBsl, format.mintick), text_color = i_bslCol, text_size = size.small, bgcolor = color.new(color.black, 30))
+    table.cell(dash, 2, 1, na(nBsl) ? "—" : str.tostring(math.round((nBsl - close) / syminfo.mintick)), text_color = i_bslCol, text_size = size.small, bgcolor = color.new(color.black, 30))
+    table.cell(dash, 0, 2, "Sell-side", text_color = i_sslCol, text_size = size.small, bgcolor = color.new(color.black, 30))
+    table.cell(dash, 1, 2, na(nSsl) ? "—" : str.tostring(nSsl, format.mintick), text_color = i_sslCol, text_size = size.small, bgcolor = color.new(color.black, 30))
+    table.cell(dash, 2, 2, na(nSsl) ? "—" : str.tostring(math.round((close - nSsl) / syminfo.mintick)), text_color = i_sslCol, text_size = size.small, bgcolor = color.new(color.black, 30))
+
+// ---------------- Alerts ----------------
+alertcondition(bslTakenNow, title = "Buy-Side Liquidity Swept", message = "BSL swept on {{ticker}} {{interval}}")
+alertcondition(sslTakenNow, title = "Sell-Side Liquidity Swept", message = "SSL swept on {{ticker}} {{interval}}")
+alertcondition(bslTakenNow or sslTakenNow, title = "Any Liquidity Swept", message = "Liquidity swept on {{ticker}} {{interval}}")
+alertcondition(bslReclNow, title = "Buy-Side Reclaim (bearish)", message = "Buy-side reclaim on {{ticker}} {{interval}} — failed high")
+alertcondition(sslReclNow, title = "Sell-Side Reclaim (bullish)", message = "Sell-side reclaim on {{ticker}} {{interval}} — failed low")
