@@ -57,11 +57,14 @@ def main() -> int:
     ap.add_argument("--stop-multiple", type=float, default=2.0, help="2.0 = original doubled stop; 1.0 = (doubled * 0.5), stop at the reversal wick")
     ap.add_argument("--exit-mode", default="fixed_1r", choices=["fixed_1r", "be_at_1r_tp_2r"])
     ap.add_argument("--min-stop-points", type=float, default=None, help="override the 10-point minimum (0 disables)")
+    ap.add_argument("--session", default=None, help="entry session New York, e.g. 09:30-11:30")
     ap.add_argument("--out", default=str(ROOT / "results"))
     args = ap.parse_args()
     base = BacktestConfig()
     cfg = dataclasses.replace(base, data=DATASETS[args.dataset], costs=dataclasses.replace(base.costs, slippage_ticks=args.slippage_ticks),
-                              fvg=dataclasses.replace(base.fvg, sweep_timestamp_mode=args.sweep_mode),
+                              fvg=dataclasses.replace(base.fvg, sweep_timestamp_mode=args.sweep_mode,
+                                                      session_start=args.session.split("-")[0] if args.session else None,
+                                                      session_end=args.session.split("-")[1] if args.session else None),
                               strategy=dataclasses.replace(base.strategy, stop_multiple=args.stop_multiple, exit_mode=args.exit_mode),
                               risk=dataclasses.replace(base.risk, min_stop_points=args.min_stop_points) if args.min_stop_points is not None else base.risk,
                               split=SplitConfig(dev_fraction=0.0) if args.single_block else base.split)
@@ -70,6 +73,8 @@ def main() -> int:
     label = f"fvg_{args.dataset}_{args.sweep_mode}_{args.slippage_ticks}ticks"
     if args.stop_multiple != 2.0 or args.exit_mode != "fixed_1r" or args.min_stop_points is not None:
         label += f"_stop{args.stop_multiple:g}x_{args.exit_mode}_min{cfg.risk.min_stop_points:g}"
+    if args.session:
+        label += "_session" + args.session.replace(":", "")
     out = Path(args.out) / label
     rep = write_outputs(res, md, out, label)
     res.setups.to_csv(out / "setups.csv", index=False)

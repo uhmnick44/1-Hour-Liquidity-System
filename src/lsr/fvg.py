@@ -138,11 +138,12 @@ class SetupManager:
     confirmation: see FvgConfig.ignore_sweeps_while_occupied)."""
 
     def __init__(self, engine: LiquidityEngine, window_minutes: int, mode: SweepTimestampMode,
-                 ignore_sweeps_while_occupied: bool = True):
+                 ignore_sweeps_while_occupied: bool = True, session: Optional[Tuple[str, str]] = None):
         self.engine = engine
         self.window = pd.Timedelta(minutes=window_minutes)
         self.mode = mode
         self.ignore_while_occupied = ignore_sweeps_while_occupied
+        self.session = session   # ("HH:MM", "HH:MM") New York, inclusive both ends
         self.active: Optional[SweepSetup] = None
         self.setups: List[SweepSetup] = []
         self.ignored: List[dict] = []
@@ -152,6 +153,12 @@ class SetupManager:
         self._swept_keys: set = set()   # (level_id) already treated as swept intrabar this hour
 
     # ------------------------------------------------------------- helpers
+    def in_session(self, ts: pd.Timestamp) -> bool:
+        if self.session is None:
+            return True
+        hm = ts.tz_convert("America/New_York").strftime("%H:%M")
+        return self.session[0] <= hm <= self.session[1]
+
     @staticmethod
     def level_id(side: str, lvl: Level) -> str:
         return f"{side}:{lvl.created_bar}:{lvl.price}"
@@ -188,6 +195,11 @@ class SetupManager:
 
     def _register_sweeps(self, ts: pd.Timestamp, hits: List[Tuple[int, float, str]], occupied: bool) -> None:
         if not hits:
+            return
+        if not self.in_session(ts):
+            for d, px, key in hits:
+                self.ignored.append(dict(ts=ts, level_id=key, level_price=px, direction="short" if d == SHORT else "long",
+                                         reason="outside_session"))
             return
         dirs = {h[0] for h in hits}
         if len(dirs) > 1:
@@ -235,6 +247,12 @@ class SetupManager:
         a, b, cc = self._recent
         d = fvg_direction(a, cc)
         if d != s.sweep_direction:
+            return None
+        if not self.in_session(cc.close_ts):
+            s.setup_status = SetupStatus.ENTRY_REJECTED
+            s.reject_reason = "fvg_confirmed_outside_session"
+            s.fvg_confirmation_timestamp = cc.close_ts; s.fvg_direction = d
+            self.active = None
             return None
         s.setup_status = SetupStatus.FVG_CONFIRMED
         s.fvg_confirmation_timestamp = cc.close_ts

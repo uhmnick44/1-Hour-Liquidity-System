@@ -332,3 +332,25 @@ def test_half_doubled_min_stop_applies_only_when_enabled():
 
 def test_stop_multiple_default_preserves_v1_behaviour():
     assert StrategyConfig().stop_multiple == 2.0
+
+
+# ------------------------------------------------------------- session filter
+def test_session_filter_on_sweep_and_on_confirmation():
+    NYT = pd.Timestamp("2026-01-06 09:25", tz="America/New_York").tz_convert("UTC")   # 09:25 ET base
+    m = SetupManager(engine_with_levels(ssl=[100.0]), 15, SweepTimestampMode.INTRABAR_1M, session=("09:30", "11:30"))
+    m.on_candle_close(cd(0, 101, 102, 99.75, 100.5, base=NYT), False)                 # sweep at 09:26 close -> outside
+    assert m.active is None and m.ignored[-1]["reason"] == "outside_session"
+    m.engine.ssl.append(type(m.engine.ssl[0])(price=99.0, created_bar=1, pivot_bar=1))
+    m.on_candle_close(cd(5, 99.5, 99.6, 98.75, 99.2, base=NYT), False)                # 09:31 close -> inside
+    assert m.active is not None
+    m2 = SetupManager(engine_with_levels(ssl=[100.0]), 15, SweepTimestampMode.INTRABAR_1M, session=("09:30", "11:30"))
+    late = pd.Timestamp("2026-01-06 11:20", tz="America/New_York").tz_convert("UTC")
+    m2.on_candle_close(cd(0, 101, 102, 99.75, 100.5, base=late), False)               # sweep 11:21, inside
+    m2.on_candle_close(cd(8, 100, 100.5, 99.5, 100.2, base=late), False)              # A
+    m2.on_candle_close(cd(9, 100.5, 101, 100.3, 100.9, base=late), False)             # B
+    assert m2.on_candle_close(cd(10, 101, 101.5, 100.75, 101.2, base=late), False) is None   # C closes 11:31 -> rejected
+    assert m2.setups[-1].setup_status == SetupStatus.ENTRY_REJECTED and m2.setups[-1].reject_reason == "fvg_confirmed_outside_session"
+    m3 = SetupManager(engine_with_levels(ssl=[100.0]), 15, SweepTimestampMode.INTRABAR_1M, session=("09:30", "11:30"))
+    m3.on_candle_close(cd(0, 101, 102, 99.75, 100.5, base=late), False)
+    m3.on_candle_close(cd(7, 100, 100.5, 99.5, 100.2, base=late), False); m3.on_candle_close(cd(8, 100.5, 101, 100.3, 100.9, base=late), False)
+    assert m3.on_candle_close(cd(9, 101, 101.5, 100.75, 101.2, base=late), False) is not None   # C closes 11:30 exactly -> allowed

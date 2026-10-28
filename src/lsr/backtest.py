@@ -105,7 +105,8 @@ def run_fvg_backtest(md: MarketData, cfg: BacktestConfig, end_ts: Optional[pd.Ti
     engine = LiquidityEngine(engine_params(cfg))
     sim = Simulator(cfg, md.sessions)
     mode = SweepTimestampMode(cfg.fvg.sweep_timestamp_mode)
-    sm = SetupManager(engine, cfg.fvg.window_minutes, mode, cfg.fvg.ignore_sweeps_while_occupied)
+    session = (cfg.fvg.session_start, cfg.fvg.session_end) if cfg.fvg.session_start and cfg.fvg.session_end else None
+    sm = SetupManager(engine, cfg.fvg.window_minutes, mode, cfg.fvg.ignore_sweeps_while_occupied, session=session)
     sig_rows: List[dict] = []
     n_levels = n_sweeps = 0
     for hb in h1.itertuples():

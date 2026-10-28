@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, Tuple
+from typing import Dict, Optional, Tuple
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
@@ -125,6 +125,11 @@ class FvgConfig:
     apply_existing_min_stop: bool = True
     # APPROVED: one active setup, order or position; new sweeps are ignored while occupied.
     ignore_sweeps_while_occupied: bool = True
+    # Optional entry session, New York wall-clock "HH:MM". When set, a sweep outside
+    # [start, end] creates no setup and an FVG confirming outside it is rejected, so
+    # the entry open is never later than `end`. Open positions are not time-exited.
+    session_start: Optional[str] = None
+    session_end: Optional[str] = None
 
 
 @dataclass(frozen=True)
