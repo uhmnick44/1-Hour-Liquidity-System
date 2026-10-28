@@ -1,0 +1,15 @@
+Setup 1: short after level 25076.75 (bsl:29:25076.75) swept
+  sweep timestamp      2025-10-02 03:06:00-04:00  (close of the first 1m bar through the level)
+  expiration           2025-10-02 03:21:00-04:00
+  FVG A candle open    2025-10-02 03:06:00-04:00
+  FVG C candle open    2025-10-02 03:08:00-04:00  confirmed at 2025-10-02 03:09:00-04:00
+  reversal extreme     25080.5 at 2025-10-02 03:05:00-04:00 over 4 candles
+  entry                2025-10-02 03:09:00-04:00 fill 25067.75 (ENTRY_TRIGGERED)
+  original distance    12.75  doubled 25.5  final stop 25093.25
+  1-minute candles, sweep candle through entry candle (adjusted prices):
+    03:05  O  25069.75 H  25080.50 L  25069.00 C  25077.75
+    03:06  O  25077.50 H  25080.50 L  25074.25 C  25074.75
+    03:07  O  25074.50 H  25077.75 L  25068.50 C  25069.50
+    03:08  O  25069.50 H  25070.75 L  25066.25 C  25068.00
+    03:09  O  25068.00 H  25078.50 L  25067.50 C  25076.75
+  exit                 2025-10-02 04:03:00-04:00 at 25093.5 (stop) net $-480.42, 9 contracts  [exit rule PROVISIONAL]

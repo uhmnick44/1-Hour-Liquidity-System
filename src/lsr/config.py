@@ -104,20 +104,20 @@ class StrategyConfig:
 class FvgConfig:
     """1H sweep -> 1M FVG strategy (specification 2026-10-28).
 
-    Fields marked PROVISIONAL are Section 16 decisions the specification leaves
-    open. They are set to the existing system's rule so the code can run, and
-    they must be confirmed or changed by the user before any result is read.
+    The four Section 16 decisions were approved by the user on 2026-10-28:
+    intrabar sweep timestamp, 1:1 target from the fill, keep the 10-point
+    minimum doubled stop, one active setup / order / position at a time.
     """
     window_minutes: int = 15
-    # Which timestamp is "the sweep": the first 1-minute breach (how the Pine
-    # alert fires live) or the engine's 1H close event. UNRESOLVED, see report.
+    # APPROVED: the sweep timestamp is the close of the first 1-minute bar
+    # through the level (how the Pine alert fires live). "h1_close" is kept
+    # for comparison only.
     sweep_timestamp_mode: str = "intrabar_1m"
-    # PROVISIONAL: existing exit rule (1:1 target from the fill). Spec: TP unresolved.
+    # APPROVED: existing exit rule, 1:1 target from the actual fill.
     take_profit: str = "existing_fixed_1r"
-    # PROVISIONAL: existing 10-point minimum doubled stop. Spec: flag, do not silently carry.
+    # APPROVED: existing 10-point minimum doubled stop applies.
     apply_existing_min_stop: bool = True
-    # PROVISIONAL: existing one-active rule extended to setups: new sweeps are ignored
-    # while a setup, order or position is active. Spec: overlapping sweeps unresolved.
+    # APPROVED: one active setup, order or position; new sweeps are ignored while occupied.
     ignore_sweeps_while_occupied: bool = True
 
 
