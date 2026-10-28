@@ -163,6 +163,7 @@ class Simulator:
         self.events: List[OrderEvent] = []
         self.ambiguity: Dict[str, int] = {"fill_vs_invalidation": 0, "stop_vs_target": 0, "entry_and_exit_same_minute": 0}
         self._last_bar: Optional[MinuteBar] = None
+        self.last_market_outcome: Optional[dict] = None   # set by _execute_market for callers that track setups
         self._trade_seq = 0
         self.equity_curve: List[tuple] = [(None, cfg.risk.starting_equity)]
 
@@ -208,39 +209,40 @@ class Simulator:
                                       entry_type=sig.entry_type if sig else None, outcome=outcome, reason=reason, detail=detail))
 
     # ----------------------------------------------------- signal handling
-    def on_signal(self, sig: Signal, session: Session) -> None:
-        """Called at the 1H close that confirmed the setup."""
+    def on_signal(self, sig: Signal, session: Session) -> Optional[str]:
+        """Called when a setup confirms. Returns the skip reason if no order was created."""
         if self.occupied:
             self._record_event(sig.close_ts, sig, "skipped", "occupied")
-            return
+            return "occupied"
         if session.flatten_at is not None and sig.close_ts >= session.flatten_at:
             self._record_event(sig.close_ts, sig, "skipped", "pre_closure_window")
-            return
+            return "pre_closure_window"
         if sig.entry_type == "market":
             self.pending = PendingOrder(signal=sig, kind="market", created_ts=sig.close_ts, limit_price=None,
                                         planned_contracts=0, planned_stop_distance=0.0, planned_risk_usd=0.0,
                                         equity_at_creation=self.equity)
-            return
+            return None
         if self.cfg.strategy.entry_mode == "market_only":
             # V2: no EQ limit orders. The setup is skipped and the system stays free.
             self._record_event(sig.close_ts, sig, "skipped", "limit_entries_disabled")
-            return
+            return "limit_entries_disabled"
         # limit at EQ: sell limit rounds up, buy limit rounds down
         lp = self.cfg.instrument.round_to_tick(sig.eq, "up" if sig.direction == SHORT else "down")
         stop, target, dist = self.stop_and_target(sig.direction, lp, sig.extreme)
         if dist <= 0:
             self._record_event(sig.close_ts, sig, "skipped", "invalid_stop", f"limit {lp} extreme {sig.extreme}")
-            return
+            return "invalid_stop"
         if dist < self.cfg.risk.min_stop_points:
             self._record_event(sig.close_ts, sig, "skipped", "min_stop", f"dist {dist}")
-            return
+            return "min_stop"
         n, rpc, budget = self.size(dist, self.equity)
         if n < 1:
             self._record_event(sig.close_ts, sig, "skipped", "size_below_min", f"rpc {rpc:.2f} budget {budget:.2f}")
-            return
+            return "size_below_min"
         self.pending = PendingOrder(signal=sig, kind="limit", created_ts=sig.close_ts, limit_price=lp,
                                     planned_contracts=n, planned_stop_distance=dist, planned_risk_usd=n * rpc,
                                     equity_at_creation=self.equity)
+        return None
 
     def on_hour_close(self, close_ts: pd.Timestamp) -> None:
         """Called at every 1H close before the new candle is evaluated."""
@@ -285,22 +287,29 @@ class Simulator:
     def _execute_market(self, bar: MinuteBar) -> None:
         p = self.pending; sig = p.signal; d = sig.direction
         self.pending = None
-        if d * (bar.open - sig.eq) > 0:
+        self.last_market_outcome = None
+
+        def reject(reason: str, detail: str, fill_px: Optional[float] = None):
+            self._record_event(bar.ts, sig, "skipped", reason, detail)
+            self.last_market_outcome = dict(signal=sig, outcome="rejected", reason=reason, ts=bar.ts, fill=fill_px)
+
+        if getattr(sig, "zone_test", True) and d * (bar.open - sig.eq) > 0:
             # short: open below EQ; long: open above EQ -> outside the permitted zone
-            self._record_event(bar.ts, sig, "skipped", "market_open_outside_zone", f"open {bar.open} eq {sig.eq}")
+            reject("market_open_outside_zone", f"open {bar.open} eq {sig.eq}")
             return
         fill = bar.open + d * self.slip
         stop, target, dist = self.stop_and_target(d, fill, sig.extreme)
         if dist <= 0:
-            self._record_event(bar.ts, sig, "skipped", "invalid_stop", f"fill {fill} extreme {sig.extreme}")
+            reject("invalid_stop", f"fill {fill} extreme {sig.extreme}", fill)
             return
         if dist < self.cfg.risk.min_stop_points:
-            self._record_event(bar.ts, sig, "skipped", "min_stop", f"dist {dist}")
+            reject("min_stop", f"dist {dist}", fill)
             return
         n, rpc, budget = self.size(dist, self.equity)
         if n < 1:
-            self._record_event(bar.ts, sig, "skipped", "size_below_min", f"rpc {rpc:.2f} budget {budget:.2f}")
+            reject("size_below_min", f"rpc {rpc:.2f} budget {budget:.2f}", fill)
             return
+        self.last_market_outcome = dict(signal=sig, outcome="entered", reason="", ts=bar.ts, fill=fill, stop=stop, dist=dist)
         self.position = Position(signal=sig, entry_type="market", direction=d, entry_ts=bar.ts, entry_price=fill,
                                  raw_reference=bar.open, entry_slippage_ticks=self.cfg.costs.slippage_ticks, stop=stop,
                                  target=target, stop_distance=dist, contracts=n, planned_risk_usd=n * rpc,

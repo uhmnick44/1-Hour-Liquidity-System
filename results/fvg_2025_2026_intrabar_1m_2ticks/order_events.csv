@@ -1,0 +1,12 @@
+ts,signal_bar_ts,direction,entry_type,outcome,reason,detail
+2025-10-03 05:15:00+00:00,2025-10-03 05:14:00+00:00,short,market,skipped,min_stop,dist 8.5
+2025-10-29 20:07:00+00:00,2025-10-29 20:06:00+00:00,short,market,skipped,size_below_min,rpc 676.88 budget 491.48
+2026-02-20 15:07:00+00:00,2026-02-20 15:06:00+00:00,short,market,skipped,size_below_min,rpc 856.88 budget 460.98
+2026-03-23 11:17:00+00:00,2026-03-23 11:16:00+00:00,short,market,skipped,size_below_min,rpc 627.88 budget 460.17
+2026-03-24 20:30:00+00:00,2026-03-24 20:29:00+00:00,short,market,skipped,size_below_min,rpc 507.88 budget 463.48
+2026-04-01 12:50:00+00:00,2026-04-01 12:49:00+00:00,short,market,skipped,size_below_min,rpc 650.88 budget 466.93
+2026-05-20 13:56:00+00:00,2026-05-20 13:55:00+00:00,short,market,skipped,size_below_min,rpc 563.88 budget 473.85
+2026-06-12 13:58:00+00:00,2026-06-12 13:57:00+00:00,long,market,skipped,size_below_min,rpc 588.88 budget 458.10
+2026-06-17 18:09:00+00:00,2026-06-17 18:08:00+00:00,long,market,skipped,size_below_min,rpc 538.88 budget 455.22
+2026-06-24 13:51:00+00:00,2026-06-24 13:50:00+00:00,long,market,skipped,size_below_min,rpc 640.88 budget 458.13
+2026-08-17 06:10:00+00:00,2026-08-17 06:09:00+00:00,short,market,skipped,min_stop,dist 9.0

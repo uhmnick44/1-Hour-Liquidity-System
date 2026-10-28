@@ -101,6 +101,27 @@ class StrategyConfig:
 
 
 @dataclass(frozen=True)
+class FvgConfig:
+    """1H sweep -> 1M FVG strategy (specification 2026-10-28).
+
+    Fields marked PROVISIONAL are Section 16 decisions the specification leaves
+    open. They are set to the existing system's rule so the code can run, and
+    they must be confirmed or changed by the user before any result is read.
+    """
+    window_minutes: int = 15
+    # Which timestamp is "the sweep": the first 1-minute breach (how the Pine
+    # alert fires live) or the engine's 1H close event. UNRESOLVED, see report.
+    sweep_timestamp_mode: str = "intrabar_1m"
+    # PROVISIONAL: existing exit rule (1:1 target from the fill). Spec: TP unresolved.
+    take_profit: str = "existing_fixed_1r"
+    # PROVISIONAL: existing 10-point minimum doubled stop. Spec: flag, do not silently carry.
+    apply_existing_min_stop: bool = True
+    # PROVISIONAL: existing one-active rule extended to setups: new sweeps are ignored
+    # while a setup, order or position is active. Spec: overlapping sweeps unresolved.
+    ignore_sweeps_while_occupied: bool = True
+
+
+@dataclass(frozen=True)
 class DataConfig:
     """One Databento batch. ``front_contracts`` is the liquid front-month chain in
     expiry order; back months in the batch that never become front are ignored."""
@@ -165,3 +186,4 @@ class BacktestConfig:
     strategy: StrategyConfig = field(default_factory=StrategyConfig)
     data: DataConfig = field(default_factory=DataConfig)
     split: SplitConfig = field(default_factory=SplitConfig)
+    fvg: FvgConfig = field(default_factory=FvgConfig)
