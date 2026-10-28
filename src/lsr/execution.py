@@ -197,7 +197,7 @@ class Simulator:
     def stop_and_target(self, direction: int, fill: float, extreme: float) -> tuple[float, float, float]:
         """Returns (stop, target, stop_distance). stop_distance <= 0 means invalid."""
         d = direction * (fill - extreme)
-        dist = 2.0 * d
+        dist = self.cfg.strategy.stop_multiple * d
         stop = fill - direction * dist
         mult = 2.0 if self.cfg.strategy.exit_mode == "be_at_1r_tp_2r" else 1.0
         target = fill + direction * mult * dist

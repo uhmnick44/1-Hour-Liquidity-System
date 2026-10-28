@@ -98,6 +98,7 @@ class SweepSetup:
     reversal_extreme_ts: Optional[pd.Timestamp] = None
     original_stop_distance: Optional[float] = None
     doubled_stop_distance: Optional[float] = None
+    final_stop_distance: Optional[float] = None    # what was actually placed: doubled * (stop_multiple / 2)
     final_stop_price: Optional[float] = None
     reject_reason: Optional[str] = None
     window_candles: int = 0
@@ -255,7 +256,9 @@ class SetupManager:
         s = self.active
         s.setup_status = SetupStatus.ENTRY_TRIGGERED
         s.entry_timestamp = ts; s.entry_fill_price = fill
-        s.original_stop_distance = dist / 2.0; s.doubled_stop_distance = dist; s.final_stop_price = stop
+        s.original_stop_distance = s.sweep_direction * (fill - s.reversal_extreme)
+        s.doubled_stop_distance = 2.0 * s.original_stop_distance
+        s.final_stop_distance = dist; s.final_stop_price = stop
         self.active = None
 
     def on_entry_rejected(self, ts: pd.Timestamp, reason: str, fill: Optional[float] = None) -> None:

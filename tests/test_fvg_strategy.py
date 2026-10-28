@@ -277,3 +277,58 @@ def test_original_engine_unchanged():
     """The Pine source and the verified port are byte-identical to the versions that passed parity."""
     assert hashlib.md5((ROOT / "engine" / "bsl_ssl.pine").read_bytes()).hexdigest() == "ee49700535649fe62a8ecc6742f6e142"
     assert hashlib.md5((ROOT / "src" / "lsr" / "liquidity_engine.py").read_bytes()).hexdigest() == "030525e3b09cbaebcbd1c06f73e24fa9"
+
+
+# ------------------------------------------------- 2026-10-28 stop update: (doubled * 0.5)
+def run_half_doubled(open_px, min_stop, exit_mode="be_at_1r_tp_2r", level=100.0, sweep_low=99.75):
+    cfg = BacktestConfig()
+    cfg = dataclasses.replace(cfg, risk=dataclasses.replace(cfg.risk, min_stop_points=min_stop),
+                              strategy=dataclasses.replace(cfg.strategy, stop_multiple=1.0, exit_mode=exit_mode))
+    sim = Simulator(cfg, long_session()); m = manager(ssl=[level]); L = level
+    m.on_candle_close(cd(0, L + 1, L + 2, sweep_low, L + 0.5), sim.occupied)
+    m.on_candle_close(cd(1, L + 0.5, L + 0.75, L + 0.0, L + 0.5), sim.occupied)
+    m.on_candle_close(cd(2, L + 0.5, L + 1.5, L + 0.25, L + 1.4), sim.occupied)
+    sig = m.on_candle_close(cd(3, L + 1.5, L + 2, L + 1.0, L + 1.8), sim.occupied)
+    sim.on_signal(sig, long_session()[0])
+    sim.on_minute(MinuteBar(ts=T0 + pd.Timedelta(minutes=4), open=open_px, high=open_px + 0.5, low=open_px - 0.5, close=open_px, session=0, contract="MNQT1", cum_offset=0.0))
+    oc = sim.last_market_outcome
+    if oc["outcome"] == "entered":
+        m.on_entry(oc["ts"], oc["fill"], oc["stop"], oc["dist"])
+    else:
+        m.on_entry_rejected(oc["ts"], oc["reason"], oc.get("fill"))
+    return sim, m
+
+
+def test_half_doubled_stop_sits_at_reversal_wick_and_targets_2r():
+    sim, m = run_half_doubled(open_px=29_914.5, min_stop=0.0, level=29_900.0, sweep_low=29_895.0)
+    s = m.setups[-1]; p = sim.position
+    assert s.entry_fill_price == 29_915.0 and s.original_stop_distance == 20.0 and s.doubled_stop_distance == 40.0
+    assert s.final_stop_distance == 20.0 and s.final_stop_price == 29_895.0 == p.stop == s.reversal_extreme
+    assert p.be_level == 29_935.0 and p.target == 29_955.0                       # 1R arms break-even, 2R target
+    assert p.stop < p.entry_price                                                 # correct side for a long
+    assert p.contracts == min(10, int(500 // (20.0 * 2 + 1.88 + 1.0)))           # sizing from the new distance
+
+
+def test_half_doubled_bearish_side_and_invalid_geometry():
+    sim = Simulator(dataclasses.replace(BacktestConfig(), strategy=StrategyConfig(stop_multiple=1.0, exit_mode="be_at_1r_tp_2r"),
+                                        risk=dataclasses.replace(BacktestConfig().risk, min_stop_points=0.0)), long_session())
+    m = manager(bsl=[100.0])
+    m.on_candle_close(cd(0, 99, 100.25, 98, 99.5), False); m.on_candle_close(cd(1, 99.5, 100.5, 99.0, 99.5), False)
+    m.on_candle_close(cd(2, 99.5, 99.75, 98.5, 98.6), False); sig = m.on_candle_close(cd(3, 98.5, 98.75, 97.5, 97.6), False)
+    sim.on_signal(sig, long_session()[0])
+    sim.on_minute(MinuteBar(ts=T0 + pd.Timedelta(minutes=4), open=90.5, high=91, low=90, close=90.5, session=0, contract="MNQT1", cum_offset=0.0))
+    p = sim.position
+    assert p.entry_price == 90.0 and p.stop == 100.5 and p.stop > p.entry_price and p.target == 90.0 - 2 * 10.5
+    sim2, m2 = run_half_doubled(open_px=99.25, min_stop=0.0)                      # fill at the wick: distance 0 -> rejected
+    assert m2.setups[-1].reject_reason == "invalid_stop"
+
+
+def test_half_doubled_min_stop_applies_only_when_enabled():
+    sim, m = run_half_doubled(open_px=101.75, min_stop=10.0)                      # distance 2.5 < 10
+    assert m.setups[-1].reject_reason == "min_stop"
+    sim, m = run_half_doubled(open_px=101.75, min_stop=0.0)
+    assert m.setups[-1].setup_status == SetupStatus.ENTRY_TRIGGERED and sim.position.stop == 99.75
+
+
+def test_stop_multiple_default_preserves_v1_behaviour():
+    assert StrategyConfig().stop_multiple == 2.0

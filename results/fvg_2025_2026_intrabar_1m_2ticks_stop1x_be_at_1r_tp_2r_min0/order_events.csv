@@ -1,0 +1,4 @@
+ts,signal_bar_ts,direction,entry_type,outcome,reason,detail
+2026-02-20 15:07:00+00:00,2026-02-20 15:06:00+00:00,short,market,skipped,size_below_min,rpc 429.88 budget 365.74
+2026-06-12 13:58:00+00:00,2026-06-12 13:57:00+00:00,long,market,skipped,size_below_min,rpc 295.88 budget 287.36
+2026-06-24 13:51:00+00:00,2026-06-24 13:50:00+00:00,long,market,skipped,size_below_min,rpc 321.88 budget 295.52

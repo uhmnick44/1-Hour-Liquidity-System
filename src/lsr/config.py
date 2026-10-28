@@ -92,8 +92,14 @@ class StrategyConfig:
     # (requested 2026-10-21): "be_at_1r_tp_2r": when price touches +1R the stop
     # moves to the entry fill; the target is a limit at +2R.
     exit_mode: str = "fixed_1r"
+    # Stop distance as a multiple of the entry-to-extreme distance. V1/V2/V3 and
+    # the first FVG specification use 2.0. The 2026-10-28 FVG update specifies
+    # (distance * 2) * 0.5, i.e. 1.0: the stop sits at the reversal wick.
+    stop_multiple: float = 2.0
 
     def __post_init__(self) -> None:
+        if self.stop_multiple <= 0:
+            raise ValueError("stop_multiple must be positive")
         if self.entry_mode not in ("market_and_limit", "market_only"):
             raise ValueError(f"unknown entry_mode {self.entry_mode!r}")
         if self.exit_mode not in ("fixed_1r", "be_at_1r_tp_2r"):

@@ -36,7 +36,7 @@ def trace(res, md, setup_id: int) -> str:
              f"  FVG C candle open    {pd.Timestamp(s.fvg_candle_c_ts).tz_convert(NY)}  confirmed at {pd.Timestamp(s.fvg_confirmation_timestamp).tz_convert(NY)}",
              f"  reversal extreme     {s.reversal_extreme} at {pd.Timestamp(s.reversal_extreme_ts).tz_convert(NY)} over {s.window_candles} candles",
              f"  entry                {pd.Timestamp(s.entry_timestamp).tz_convert(NY)} fill {s.entry_fill_price} ({s.setup_status})",
-             f"  original distance    {s.original_stop_distance}  doubled {s.doubled_stop_distance}  final stop {s.final_stop_price}"]
+             f"  original distance    {s.original_stop_distance}  doubled {s.doubled_stop_distance}  placed distance {s.final_stop_distance}  final stop {s.final_stop_price}"]
     w = m1[(m1.index >= pd.Timestamp(s.sweep_timestamp) - pd.Timedelta(minutes=1)) & (m1.index <= pd.Timestamp(s.entry_timestamp))]
     lines.append("  1-minute candles, sweep candle through entry candle (adjusted prices):")
     for r in w.itertuples():
@@ -54,15 +54,22 @@ def main() -> int:
     ap.add_argument("--sweep-mode", default="intrabar_1m", choices=["intrabar_1m", "h1_close"])
     ap.add_argument("--slippage-ticks", type=int, default=2)
     ap.add_argument("--single-block", action="store_true")
+    ap.add_argument("--stop-multiple", type=float, default=2.0, help="2.0 = original doubled stop; 1.0 = (doubled * 0.5), stop at the reversal wick")
+    ap.add_argument("--exit-mode", default="fixed_1r", choices=["fixed_1r", "be_at_1r_tp_2r"])
+    ap.add_argument("--min-stop-points", type=float, default=None, help="override the 10-point minimum (0 disables)")
     ap.add_argument("--out", default=str(ROOT / "results"))
     args = ap.parse_args()
     base = BacktestConfig()
     cfg = dataclasses.replace(base, data=DATASETS[args.dataset], costs=dataclasses.replace(base.costs, slippage_ticks=args.slippage_ticks),
                               fvg=dataclasses.replace(base.fvg, sweep_timestamp_mode=args.sweep_mode),
+                              strategy=dataclasses.replace(base.strategy, stop_multiple=args.stop_multiple, exit_mode=args.exit_mode),
+                              risk=dataclasses.replace(base.risk, min_stop_points=args.min_stop_points) if args.min_stop_points is not None else base.risk,
                               split=SplitConfig(dev_fraction=0.0) if args.single_block else base.split)
     md = build_market_data(cfg.data, cfg.strategy)
     res = run_fvg_backtest(md, cfg)
     label = f"fvg_{args.dataset}_{args.sweep_mode}_{args.slippage_ticks}ticks"
+    if args.stop_multiple != 2.0 or args.exit_mode != "fixed_1r" or args.min_stop_points is not None:
+        label += f"_stop{args.stop_multiple:g}x_{args.exit_mode}_min{cfg.risk.min_stop_points:g}"
     out = Path(args.out) / label
     rep = write_outputs(res, md, out, label)
     res.setups.to_csv(out / "setups.csv", index=False)
