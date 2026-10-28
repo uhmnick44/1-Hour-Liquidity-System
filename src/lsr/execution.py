@@ -93,6 +93,11 @@ class Position:
     gap_fill: bool = False
     be_level: Optional[float] = None      # +1R price that arms break-even (exit_mode be_at_1r_tp_2r)
     be_armed: bool = False
+    initial_stop: Optional[float] = None  # stop as placed at entry; `stop` may later move to entry in be mode
+
+    def __post_init__(self) -> None:
+        if self.initial_stop is None:
+            self.initial_stop = self.stop
 
 
 @dataclass
@@ -117,7 +122,8 @@ class TradeRecord:
     contract: str
     entry_slippage_ticks: int
     gap_fill: bool
-    stop: float
+    stop: float                   # initial stop as placed at entry
+    stop_at_exit: float           # stop in force when the trade closed (equals `stop` unless break-even moved it)
     target: float
     stop_distance: float
     contracts: int
@@ -446,7 +452,7 @@ class Simulator:
             order_created_ts=pos.order_created_ts, limit_price=pos.raw_reference if pos.entry_type == "limit" else None,
             entry_ts=pos.entry_ts, entry_price=pos.entry_price, entry_price_raw=pos.entry_price - pos.cum_offset,
             contract=pos.contract, entry_slippage_ticks=pos.entry_slippage_ticks, gap_fill=pos.gap_fill,
-            stop=pos.stop, target=pos.target, stop_distance=pos.stop_distance, contracts=pos.contracts,
+            stop=pos.initial_stop, stop_at_exit=pos.stop, target=pos.target, stop_distance=pos.stop_distance, contracts=pos.contracts,
             planned_risk_per_contract=pos.planned_risk_per_contract, planned_risk_usd=pos.planned_risk_usd,
             equity_at_entry=pos.equity_at_entry, exit_ts=ts, exit_price=exit_price, exit_price_raw=exit_price - bar.cum_offset,
             exit_reason=reason, exit_slippage_ticks=exit_slip_ticks, pnl_points=pnl_pts, gross_pnl_usd=gross,
