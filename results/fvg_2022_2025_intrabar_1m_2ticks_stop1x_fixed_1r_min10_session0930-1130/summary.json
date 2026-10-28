@@ -1,0 +1,394 @@
+{
+  "label": "fvg_2022_2025_intrabar_1m_2ticks_stop1x_fixed_1r_min10_session0930-1130",
+  "config": {
+    "slippage_ticks": 2,
+    "fees_per_side": 0.94,
+    "starting_equity": 50000.0,
+    "risk_fraction": 0.01,
+    "max_contracts": 10,
+    "min_stop_points": 10.0,
+    "limit_window_candles": 3
+  },
+  "data": {
+    "h1_bars": 17685,
+    "m1_bars": 1060704,
+    "first_bar": "2022-10-02 22:00:00+00:00",
+    "last_bar_close": "2025-10-01 00:00:00+00:00",
+    "engine_new_levels": 2085,
+    "engine_sweeps": 1401
+  },
+  "split": {
+    "boundary_utc": "2022-10-02 22:00:00+00:00",
+    "boundary_et": "2022-10-02 18:00:00-04:00",
+    "dev_fraction": 0.0
+  },
+  "full_sample": {
+    "performance": {
+      "total_trades": 285,
+      "winning_trades": 133,
+      "losing_trades": 152,
+      "win_rate": 0.4666666666666667,
+      "win_rate_ci95": [
+        0.409573711723813,
+        0.5246462898272102
+      ],
+      "avg_win_r": 0.9124049757739732,
+      "avg_loss_r": -1.0,
+      "avg_win_usd": 349.63308270676697,
+      "avg_loss_usd": -386.59723684210525,
+      "expectancy_r": -0.10754434463881259,
+      "expectancy_r_ci95": [
+        -0.21660776330670334,
+        0.0028501928430804202
+      ],
+      "expectancy_usd": -43.023087719298246,
+      "profit_factor": 0.791337646040572,
+      "gross_pnl_usd": -8753.5,
+      "fees_usd": 3508.0799999999995,
+      "slippage_usd": 2874.0,
+      "net_pnl_usd": -12261.58,
+      "ending_equity": 37738.42,
+      "max_drawdown_usd": -13703.660000000003,
+      "max_drawdown_pct": -0.2696394643596416,
+      "longest_losing_streak": 7,
+      "avg_contracts": 6.5473684210526315,
+      "avg_planned_risk_usd": 384.6195789473684,
+      "avg_planned_risk_pct_of_equity": 0.008826515021950984,
+      "avg_stop_distance_points": 35.06140350877193,
+      "exit_reasons": {
+        "stop": 152,
+        "target": 132,
+        "flatten": 1
+      },
+      "by_entry_type": {
+        "market": {
+          "trades": 285,
+          "win_rate": 0.4666666666666667,
+          "expectancy_r": -0.10754434463881259
+        }
+      },
+      "by_direction": {
+        "long": {
+          "trades": 145,
+          "win_rate": 0.4689655172413793,
+          "expectancy_r": -0.10445735652919963
+        },
+        "short": {
+          "trades": 140,
+          "win_rate": 0.4642857142857143,
+          "expectancy_r": -0.1107415823237688
+        }
+      }
+    },
+    "orders": {
+      "signals": 285,
+      "limit_orders_placed": 0,
+      "limit_orders_filled": 0,
+      "limit_fill_rate": NaN,
+      "expired_orders": 0,
+      "invalidated_orders": 0,
+      "flatten_cancelled_orders": 0,
+      "invalidation_reasons": {},
+      "skipped_setups_by_reason": {},
+      "no_setup_by_reason": {}
+    }
+  },
+  "development": {
+    "performance": {
+      "total_trades": 0
+    },
+    "orders": {
+      "signals": 0,
+      "limit_orders_placed": 0,
+      "limit_orders_filled": 0,
+      "limit_fill_rate": NaN,
+      "expired_orders": 0,
+      "invalidated_orders": 0,
+      "flatten_cancelled_orders": 0,
+      "invalidation_reasons": {},
+      "skipped_setups_by_reason": {},
+      "no_setup_by_reason": {}
+    }
+  },
+  "out_of_sample": {
+    "performance": {
+      "total_trades": 285,
+      "winning_trades": 133,
+      "losing_trades": 152,
+      "win_rate": 0.4666666666666667,
+      "win_rate_ci95": [
+        0.409573711723813,
+        0.5246462898272102
+      ],
+      "avg_win_r": 0.9124049757739732,
+      "avg_loss_r": -1.0,
+      "avg_win_usd": 349.63308270676697,
+      "avg_loss_usd": -386.59723684210525,
+      "expectancy_r": -0.10754434463881259,
+      "expectancy_r_ci95": [
+        -0.21660776330670334,
+        0.0028501928430804202
+      ],
+      "expectancy_usd": -43.023087719298246,
+      "profit_factor": 0.791337646040572,
+      "gross_pnl_usd": -8753.5,
+      "fees_usd": 3508.0799999999995,
+      "slippage_usd": 2874.0,
+      "net_pnl_usd": -12261.58,
+      "ending_equity": 37738.42,
+      "max_drawdown_usd": -13703.660000000003,
+      "max_drawdown_pct": -0.2696394643596416,
+      "longest_losing_streak": 7,
+      "avg_contracts": 6.5473684210526315,
+      "avg_planned_risk_usd": 384.6195789473684,
+      "avg_planned_risk_pct_of_equity": 0.008826515021950984,
+      "avg_stop_distance_points": 35.06140350877193,
+      "exit_reasons": {
+        "stop": 152,
+        "target": 132,
+        "flatten": 1
+      },
+      "by_entry_type": {
+        "market": {
+          "trades": 285,
+          "win_rate": 0.4666666666666667,
+          "expectancy_r": -0.10754434463881259
+        }
+      },
+      "by_direction": {
+        "long": {
+          "trades": 145,
+          "win_rate": 0.4689655172413793,
+          "expectancy_r": -0.10445735652919963
+        },
+        "short": {
+          "trades": 140,
+          "win_rate": 0.4642857142857143,
+          "expectancy_r": -0.1107415823237688
+        }
+      }
+    },
+    "orders": {
+      "signals": 285,
+      "limit_orders_placed": 0,
+      "limit_orders_filled": 0,
+      "limit_fill_rate": NaN,
+      "expired_orders": 0,
+      "invalidated_orders": 0,
+      "flatten_cancelled_orders": 0,
+      "invalidation_reasons": {},
+      "skipped_setups_by_reason": {},
+      "no_setup_by_reason": {}
+    }
+  },
+  "ambiguity": {
+    "fill_vs_invalidation": 0,
+    "stop_vs_target": 2,
+    "entry_and_exit_same_minute": 4
+  },
+  "flagged_trades": {
+    "entry_and_exit_same_minute": 4,
+    "ambiguous_stop_vs_target": 2,
+    "gap_stop": 1
+  },
+  "rolls": [
+    {
+      "old": "MNQZ2",
+      "new": "MNQH3",
+      "roll_session": "2022-12-09",
+      "expiry": "2022-12-16",
+      "old_close": 11553.0,
+      "new_close": 11667.75,
+      "offset": 114.75,
+      "old_volume": 904739,
+      "new_volume": 345954,
+      "old_close_ts_et": "2022-12-09 16:59:00-05:00",
+      "new_close_ts_et": "2022-12-09 16:59:00-05:00"
+    },
+    {
+      "old": "MNQH3",
+      "new": "MNQM3",
+      "roll_session": "2023-03-10",
+      "expiry": "2023-03-17",
+      "old_close": 11885.25,
+      "new_close": 12007.5,
+      "offset": 122.25,
+      "old_volume": 1662670,
+      "new_volume": 276674,
+      "old_close_ts_et": "2023-03-10 16:59:00-05:00",
+      "new_close_ts_et": "2023-03-10 16:59:00-05:00"
+    },
+    {
+      "old": "MNQM3",
+      "new": "MNQU3",
+      "roll_session": "2023-06-09",
+      "expiry": "2023-06-16",
+      "old_close": 14563.25,
+      "new_close": 14742.0,
+      "offset": 178.75,
+      "old_volume": 986142,
+      "new_volume": 100552,
+      "old_close_ts_et": "2023-06-09 16:59:00-04:00",
+      "new_close_ts_et": "2023-06-09 16:59:00-04:00"
+    },
+    {
+      "old": "MNQU3",
+      "new": "MNQZ3",
+      "roll_session": "2023-09-08",
+      "expiry": "2023-09-15",
+      "old_close": 15314.75,
+      "new_close": 15509.75,
+      "offset": 195.0,
+      "old_volume": 1027750,
+      "new_volume": 73149,
+      "old_close_ts_et": "2023-09-08 16:59:00-04:00",
+      "new_close_ts_et": "2023-09-08 16:59:00-04:00"
+    },
+    {
+      "old": "MNQZ3",
+      "new": "MNQH4",
+      "roll_session": "2023-12-08",
+      "expiry": "2023-12-15",
+      "old_close": 16092.5,
+      "new_close": 16303.25,
+      "offset": 210.75,
+      "old_volume": 1041410,
+      "new_volume": 131775,
+      "old_close_ts_et": "2023-12-08 16:59:00-05:00",
+      "new_close_ts_et": "2023-12-08 16:59:00-05:00"
+    },
+    {
+      "old": "MNQH4",
+      "new": "MNQM4",
+      "roll_session": "2024-03-08",
+      "expiry": "2024-03-15",
+      "old_close": 18055.25,
+      "new_close": 18303.0,
+      "offset": 247.75,
+      "old_volume": 1805710,
+      "new_volume": 231819,
+      "old_close_ts_et": "2024-03-08 16:59:00-05:00",
+      "new_close_ts_et": "2024-03-08 16:59:00-05:00"
+    },
+    {
+      "old": "MNQM4",
+      "new": "MNQU4",
+      "roll_session": "2024-06-14",
+      "expiry": "2024-06-21",
+      "old_close": 19696.25,
+      "new_close": 19956.75,
+      "offset": 260.5,
+      "old_volume": 1264619,
+      "new_volume": 154677,
+      "old_close_ts_et": "2024-06-14 16:59:00-04:00",
+      "new_close_ts_et": "2024-06-14 16:59:00-04:00"
+    },
+    {
+      "old": "MNQU4",
+      "new": "MNQZ4",
+      "roll_session": "2024-09-13",
+      "expiry": "2024-09-20",
+      "old_close": 19504.0,
+      "new_close": 19739.25,
+      "offset": 235.25,
+      "old_volume": 1049086,
+      "new_volume": 106087,
+      "old_close_ts_et": "2024-09-13 16:59:00-04:00",
+      "new_close_ts_et": "2024-09-13 16:59:00-04:00"
+    },
+    {
+      "old": "MNQZ4",
+      "new": "MNQH5",
+      "roll_session": "2024-12-13",
+      "expiry": "2024-12-20",
+      "old_close": 21760.5,
+      "new_close": 22047.5,
+      "offset": 287.0,
+      "old_volume": 1307519,
+      "new_volume": 59259,
+      "old_close_ts_et": "2024-12-13 16:59:00-05:00",
+      "new_close_ts_et": "2024-12-13 16:59:00-05:00"
+    },
+    {
+      "old": "MNQH5",
+      "new": "MNQM5",
+      "roll_session": "2025-03-14",
+      "expiry": "2025-03-21",
+      "old_close": 19666.75,
+      "new_close": 19871.0,
+      "offset": 204.25,
+      "old_volume": 2062774,
+      "new_volume": 53931,
+      "old_close_ts_et": "2025-03-14 16:59:00-04:00",
+      "new_close_ts_et": "2025-03-14 16:59:00-04:00"
+    },
+    {
+      "old": "MNQM5",
+      "new": "MNQU5",
+      "roll_session": "2025-06-13",
+      "expiry": "2025-06-20",
+      "old_close": 21654.0,
+      "new_close": 21865.75,
+      "offset": 211.75,
+      "old_volume": 1672738,
+      "new_volume": 201749,
+      "old_close_ts_et": "2025-06-13 16:59:00-04:00",
+      "new_close_ts_et": "2025-06-13 16:59:00-04:00"
+    },
+    {
+      "old": "MNQU5",
+      "new": "MNQZ5",
+      "roll_session": "2025-09-12",
+      "expiry": "2025-09-19",
+      "old_close": 24114.5,
+      "new_close": 24351.75,
+      "offset": 237.25,
+      "old_volume": 1028935,
+      "new_volume": 34462,
+      "old_close_ts_et": "2025-09-12 16:59:00-04:00",
+      "new_close_ts_et": "2025-09-12 16:59:00-04:00"
+    }
+  ],
+  "calendar_overrides": [
+    {
+      "date": "2022-11-25",
+      "close_et": "2022-11-25 13:15:00-05:00",
+      "note": "Day-before-holiday early close. Databento shows the last traded minute at 13:14 ET; the calendar library says 13:00 ET. Same convention as the two user-verified 2025 dates. PENDING user verification against CME's holiday schedule for that year."
+    },
+    {
+      "date": "2023-07-03",
+      "close_et": "2023-07-03 13:15:00-04:00",
+      "note": "Day-before-holiday early close. Databento shows the last traded minute at 13:14 ET; the calendar library says 13:00 ET. Same convention as the two user-verified 2025 dates. PENDING user verification against CME's holiday schedule for that year."
+    },
+    {
+      "date": "2023-11-24",
+      "close_et": "2023-11-24 13:15:00-05:00",
+      "note": "Day-before-holiday early close. Databento shows the last traded minute at 13:14 ET; the calendar library says 13:00 ET. Same convention as the two user-verified 2025 dates. PENDING user verification against CME's holiday schedule for that year."
+    },
+    {
+      "date": "2024-07-03",
+      "close_et": "2024-07-03 13:15:00-04:00",
+      "note": "Day-before-holiday early close. Databento shows the last traded minute at 13:14 ET; the calendar library says 13:00 ET. Same convention as the two user-verified 2025 dates. PENDING user verification against CME's holiday schedule for that year."
+    },
+    {
+      "date": "2024-11-29",
+      "close_et": "2024-11-29 13:15:00-05:00",
+      "note": "Day-before-holiday early close. Databento shows the last traded minute at 13:14 ET; the calendar library says 13:00 ET. Same convention as the two user-verified 2025 dates. PENDING user verification against CME's holiday schedule for that year."
+    },
+    {
+      "date": "2024-12-24",
+      "close_et": "2024-12-24 13:15:00-05:00",
+      "note": "Day-before-holiday early close. Databento shows the last traded minute at 13:14 ET; the calendar library says 13:00 ET. Same convention as the two user-verified 2025 dates. PENDING user verification against CME's holiday schedule for that year."
+    },
+    {
+      "date": "2025-01-09",
+      "close_et": "2025-01-09 09:30:00-05:00",
+      "note": "National Day of Mourning (Carter). NYSE closed; the library marks CME closed. Databento shows CME equity index futures trading from 18:00 ET on 01-08 to 09:29 ET on 01-09, then reopening 18:00 ET for the 01-10 session. PENDING user verification against CME's notice."
+    },
+    {
+      "date": "2025-07-03",
+      "close_et": "2025-07-03 13:15:00-04:00",
+      "note": "Day-before-holiday early close. Databento shows the last traded minute at 13:14 ET; the calendar library says 13:00 ET. Same convention as the two user-verified 2025 dates. PENDING user verification against CME's holiday schedule for that year."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+Setup 1: long after level 10995.0 (ssl:130:10995.0) swept
+  sweep timestamp      2022-10-10 10:05:00-04:00  (close of the first 1m bar through the level)
+  expiration           2022-10-10 10:20:00-04:00
+  FVG A candle open    2022-10-10 10:14:00-04:00
+  FVG C candle open    2022-10-10 10:16:00-04:00  confirmed at 2022-10-10 10:17:00-04:00
+  reversal extreme     10983.25 at 2022-10-10 10:09:00-04:00 over 13 candles
+  entry                2022-10-10 10:17:00-04:00 fill 11013.0 (ENTRY_TRIGGERED)
+  original distance    29.75  doubled 59.5  placed distance 29.75  final stop 10983.25
+  1-minute candles, sweep candle through entry candle (adjusted prices):
+    10:04  O  11002.25 H  11013.25 L  10990.50 C  11000.00
+    10:05  O  11000.75 H  11020.00 L  10996.00 C  11012.50
+    10:06  O  11012.50 H  11032.25 L  11011.00 C  11017.50
+    10:07  O  11017.50 H  11021.75 L  11006.75 C  11012.75
+    10:08  O  11012.75 H  11016.00 L  11001.00 C  11004.50
+    10:09  O  11004.75 H  11005.50 L  10983.25 C  10987.00
+    10:10  O  10986.50 H  11000.50 L  10984.25 C  10995.50
+    10:11  O  10996.00 H  11005.00 L  10991.50 C  10999.75
+    10:12  O  11000.25 H  11003.75 L  10988.75 C  10993.00
+    10:13  O  10993.25 H  11001.00 L  10992.75 C  10994.50
+    10:14  O  10994.50 H  11001.75 L  10991.00 C  10994.00
+    10:15  O  10994.00 H  11016.25 L  10988.50 C  11009.75
+    10:16  O  11010.00 H  11018.00 L  11005.75 C  11012.00
+    10:17  O  11012.50 H  11023.00 L  11009.25 C  11016.75
+  exit                 2022-10-10 10:27:00-04:00 at 11042.75 (target) net $460.96, 8 contracts  [exit rule PROVISIONAL]
