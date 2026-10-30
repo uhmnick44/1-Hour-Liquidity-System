@@ -43,10 +43,13 @@ def load_contract(path: Path) -> pd.DataFrame:
 def load_all_contracts(cfg: DataConfig) -> Dict[str, pd.DataFrame]:
     out = {}
     for sym in cfg.front_contracts:
-        files = sorted(cfg.databento_dir.glob(f"*.ohlcv-1m.{sym}.dbn.zst"))
+        files = sorted(cfg.databento_dir.rglob(f"*.ohlcv-1m.{sym}.dbn.zst"))
         if not files:
             raise FileNotFoundError(f"no file for {sym} in {cfg.databento_dir}")
-        out[sym] = load_contract(files[0])
+        frames = [load_contract(f) for f in files]
+        df = pd.concat(frames).sort_index()
+        df = df[~df.index.duplicated(keep="first")]   # the same contract may appear in two batches
+        out[sym] = df
     return out
 
 

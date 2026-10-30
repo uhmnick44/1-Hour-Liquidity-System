@@ -38,8 +38,10 @@ class BacktestResult:
     h1_count: int
     m1_count: int
     engine_events: Dict[str, int] = field(default_factory=dict)
-    setups: Optional[pd.DataFrame] = None          # FVG strategy only
-    ignored_sweeps: Optional[pd.DataFrame] = None  # FVG strategy only
+    setups: Optional[pd.DataFrame] = None          # FVG strategies only
+    ignored_sweeps: Optional[pd.DataFrame] = None  # FVG strategies only
+    levels: Optional[pd.DataFrame] = None          # sweep->FVG strategy only
+    skipped_entries: Optional[pd.DataFrame] = None
 
 
 def engine_params(cfg: BacktestConfig) -> EngineParams:

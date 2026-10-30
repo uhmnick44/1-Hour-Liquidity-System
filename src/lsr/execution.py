@@ -144,6 +144,7 @@ class TradeRecord:
     equity_after: float
     minutes_held: float
     trade_flags: str
+    setup_ref: str = ""           # event/setup id from the signal, when the strategy provides one
 
 
 @dataclass
@@ -304,17 +305,32 @@ class Simulator:
             reject("market_open_outside_zone", f"open {bar.open} eq {sig.eq}")
             return
         fill = bar.open + d * self.slip
-        stop, target, dist = self.stop_and_target(d, fill, sig.extreme)
-        if dist <= 0:
-            reject("invalid_stop", f"fill {fill} extreme {sig.extreme}", fill)
-            return
-        if dist < self.cfg.risk.min_stop_points:
+        stop_px = getattr(sig, "stop_price", None)
+        if stop_px is not None:
+            # explicit stop (sweep->FVG strategy): distance measured from the slipped fill
+            dist = d * (fill - stop_px)
+            if dist <= 0:
+                reject("stop_not_beyond_fill", f"fill {fill} stop {stop_px}", fill)
+                return
+            stop = stop_px
+            mult = 2.0 if self.cfg.strategy.exit_mode == "be_at_1r_tp_2r" else 1.0
+            target = fill + d * mult * dist
+        else:
+            stop, target, dist = self.stop_and_target(d, fill, sig.extreme)
+            if dist <= 0:
+                reject("invalid_stop", f"fill {fill} extreme {sig.extreme}", fill)
+                return
+        if self.cfg.risk.min_stop_points > 0 and dist < self.cfg.risk.min_stop_points:
             reject("min_stop", f"dist {dist}", fill)
             return
-        n, rpc, budget = self.size(dist, self.equity)
-        if n < 1:
-            reject("size_below_min", f"rpc {rpc:.2f} budget {budget:.2f}", fill)
-            return
+        if self.cfg.risk.fixed_contracts:
+            n = self.cfg.risk.fixed_contracts
+            rpc = dist * self.cfg.instrument.point_value          # gross price risk per contract
+        else:
+            n, rpc, budget = self.size(dist, self.equity)
+            if n < 1:
+                reject("size_below_min", f"rpc {rpc:.2f} budget {budget:.2f}", fill)
+                return
         self.last_market_outcome = dict(signal=sig, outcome="entered", reason="", ts=bar.ts, fill=fill, stop=stop, dist=dist)
         self.position = Position(signal=sig, entry_type="market", direction=d, entry_ts=bar.ts, entry_price=fill,
                                  raw_reference=bar.open, entry_slippage_ticks=self.cfg.costs.slippage_ticks, stop=stop,
@@ -458,9 +474,22 @@ class Simulator:
             exit_reason=reason, exit_slippage_ticks=exit_slip_ticks, pnl_points=pnl_pts, gross_pnl_usd=gross,
             fees_usd=fees, net_pnl_usd=net, r_net=net / pos.planned_risk_usd if pos.planned_risk_usd else float("nan"),
             r_price=pnl_pts / pos.stop_distance if pos.stop_distance else float("nan"), equity_after=self.equity,
-            minutes_held=(ts - pos.entry_ts).total_seconds() / 60.0, trade_flags=",".join(pos.flags)))
+            minutes_held=(ts - pos.entry_ts).total_seconds() / 60.0, trade_flags=",".join(pos.flags),
+            setup_ref=str(getattr(pos.signal, "event_id", getattr(pos.signal, "setup_id", "")))))
         self.equity_curve.append((ts, self.equity))
         self.position = None
+
+    def force_close(self, bar: MinuteBar, reason: str) -> None:
+        """Market exit at this bar's open with adverse slippage (scheduled hard exit)."""
+        if self.position is None:
+            return
+        self.position.flags.append(reason)
+        self._close(bar, bar.open - self.position.direction * self.slip, reason, self.cfg.costs.slippage_ticks)
+
+    def cancel_pending(self, ts: pd.Timestamp, reason: str) -> None:
+        if self.pending is not None:
+            self._record_event(ts, self.pending.signal, "cancelled", reason)
+            self.pending = None
 
     def finish(self) -> None:
         bar = self._last_bar

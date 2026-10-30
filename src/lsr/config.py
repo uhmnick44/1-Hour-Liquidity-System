@@ -69,6 +69,9 @@ class RiskConfig:
     risk_fraction: float = 0.01          # of current realized equity
     min_stop_points: float = 10.0        # minimum doubled stop distance
     max_contracts: int = 10
+    # When set, every trade uses this many contracts and planned risk is the gross
+    # price risk (stop distance x point value x contracts), with no compounding.
+    fixed_contracts: Optional[int] = None
 
 
 @dataclass(frozen=True)
@@ -133,6 +136,29 @@ class FvgConfig:
 
 
 @dataclass(frozen=True)
+class SweepFvgConfig:
+    """10-MNQ liquidity sweep -> first 1-minute FVG strategy (specification 2026-10-30).
+    Level definitions are the user's unvalidated baseline assumptions of 2026-10-30."""
+    # entry windows, New York wall clock, start-inclusive end-exclusive, with the pre-window range start
+    windows: Tuple[Tuple[str, str, str, str], ...] = (("london", "03:00", "04:00", "18:00"),
+                                                       ("ny_am", "10:00", "11:00", "03:00"),
+                                                       ("ny_pm", "14:00", "15:00", "10:00"))
+    force_close_time: str = "16:00"        # New York; earlier on early-close days (last minute before the close)
+    rth_start: str = "09:30"
+    rth_end: str = "16:00"
+    close_back_candles: int = 3            # penetration candle counts as the first
+    swing1m_left: int = 2
+    swing1m_right: int = 2
+    swing1m_eligibility_minutes: int = 60  # from the pivot bar's timestamp; tradeable from confirmation
+    swing15m_left: int = 2
+    swing15m_right: int = 2
+    swing15m_eligibility_sessions: int = 5  # the pivot's session plus the next five
+    consume_on_penetration: bool = True    # default 1: any one-tick penetration consumes a level
+    stop_offset_ticks: int = 2             # 1, 2, 4 tested separately
+    prewindow_levels_expire_at_window_end: bool = True   # ASSUMPTION, documented in the report
+
+
+@dataclass(frozen=True)
 class DataConfig:
     """One Databento batch. ``front_contracts`` is the liquid front-month chain in
     expiry order; back months in the batch that never become front are ignored."""
@@ -151,6 +177,11 @@ DATASETS = {
                             front_contracts=("MNQZ2", "MNQH3", "MNQM3", "MNQU3", "MNQZ3", "MNQH4", "MNQM4", "MNQU4",
                                              "MNQZ4", "MNQH5", "MNQM5", "MNQU5", "MNQZ5"),
                             start_utc="2022-10-02T00:00:00Z", end_utc="2025-10-01T00:00:00Z"),
+    # Both batches joined: the full four years. Contract files are looked up in either directory.
+    "2022_2026": DataConfig(name="2022_2026", databento_dir=REPO_ROOT / "data",
+                            front_contracts=("MNQZ2", "MNQH3", "MNQM3", "MNQU3", "MNQZ3", "MNQH4", "MNQM4", "MNQU4",
+                                             "MNQZ4", "MNQH5", "MNQM5", "MNQU5", "MNQZ5", "MNQH6", "MNQM6", "MNQU6", "MNQZ6"),
+                            start_utc="2022-10-02T00:00:00Z", end_utc="2026-10-21T00:00:00Z"),
 }
 
 
@@ -198,3 +229,4 @@ class BacktestConfig:
     data: DataConfig = field(default_factory=DataConfig)
     split: SplitConfig = field(default_factory=SplitConfig)
     fvg: FvgConfig = field(default_factory=FvgConfig)
+    sweepfvg: SweepFvgConfig = field(default_factory=SweepFvgConfig)
