@@ -1,0 +1,2309 @@
+{
+  "label": "dev_no_swing1m",
+  "start": "2022-10-02 00:00:00+00:00",
+  "end": "2024-10-21 00:00:00+00:00",
+  "folds": [
+    "2022-10-02 00:00:00+00:00",
+    "2023-04-07 12:00:00+00:00",
+    "2023-10-12 00:00:00+00:00",
+    "2024-04-16 12:00:00+00:00",
+    "2024-10-21 00:00:00+00:00"
+  ],
+  "scenarios": {
+    "stop1_slip1": {
+      "stop_offset_ticks": 1,
+      "slippage_ticks": 1,
+      "overall": {
+        "trades": 651,
+        "win_rate": 0.22887864823348694,
+        "win_rate_ci95": [
+          0.19825241067428107,
+          0.2626859292234897
+        ],
+        "expectancy_r": -0.1159370221326137,
+        "expectancy_r_ci95": [
+          -0.20414902953879505,
+          -0.02584127381841928
+        ],
+        "avg_win_r": 1.8856280767761588,
+        "avg_loss_r": -0.7100270614501578,
+        "profit_factor": 0.7440283915732434,
+        "net_pnl_usd": -33408.799999999996,
+        "max_drawdown_usd": -36384.599999999846,
+        "fees_usd": 12238.8,
+        "slippage_usd": 5785.0,
+        "exits": {
+          "stop": 311,
+          "breakeven": 188,
+          "target": 145,
+          "force_close": 7
+        },
+        "ambiguous": 30
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2022-10-02",
+          "end": "2023-04-07",
+          "trades": 157,
+          "win_rate": 0.2229299363057325,
+          "win_rate_ci95": [
+            0.16488434152646586,
+            0.2942108179347681
+          ],
+          "expectancy_r": -0.13015200314146683,
+          "expectancy_r_ci95": [
+            -0.30761235286792316,
+            0.05340803687734859
+          ],
+          "avg_win_r": 1.883982097901173,
+          "avg_loss_r": -0.7079773599979617,
+          "profit_factor": 0.7898536105612225,
+          "net_pnl_usd": -6666.599999999996,
+          "max_drawdown_usd": -9635.800000000017,
+          "fees_usd": 2951.5999999999995,
+          "slippage_usd": 1400.0,
+          "exits": {
+            "stop": 76,
+            "breakeven": 45,
+            "target": 34,
+            "force_close": 2
+          },
+          "ambiguous": 9
+        },
+        {
+          "fold": 2,
+          "start": "2023-04-07",
+          "end": "2023-10-12",
+          "trades": 173,
+          "win_rate": 0.24855491329479767,
+          "win_rate_ci95": [
+            0.19008569685616644,
+            0.317948611813287
+          ],
+          "expectancy_r": -0.06186692696219613,
+          "expectancy_r_ci95": [
+            -0.23187250133134324,
+            0.1183979283383051
+          ],
+          "avg_win_r": 1.8527604544990177,
+          "avg_loss_r": -0.6951667531378285,
+          "profit_factor": 0.8718219768381366,
+          "net_pnl_usd": -3807.399999999999,
+          "max_drawdown_usd": -6564.199999999997,
+          "fees_usd": 3252.3999999999996,
+          "slippage_usd": 1525.0,
+          "exits": {
+            "stop": 78,
+            "breakeven": 51,
+            "target": 41,
+            "force_close": 3
+          },
+          "ambiguous": 7
+        },
+        {
+          "fold": 3,
+          "start": "2023-10-12",
+          "end": "2024-04-16",
+          "trades": 159,
+          "win_rate": 0.25157232704402516,
+          "win_rate_ci95": [
+            0.1905289368296746,
+            0.32433704336211916
+          ],
+          "expectancy_r": -0.039685273631120684,
+          "expectancy_r_ci95": [
+            -0.21524238560093917,
+            0.1559166897645905
+          ],
+          "avg_win_r": 1.9170560781449701,
+          "avg_loss_r": -0.6974134591020754,
+          "profit_factor": 0.7956127368374778,
+          "net_pnl_usd": -5579.199999999998,
+          "max_drawdown_usd": -8214.400000000009,
+          "fees_usd": 2989.2,
+          "slippage_usd": 1390.0,
+          "exits": {
+            "stop": 72,
+            "breakeven": 47,
+            "target": 40
+          },
+          "ambiguous": 4
+        },
+        {
+          "fold": 4,
+          "start": "2024-04-16",
+          "end": "2024-10-21",
+          "trades": 162,
+          "win_rate": 0.19135802469135801,
+          "win_rate_ci95": [
+            0.13821190769127087,
+            0.2588030752804322
+          ],
+          "expectancy_r": -0.23474197557600693,
+          "expectancy_r_ci95": [
+            -0.408094866406687,
+            -0.05446569664818055
+          ],
+          "avg_win_r": 1.8925247530274216,
+          "avg_loss_r": -0.7381409724210931,
+          "profit_factor": 0.5847227273597367,
+          "net_pnl_usd": -17355.6,
+          "max_drawdown_usd": -21426.799999999963,
+          "fees_usd": 3045.6,
+          "slippage_usd": 1470.0,
+          "exits": {
+            "stop": 85,
+            "breakeven": 45,
+            "target": 30,
+            "force_close": 2
+          },
+          "ambiguous": 10
+        }
+      ],
+      "by_session": {
+        "london": {
+          "trades": 244,
+          "win_rate": 0.2540983606557377,
+          "win_rate_ci95": [
+            0.20357461753981732,
+            0.31224516412718295
+          ],
+          "expectancy_r": -0.09140723639142098,
+          "expectancy_r_ci95": [
+            -0.24441289357063856,
+            0.06688174234158285
+          ],
+          "avg_win_r": 1.9007304354623789,
+          "avg_loss_r": -0.7700475421877704,
+          "profit_factor": 0.8219542505292478,
+          "net_pnl_usd": -5702.199999999999,
+          "max_drawdown_usd": -5702.200000000002,
+          "fees_usd": 4587.200000000002,
+          "slippage_usd": 2130.0,
+          "exits": {
+            "stop": 118,
+            "breakeven": 64,
+            "target": 62
+          },
+          "ambiguous": 7
+        },
+        "ny_am": {
+          "trades": 207,
+          "win_rate": 0.2028985507246377,
+          "win_rate_ci95": [
+            0.1537582973984552,
+            0.2628653670017391
+          ],
+          "expectancy_r": -0.15093241649320785,
+          "expectancy_r_ci95": [
+            -0.30433051978917336,
+            0.0029201085397379443
+          ],
+          "avg_win_r": 1.9509777083699293,
+          "avg_loss_r": -0.6859640846401882,
+          "profit_factor": 0.6833699926681329,
+          "net_pnl_usd": -19001.599999999995,
+          "max_drawdown_usd": -22134.199999999964,
+          "fees_usd": 3891.600000000001,
+          "slippage_usd": 1860.0,
+          "exits": {
+            "stop": 103,
+            "breakeven": 61,
+            "target": 42,
+            "force_close": 1
+          },
+          "ambiguous": 12
+        },
+        "ny_pm": {
+          "trades": 200,
+          "win_rate": 0.225,
+          "win_rate_ci95": [
+            0.17262283786915622,
+            0.28774246538592035
+          ],
+          "expectancy_r": -0.10964312757365395,
+          "expectancy_r_ci95": [
+            -0.26561591124983597,
+            0.05557917912497149
+          ],
+          "avg_win_r": 1.8038273930987372,
+          "avg_loss_r": -0.665166827123703,
+          "profit_factor": 0.7737727071909354,
+          "net_pnl_usd": -8705.0,
+          "max_drawdown_usd": -11678.000000000022,
+          "fees_usd": 3760.0000000000005,
+          "slippage_usd": 1795.0,
+          "exits": {
+            "stop": 90,
+            "breakeven": 63,
+            "target": 41,
+            "force_close": 6
+          },
+          "ambiguous": 11
+        }
+      },
+      "events": {
+        "ENTERED": 651,
+        "FAILED_NO_CLOSE_BACK": 511,
+        "INVALIDATED_15M": 288,
+        "WINDOW_ENDED": 91
+      },
+      "skipped_entries": {},
+      "ignored_sweeps": {
+        "outside_window": 10220,
+        "window_done": 355,
+        "setup_active": 272,
+        "position_open": 94
+      },
+      "levels_created": 14054,
+      "force_closes": 7,
+      "ambiguity": {
+        "fill_vs_invalidation": 0,
+        "stop_vs_target": 30,
+        "entry_and_exit_same_minute": 7
+      }
+    },
+    "stop1_slip2": {
+      "stop_offset_ticks": 1,
+      "slippage_ticks": 2,
+      "overall": {
+        "trades": 651,
+        "win_rate": 0.23348694316436253,
+        "win_rate_ci95": [
+          0.20261019445788409,
+          0.2674906665747688
+        ],
+        "expectancy_r": -0.13105792554011741,
+        "expectancy_r_ci95": [
+          -0.2205929505217834,
+          -0.039443626664194376
+        ],
+        "avg_win_r": 1.8891224679063952,
+        "avg_loss_r": -0.7464234962893557,
+        "profit_factor": 0.74595659244213,
+        "net_pnl_usd": -34618.8,
+        "max_drawdown_usd": -37474.599999999824,
+        "fees_usd": 12238.8,
+        "slippage_usd": 11540.0,
+        "exits": {
+          "stop": 319,
+          "breakeven": 177,
+          "target": 148,
+          "force_close": 7
+        },
+        "ambiguous": 24
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2022-10-02",
+          "end": "2023-04-07",
+          "trades": 157,
+          "win_rate": 0.2229299363057325,
+          "win_rate_ci95": [
+            0.16488434152646586,
+            0.2942108179347681
+          ],
+          "expectancy_r": -0.15437257148103156,
+          "expectancy_r_ci95": [
+            -0.33201826332801865,
+            0.030273938094995314
+          ],
+          "avg_win_r": 1.885117323378138,
+          "avg_loss_r": -0.739472131481613,
+          "profit_factor": 0.7672430988316216,
+          "net_pnl_usd": -7701.599999999997,
+          "max_drawdown_usd": -10280.800000000012,
+          "fees_usd": 2951.5999999999995,
+          "slippage_usd": 2800.0,
+          "exits": {
+            "stop": 78,
+            "breakeven": 43,
+            "target": 34,
+            "force_close": 2
+          },
+          "ambiguous": 9
+        },
+        {
+          "fold": 2,
+          "start": "2023-04-07",
+          "end": "2023-10-12",
+          "trades": 173,
+          "win_rate": 0.24277456647398843,
+          "win_rate_ci95": [
+            0.18492149300193772,
+            0.3118032595449744
+          ],
+          "expectancy_r": -0.10369219598760795,
+          "expectancy_r_ci95": [
+            -0.2769665539411675,
+            0.0740633115582512
+          ],
+          "avg_win_r": 1.8517916774833731,
+          "avg_loss_r": -0.7306412241233424,
+          "profit_factor": 0.8209134768384743,
+          "net_pnl_usd": -5627.399999999999,
+          "max_drawdown_usd": -8374.2,
+          "fees_usd": 3252.3999999999996,
+          "slippage_usd": 3060.0,
+          "exits": {
+            "stop": 81,
+            "breakeven": 49,
+            "target": 40,
+            "force_close": 3
+          },
+          "ambiguous": 5
+        },
+        {
+          "fold": 3,
+          "start": "2023-10-12",
+          "end": "2024-04-16",
+          "trades": 159,
+          "win_rate": 0.27044025157232704,
+          "win_rate_ci95": [
+            0.20741683639366337,
+            0.3442947655557157
+          ],
+          "expectancy_r": -0.025747335133630648,
+          "expectancy_r_ci95": [
+            -0.2125919201512563,
+            0.1777211124525789
+          ],
+          "avg_win_r": 1.920697279331051,
+          "avg_loss_r": -0.7472742180817454,
+          "profit_factor": 0.8313792039493983,
+          "net_pnl_usd": -4809.199999999998,
+          "max_drawdown_usd": -8119.400000000009,
+          "fees_usd": 2989.2,
+          "slippage_usd": 2750.0,
+          "exits": {
+            "stop": 74,
+            "target": 43,
+            "breakeven": 42
+          },
+          "ambiguous": 3
+        },
+        {
+          "fold": 4,
+          "start": "2024-04-16",
+          "end": "2024-10-21",
+          "trades": 162,
+          "win_rate": 0.19753086419753085,
+          "win_rate_ci95": [
+            0.14353803306993532,
+            0.2655366502423337
+          ],
+          "expectancy_r": -0.24104715809870994,
+          "expectancy_r_ci95": [
+            -0.4170096702631405,
+            -0.05433266561173538
+          ],
+          "avg_win_r": 1.9000711043125125,
+          "avg_loss_r": -0.7680916534614725,
+          "profit_factor": 0.6188487245310946,
+          "net_pnl_usd": -16480.600000000002,
+          "max_drawdown_usd": -20179.999999999956,
+          "fees_usd": 3045.6,
+          "slippage_usd": 2930.0,
+          "exits": {
+            "stop": 86,
+            "breakeven": 43,
+            "target": 31,
+            "force_close": 2
+          },
+          "ambiguous": 7
+        }
+      ],
+      "by_session": {
+        "london": {
+          "trades": 244,
+          "win_rate": 0.2540983606557377,
+          "win_rate_ci95": [
+            0.20357461753981732,
+            0.31224516412718295
+          ],
+          "expectancy_r": -0.11902015581630722,
+          "expectancy_r_ci95": [
+            -0.27527143953463334,
+            0.04146678125295887
+          ],
+          "avg_win_r": 1.9060604540131465,
+          "avg_loss_r": -0.8088827811428244,
+          "profit_factor": 0.7934440502873817,
+          "net_pnl_usd": -7022.199999999999,
+          "max_drawdown_usd": -7022.200000000013,
+          "fees_usd": 4587.200000000002,
+          "slippage_usd": 4260.0,
+          "exits": {
+            "stop": 121,
+            "target": 62,
+            "breakeven": 61
+          },
+          "ambiguous": 5
+        },
+        "ny_am": {
+          "trades": 207,
+          "win_rate": 0.21739130434782608,
+          "win_rate_ci95": [
+            0.1666264936284419,
+            0.27845455299613314
+          ],
+          "expectancy_r": -0.13022561853622863,
+          "expectancy_r_ci95": [
+            -0.28869142021454575,
+            0.029313748678442417
+          ],
+          "avg_win_r": 1.9519341891542703,
+          "avg_loss_r": -0.7086033428947007,
+          "profit_factor": 0.7268412582870085,
+          "net_pnl_usd": -16736.599999999995,
+          "max_drawdown_usd": -19604.199999999964,
+          "fees_usd": 3891.600000000001,
+          "slippage_usd": 3690.0,
+          "exits": {
+            "stop": 103,
+            "breakeven": 58,
+            "target": 45,
+            "force_close": 1
+          },
+          "ambiguous": 9
+        },
+        "ny_pm": {
+          "trades": 200,
+          "win_rate": 0.225,
+          "win_rate_ci95": [
+            0.17262283786915622,
+            0.28774246538592035
+          ],
+          "expectancy_r": -0.14660544235219064,
+          "expectancy_r_ci95": [
+            -0.30205294038837677,
+            0.022559578756600997
+          ],
+          "avg_win_r": 1.8029739658003296,
+          "avg_loss_r": -0.7126123672996965,
+          "profit_factor": 0.7351477904594674,
+          "net_pnl_usd": -10860.0,
+          "max_drawdown_usd": -13792.999999999995,
+          "fees_usd": 3760.0000000000005,
+          "slippage_usd": 3590.0,
+          "exits": {
+            "stop": 95,
+            "breakeven": 58,
+            "target": 41,
+            "force_close": 6
+          },
+          "ambiguous": 10
+        }
+      },
+      "events": {
+        "ENTERED": 651,
+        "FAILED_NO_CLOSE_BACK": 511,
+        "INVALIDATED_15M": 288,
+        "WINDOW_ENDED": 91
+      },
+      "skipped_entries": {},
+      "ignored_sweeps": {
+        "outside_window": 10220,
+        "window_done": 349,
+        "setup_active": 272,
+        "position_open": 100
+      },
+      "levels_created": 14054,
+      "force_closes": 7,
+      "ambiguity": {
+        "fill_vs_invalidation": 0,
+        "stop_vs_target": 24,
+        "entry_and_exit_same_minute": 7
+      }
+    },
+    "stop1_slip3": {
+      "stop_offset_ticks": 1,
+      "slippage_ticks": 3,
+      "overall": {
+        "trades": 651,
+        "win_rate": 0.22734254992319508,
+        "win_rate_ci95": [
+          0.19680101765844157,
+          0.26108314852770187
+        ],
+        "expectancy_r": -0.16136415173610605,
+        "expectancy_r_ci95": [
+          -0.2513237269878976,
+          -0.07005217592667802
+        ],
+        "avg_win_r": 1.8893015184749335,
+        "avg_loss_r": -0.7647409294522768,
+        "profit_factor": 0.7038799828159267,
+        "net_pnl_usd": -41908.799999999996,
+        "max_drawdown_usd": -44644.59999999994,
+        "fees_usd": 12238.8,
+        "slippage_usd": 17370.0,
+        "exits": {
+          "stop": 323,
+          "breakeven": 177,
+          "target": 144,
+          "force_close": 7
+        },
+        "ambiguous": 21
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2022-10-02",
+          "end": "2023-04-07",
+          "trades": 157,
+          "win_rate": 0.21019108280254778,
+          "win_rate_ci95": [
+            0.15376493431902044,
+            0.2804610370714657
+          ],
+          "expectancy_r": -0.20436485426035259,
+          "expectancy_r_ci95": [
+            -0.3845509997687142,
+            -0.021108021391887423
+          ],
+          "avg_win_r": 1.8837647159932582,
+          "avg_loss_r": -0.7600767560213942,
+          "profit_factor": 0.6904955926912126,
+          "net_pnl_usd": -10786.599999999997,
+          "max_drawdown_usd": -11225.79999999999,
+          "fees_usd": 2951.5999999999995,
+          "slippage_usd": 4230.0,
+          "exits": {
+            "stop": 80,
+            "breakeven": 43,
+            "target": 32,
+            "force_close": 2
+          },
+          "ambiguous": 7
+        },
+        {
+          "fold": 2,
+          "start": "2023-04-07",
+          "end": "2023-10-12",
+          "trades": 173,
+          "win_rate": 0.24277456647398843,
+          "win_rate_ci95": [
+            0.18492149300193772,
+            0.3118032595449744
+          ],
+          "expectancy_r": -0.12137111347412669,
+          "expectancy_r_ci95": [
+            -0.294007885510849,
+            0.06035438403083562
+          ],
+          "avg_win_r": 1.8507944242936964,
+          "avg_loss_r": -0.7536684614607569,
+          "profit_factor": 0.765562046119745,
+          "net_pnl_usd": -7657.399999999997,
+          "max_drawdown_usd": -10219.200000000008,
+          "fees_usd": 3252.3999999999996,
+          "slippage_usd": 4590.0,
+          "exits": {
+            "stop": 82,
+            "breakeven": 48,
+            "target": 40,
+            "force_close": 3
+          },
+          "ambiguous": 3
+        },
+        {
+          "fold": 3,
+          "start": "2023-10-12",
+          "end": "2024-04-16",
+          "trades": 159,
+          "win_rate": 0.2641509433962264,
+          "win_rate_ci95": [
+            0.2017702715910234,
+            0.33765945643916057
+          ],
+          "expectancy_r": -0.04972628547673853,
+          "expectancy_r_ci95": [
+            -0.23579435647763064,
+            0.15067642446076684
+          ],
+          "avg_win_r": 1.9228314049274204,
+          "avg_loss_r": -0.7578239179295135,
+          "profit_factor": 0.8039559933027393,
+          "net_pnl_usd": -5784.199999999998,
+          "max_drawdown_usd": -8429.400000000009,
+          "fees_usd": 2989.2,
+          "slippage_usd": 4140.0,
+          "exits": {
+            "stop": 74,
+            "breakeven": 43,
+            "target": 42
+          },
+          "ambiguous": 4
+        },
+        {
+          "fold": 4,
+          "start": "2024-04-16",
+          "end": "2024-10-21",
+          "trades": 162,
+          "win_rate": 0.19135802469135801,
+          "win_rate_ci95": [
+            0.13821190769127087,
+            0.2588030752804322
+          ],
+          "expectancy_r": -0.2719697446882985,
+          "expectancy_r_ci95": [
+            -0.44585139948026226,
+            -0.08848687169223439
+          ],
+          "avg_win_r": 1.901938847716958,
+          "avg_loss_r": -0.7864061291506113,
+          "profit_factor": 0.6027527759179291,
+          "net_pnl_usd": -17680.600000000002,
+          "max_drawdown_usd": -21374.99999999994,
+          "fees_usd": 3045.6,
+          "slippage_usd": 4410.0,
+          "exits": {
+            "stop": 87,
+            "breakeven": 43,
+            "target": 30,
+            "force_close": 2
+          },
+          "ambiguous": 7
+        }
+      ],
+      "by_session": {
+        "london": {
+          "trades": 244,
+          "win_rate": 0.24180327868852458,
+          "win_rate_ci95": [
+            0.1923475354948765,
+            0.29926323525547377
+          ],
+          "expectancy_r": -0.16716047421729813,
+          "expectancy_r_ci95": [
+            -0.32267264218018743,
+            -0.005078729096870934
+          ],
+          "avg_win_r": 1.909512199485698,
+          "avg_loss_r": -0.8294506782631185,
+          "profit_factor": 0.7387945906839557,
+          "net_pnl_usd": -9387.199999999999,
+          "max_drawdown_usd": -9387.20000000003,
+          "fees_usd": 4587.200000000002,
+          "slippage_usd": 6435.0,
+          "exits": {
+            "stop": 123,
+            "breakeven": 62,
+            "target": 59
+          },
+          "ambiguous": 4
+        },
+        "ny_am": {
+          "trades": 207,
+          "win_rate": 0.21256038647342995,
+          "win_rate_ci95": [
+            0.16232586038470087,
+            0.27326939216508056
+          ],
+          "expectancy_r": -0.15273187888311476,
+          "expectancy_r_ci95": [
+            -0.3109028207850209,
+            0.0036337883443485026
+          ],
+          "avg_win_r": 1.9506484166627909,
+          "avg_loss_r": -0.7205155169445864,
+          "profit_factor": 0.6706287540989843,
+          "net_pnl_usd": -20771.59999999999,
+          "max_drawdown_usd": -23117.799999999934,
+          "fees_usd": 3891.600000000001,
+          "slippage_usd": 5550.0,
+          "exits": {
+            "stop": 104,
+            "breakeven": 58,
+            "target": 44,
+            "force_close": 1
+          },
+          "ambiguous": 8
+        },
+        "ny_pm": {
+          "trades": 200,
+          "win_rate": 0.225,
+          "win_rate_ci95": [
+            0.17262283786915622,
+            0.28774246538592035
+          ],
+          "expectancy_r": -0.16322704071189778,
+          "expectancy_r_ci95": [
+            -0.3180990671940042,
+            0.005528189562898486
+          ],
+          "avg_win_r": 1.8028194362549141,
+          "avg_loss_r": -0.7340147275732303,
+          "profit_factor": 0.7236854482174773,
+          "net_pnl_usd": -11750.000000000002,
+          "max_drawdown_usd": -14642.999999999987,
+          "fees_usd": 3760.0000000000005,
+          "slippage_usd": 5385.0,
+          "exits": {
+            "stop": 96,
+            "breakeven": 57,
+            "target": 41,
+            "force_close": 6
+          },
+          "ambiguous": 9
+        }
+      },
+      "events": {
+        "ENTERED": 651,
+        "FAILED_NO_CLOSE_BACK": 511,
+        "INVALIDATED_15M": 288,
+        "WINDOW_ENDED": 91
+      },
+      "skipped_entries": {},
+      "ignored_sweeps": {
+        "outside_window": 10216,
+        "window_done": 351,
+        "setup_active": 272,
+        "position_open": 102
+      },
+      "levels_created": 14054,
+      "force_closes": 7,
+      "ambiguity": {
+        "fill_vs_invalidation": 0,
+        "stop_vs_target": 21,
+        "entry_and_exit_same_minute": 7
+      }
+    },
+    "stop2_slip1": {
+      "stop_offset_ticks": 2,
+      "slippage_ticks": 1,
+      "overall": {
+        "trades": 651,
+        "win_rate": 0.23655913978494625,
+        "win_rate_ci95": [
+          0.20551834647456363,
+          0.27069086198134396
+        ],
+        "expectancy_r": -0.10138435444344188,
+        "expectancy_r_ci95": [
+          -0.1903526640712238,
+          -0.012543290431895456
+        ],
+        "avg_win_r": 1.8884978533620747,
+        "avg_loss_r": -0.7179675737634612,
+        "profit_factor": 0.7597411409219892,
+        "net_pnl_usd": -31868.799999999996,
+        "max_drawdown_usd": -34854.59999999983,
+        "fees_usd": 12238.8,
+        "slippage_usd": 5760.0,
+        "exits": {
+          "stop": 313,
+          "breakeven": 181,
+          "target": 150,
+          "force_close": 7
+        },
+        "ambiguous": 29
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2022-10-02",
+          "end": "2023-04-07",
+          "trades": 157,
+          "win_rate": 0.2229299363057325,
+          "win_rate_ci95": [
+            0.16488434152646586,
+            0.2942108179347681
+          ],
+          "expectancy_r": -0.12847408954348494,
+          "expectancy_r_ci95": [
+            -0.3057755366391281,
+            0.05582197098288272
+          ],
+          "avg_win_r": 1.8853505595297415,
+          "avg_loss_r": -0.7062106691956401,
+          "profit_factor": 0.7901106285543623,
+          "net_pnl_usd": -6746.599999999996,
+          "max_drawdown_usd": -9730.800000000017,
+          "fees_usd": 2951.5999999999995,
+          "slippage_usd": 1400.0,
+          "exits": {
+            "stop": 76,
+            "breakeven": 45,
+            "target": 34,
+            "force_close": 2
+          },
+          "ambiguous": 10
+        },
+        {
+          "fold": 2,
+          "start": "2023-04-07",
+          "end": "2023-10-12",
+          "trades": 173,
+          "win_rate": 0.24855491329479767,
+          "win_rate_ci95": [
+            0.19008569685616644,
+            0.317948611813287
+          ],
+          "expectancy_r": -0.06546968799198573,
+          "expectancy_r_ci95": [
+            -0.23859912831936644,
+            0.11591337088440208
+          ],
+          "avg_win_r": 1.8546025355544793,
+          "avg_loss_r": -0.7005705003958164,
+          "profit_factor": 0.8713474615435401,
+          "net_pnl_usd": -3897.399999999999,
+          "max_drawdown_usd": -6829.6,
+          "fees_usd": 3252.3999999999996,
+          "slippage_usd": 1525.0,
+          "exits": {
+            "stop": 79,
+            "breakeven": 50,
+            "target": 41,
+            "force_close": 3
+          },
+          "ambiguous": 7
+        },
+        {
+          "fold": 3,
+          "start": "2023-10-12",
+          "end": "2024-04-16",
+          "trades": 159,
+          "win_rate": 0.2830188679245283,
+          "win_rate_ci95": [
+            0.21875991541939405,
+            0.35751543436837524
+          ],
+          "expectancy_r": 0.026414406325011117,
+          "expectancy_r_ci95": [
+            -0.15968835714120852,
+            0.2248249117629232
+          ],
+          "avg_win_r": 1.916562585434856,
+          "avg_loss_r": -0.7196967170078223,
+          "profit_factor": 0.873752636041481,
+          "net_pnl_usd": -3484.199999999999,
+          "max_drawdown_usd": -7294.400000000009,
+          "fees_usd": 2989.2,
+          "slippage_usd": 1365.0,
+          "exits": {
+            "stop": 72,
+            "target": 45,
+            "breakeven": 42
+          },
+          "ambiguous": 3
+        },
+        {
+          "fold": 4,
+          "start": "2024-04-16",
+          "end": "2024-10-21",
+          "trades": 162,
+          "win_rate": 0.19135802469135801,
+          "win_rate_ci95": [
+            0.13821190769127087,
+            0.2588030752804322
+          ],
+          "expectancy_r": -0.23891615597170837,
+          "expectancy_r_ci95": [
+            -0.41248004216490053,
+            -0.05603188514717769
+          ],
+          "avg_win_r": 1.8983282084131423,
+          "avg_loss_r": -0.7446762727345356,
+          "profit_factor": 0.5836302273292685,
+          "net_pnl_usd": -17740.599999999995,
+          "max_drawdown_usd": -21479.99999999996,
+          "fees_usd": 3045.6,
+          "slippage_usd": 1470.0,
+          "exits": {
+            "stop": 86,
+            "breakeven": 44,
+            "target": 30,
+            "force_close": 2
+          },
+          "ambiguous": 9
+        }
+      ],
+      "by_session": {
+        "london": {
+          "trades": 244,
+          "win_rate": 0.2581967213114754,
+          "win_rate_ci95": [
+            0.20732949550190438,
+            0.31655995647064594
+          ],
+          "expectancy_r": -0.08786644867264116,
+          "expectancy_r_ci95": [
+            -0.24167448211754103,
+            0.074928081519958
+          ],
+          "avg_win_r": 1.9045674309335727,
+          "avg_loss_r": -0.7813655338394452,
+          "profit_factor": 0.8257043645363934,
+          "net_pnl_usd": -5732.199999999999,
+          "max_drawdown_usd": -5732.2000000000035,
+          "fees_usd": 4587.200000000002,
+          "slippage_usd": 2125.0,
+          "exits": {
+            "stop": 120,
+            "target": 63,
+            "breakeven": 61
+          },
+          "ambiguous": 6
+        },
+        "ny_am": {
+          "trades": 207,
+          "win_rate": 0.21256038647342995,
+          "win_rate_ci95": [
+            0.16232586038470087,
+            0.27326939216508056
+          ],
+          "expectancy_r": -0.1255802814150453,
+          "expectancy_r_ci95": [
+            -0.28122321406717166,
+            0.02991282387953277
+          ],
+          "avg_win_r": 1.9512868601198976,
+          "avg_loss_r": -0.6862069944674226,
+          "profit_factor": 0.705789644462986,
+          "net_pnl_usd": -17771.599999999995,
+          "max_drawdown_usd": -20989.19999999997,
+          "fees_usd": 3891.600000000001,
+          "slippage_usd": 1850.0,
+          "exits": {
+            "stop": 102,
+            "breakeven": 60,
+            "target": 44,
+            "force_close": 1
+          },
+          "ambiguous": 12
+        },
+        "ny_pm": {
+          "trades": 200,
+          "win_rate": 0.235,
+          "win_rate_ci95": [
+            0.18157345326946356,
+            0.29841492986724655
+          ],
+          "expectancy_r": -0.09283341506820922,
+          "expectancy_r_ci95": [
+            -0.24888576653166955,
+            0.0738976237558909
+          ],
+          "avg_win_r": 1.8081765834823167,
+          "avg_loss_r": -0.6768038067798088,
+          "profit_factor": 0.7874281474102576,
+          "net_pnl_usd": -8365.0,
+          "max_drawdown_usd": -11353.000000000024,
+          "fees_usd": 3760.0000000000005,
+          "slippage_usd": 1785.0,
+          "exits": {
+            "stop": 91,
+            "breakeven": 60,
+            "target": 43,
+            "force_close": 6
+          },
+          "ambiguous": 11
+        }
+      },
+      "events": {
+        "ENTERED": 651,
+        "FAILED_NO_CLOSE_BACK": 511,
+        "INVALIDATED_15M": 288,
+        "WINDOW_ENDED": 91
+      },
+      "skipped_entries": {},
+      "ignored_sweeps": {
+        "outside_window": 10219,
+        "window_done": 351,
+        "setup_active": 272,
+        "position_open": 99
+      },
+      "levels_created": 14054,
+      "force_closes": 7,
+      "ambiguity": {
+        "fill_vs_invalidation": 0,
+        "stop_vs_target": 29,
+        "entry_and_exit_same_minute": 7
+      }
+    },
+    "stop2_slip2": {
+      "stop_offset_ticks": 2,
+      "slippage_ticks": 2,
+      "overall": {
+        "trades": 651,
+        "win_rate": 0.23348694316436253,
+        "win_rate_ci95": [
+          0.20261019445788409,
+          0.2674906665747688
+        ],
+        "expectancy_r": -0.12714488300230106,
+        "expectancy_r_ci95": [
+          -0.21701812017451255,
+          -0.03553743967999281
+        ],
+        "avg_win_r": 1.8901634160746255,
+        "avg_loss_r": -0.7416355873303427,
+        "profit_factor": 0.7469088143779313,
+        "net_pnl_usd": -34878.799999999996,
+        "max_drawdown_usd": -37744.599999999795,
+        "fees_usd": 12238.8,
+        "slippage_usd": 11540.0,
+        "exits": {
+          "stop": 318,
+          "breakeven": 178,
+          "target": 148,
+          "force_close": 7
+        },
+        "ambiguous": 25
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2022-10-02",
+          "end": "2023-04-07",
+          "trades": 157,
+          "win_rate": 0.21019108280254778,
+          "win_rate_ci95": [
+            0.15376493431902044,
+            0.2804610370714657
+          ],
+          "expectancy_r": -0.1722182369271421,
+          "expectancy_r_ci95": [
+            -0.3456326971090929,
+            0.006312860812928195
+          ],
+          "avg_win_r": 1.8848989215265768,
+          "avg_loss_r": -0.71967683554789,
+          "profit_factor": 0.7446930613757685,
+          "net_pnl_usd": -8541.599999999997,
+          "max_drawdown_usd": -10690.8,
+          "fees_usd": 2951.5999999999995,
+          "slippage_usd": 2820.0,
+          "exits": {
+            "stop": 77,
+            "breakeven": 46,
+            "target": 32,
+            "force_close": 2
+          },
+          "ambiguous": 10
+        },
+        {
+          "fold": 2,
+          "start": "2023-04-07",
+          "end": "2023-10-12",
+          "trades": 173,
+          "win_rate": 0.24855491329479767,
+          "win_rate_ci95": [
+            0.19008569685616644,
+            0.317948611813287
+          ],
+          "expectancy_r": -0.08941873106549998,
+          "expectancy_r_ci95": [
+            -0.26191881353771834,
+            0.09121053139338003
+          ],
+          "avg_win_r": 1.8545216759597472,
+          "avg_loss_r": -0.7324144041584665,
+          "profit_factor": 0.8357684203905785,
+          "net_pnl_usd": -5222.399999999999,
+          "max_drawdown_usd": -8004.2,
+          "fees_usd": 3252.3999999999996,
+          "slippage_usd": 3050.0,
+          "exits": {
+            "stop": 81,
+            "breakeven": 48,
+            "target": 41,
+            "force_close": 3
+          },
+          "ambiguous": 5
+        },
+        {
+          "fold": 3,
+          "start": "2023-10-12",
+          "end": "2024-04-16",
+          "trades": 159,
+          "win_rate": 0.27672955974842767,
+          "win_rate_ci95": [
+            0.21308016641771516,
+            0.350913309450859
+          ],
+          "expectancy_r": -0.0038464604562463817,
+          "expectancy_r_ci95": [
+            -0.1902603746118144,
+            0.19802810288756828
+          ],
+          "avg_win_r": 1.9209787377612977,
+          "avg_loss_r": -0.7403013189046981,
+          "profit_factor": 0.8481330688659221,
+          "net_pnl_usd": -4364.199999999998,
+          "max_drawdown_usd": -7789.400000000009,
+          "fees_usd": 2989.2,
+          "slippage_usd": 2740.0,
+          "exits": {
+            "stop": 73,
+            "target": 44,
+            "breakeven": 42
+          },
+          "ambiguous": 3
+        },
+        {
+          "fold": 4,
+          "start": "2024-04-16",
+          "end": "2024-10-21",
+          "trades": 162,
+          "win_rate": 0.19753086419753085,
+          "win_rate_ci95": [
+            0.14353803306993532,
+            0.2655366502423337
+          ],
+          "expectancy_r": -0.24476560463001237,
+          "expectancy_r_ci95": [
+            -0.42116551407545866,
+            -0.05850989973580622
+          ],
+          "avg_win_r": 1.9011149470374917,
+          "avg_loss_r": -0.7729823558097058,
+          "profit_factor": 0.6177320340491568,
+          "net_pnl_usd": -16750.600000000002,
+          "max_drawdown_usd": -20484.999999999953,
+          "fees_usd": 3045.6,
+          "slippage_usd": 2930.0,
+          "exits": {
+            "stop": 87,
+            "breakeven": 42,
+            "target": 31,
+            "force_close": 2
+          },
+          "ambiguous": 7
+        }
+      ],
+      "by_session": {
+        "london": {
+          "trades": 244,
+          "win_rate": 0.2459016393442623,
+          "win_rate_ci95": [
+            0.19608353647488563,
+            0.3035969045810146
+          ],
+          "expectancy_r": -0.13607769734837477,
+          "expectancy_r_ci95": [
+            -0.2892291080616869,
+            0.02511523781466009
+          ],
+          "avg_win_r": 1.9085136628276032,
+          "avg_loss_r": -0.8027922713188025,
+          "profit_factor": 0.7693942980591337,
+          "net_pnl_usd": -8027.199999999999,
+          "max_drawdown_usd": -8027.2000000000335,
+          "fees_usd": 4587.200000000002,
+          "slippage_usd": 4280.0,
+          "exits": {
+            "stop": 122,
+            "breakeven": 62,
+            "target": 60
+          },
+          "ambiguous": 5
+        },
+        "ny_am": {
+          "trades": 207,
+          "win_rate": 0.2222222222222222,
+          "win_rate_ci95": [
+            0.1709380064062067,
+            0.2836288342931619
+          ],
+          "expectancy_r": -0.11434598670280072,
+          "expectancy_r_ci95": [
+            -0.27260952983950637,
+            0.046555073901751
+          ],
+          "avg_win_r": 1.951742732699157,
+          "avg_loss_r": -0.7046570493890745,
+          "profit_factor": 0.735531026252983,
+          "net_pnl_usd": -16311.599999999993,
+          "max_drawdown_usd": -19679.19999999997,
+          "fees_usd": 3891.600000000001,
+          "slippage_usd": 3680.0,
+          "exits": {
+            "stop": 102,
+            "breakeven": 58,
+            "target": 46,
+            "force_close": 1
+          },
+          "ambiguous": 10
+        },
+        "ny_pm": {
+          "trades": 200,
+          "win_rate": 0.23,
+          "win_rate_ci95": [
+            0.1770925624139232,
+            0.2930842807819702
+          ],
+          "expectancy_r": -0.12949370717007397,
+          "expectancy_r_ci95": [
+            -0.28409428865608927,
+            0.04020350957051502
+          ],
+          "avg_win_r": 1.804648994989687,
+          "avg_loss_r": -0.7072246441788337,
+          "profit_factor": 0.7449498127050809,
+          "net_pnl_usd": -10540.0,
+          "max_drawdown_usd": -13487.999999999998,
+          "fees_usd": 3760.0000000000005,
+          "slippage_usd": 3580.0,
+          "exits": {
+            "stop": 94,
+            "breakeven": 58,
+            "target": 42,
+            "force_close": 6
+          },
+          "ambiguous": 10
+        }
+      },
+      "events": {
+        "ENTERED": 651,
+        "FAILED_NO_CLOSE_BACK": 511,
+        "INVALIDATED_15M": 288,
+        "WINDOW_ENDED": 91
+      },
+      "skipped_entries": {},
+      "ignored_sweeps": {
+        "outside_window": 10218,
+        "window_done": 349,
+        "setup_active": 272,
+        "position_open": 102
+      },
+      "levels_created": 14054,
+      "force_closes": 7,
+      "ambiguity": {
+        "fill_vs_invalidation": 0,
+        "stop_vs_target": 25,
+        "entry_and_exit_same_minute": 7
+      }
+    },
+    "stop2_slip3": {
+      "stop_offset_ticks": 2,
+      "slippage_ticks": 3,
+      "overall": {
+        "trades": 651,
+        "win_rate": 0.22887864823348694,
+        "win_rate_ci95": [
+          0.19825241067428107,
+          0.2626859292234897
+        ],
+        "expectancy_r": -0.15551834153901592,
+        "expectancy_r_ci95": [
+          -0.2457493041207167,
+          -0.06367292550672332
+        ],
+        "avg_win_r": 1.8900003123051798,
+        "avg_loss_r": -0.7626543563254408,
+        "profit_factor": 0.7123409230752055,
+        "net_pnl_usd": -41233.8,
+        "max_drawdown_usd": -44408.199999999895,
+        "fees_usd": 12238.8,
+        "slippage_usd": 17355.0,
+        "exits": {
+          "stop": 323,
+          "breakeven": 176,
+          "target": 145,
+          "force_close": 7
+        },
+        "ambiguous": 21
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2022-10-02",
+          "end": "2023-04-07",
+          "trades": 157,
+          "win_rate": 0.21656050955414013,
+          "win_rate_ci95": [
+            0.15931387208372824,
+            0.2873466933421318
+          ],
+          "expectancy_r": -0.18237155046179496,
+          "expectancy_r_ci95": [
+            -0.36132504701463397,
+            0.004198926002515592
+          ],
+          "avg_win_r": 1.8834972384787696,
+          "avg_loss_r": -0.7534247116323574,
+          "profit_factor": 0.7220058976898814,
+          "net_pnl_usd": -9766.599999999997,
+          "max_drawdown_usd": -10894.400000000012,
+          "fees_usd": 2951.5999999999995,
+          "slippage_usd": 4215.0,
+          "exits": {
+            "stop": 79,
+            "breakeven": 43,
+            "target": 33,
+            "force_close": 2
+          },
+          "ambiguous": 7
+        },
+        {
+          "fold": 2,
+          "start": "2023-04-07",
+          "end": "2023-10-12",
+          "trades": 173,
+          "win_rate": 0.24855491329479767,
+          "win_rate_ci95": [
+            0.19008569685616644,
+            0.317948611813287
+          ],
+          "expectancy_r": -0.10703170109474432,
+          "expectancy_r_ci95": [
+            -0.2834798622519511,
+            0.07939496263092544
+          ],
+          "avg_win_r": 1.8548739342361733,
+          "avg_loss_r": -0.7559697189349711,
+          "profit_factor": 0.806216895184479,
+          "net_pnl_usd": -6402.4,
+          "max_drawdown_usd": -8994.2,
+          "fees_usd": 3252.3999999999996,
+          "slippage_usd": 4575.0,
+          "exits": {
+            "stop": 82,
+            "breakeven": 47,
+            "target": 41,
+            "force_close": 3
+          },
+          "ambiguous": 3
+        },
+        {
+          "fold": 3,
+          "start": "2023-10-12",
+          "end": "2024-04-16",
+          "trades": 159,
+          "win_rate": 0.2641509433962264,
+          "win_rate_ci95": [
+            0.2017702715910234,
+            0.33765945643916057
+          ],
+          "expectancy_r": -0.04678228885375688,
+          "expectancy_r_ci95": [
+            -0.23609740450847824,
+            0.15349101045454985
+          ],
+          "avg_win_r": 1.923574801088003,
+          "avg_loss_r": -0.7540899621661835,
+          "profit_factor": 0.8026974462482372,
+          "net_pnl_usd": -5904.199999999999,
+          "max_drawdown_usd": -8259.400000000009,
+          "fees_usd": 2989.2,
+          "slippage_usd": 4140.0,
+          "exits": {
+            "stop": 74,
+            "breakeven": 43,
+            "target": 42
+          },
+          "ambiguous": 4
+        },
+        {
+          "fold": 4,
+          "start": "2024-04-16",
+          "end": "2024-10-21",
+          "trades": 162,
+          "win_rate": 0.18518518518518517,
+          "win_rate_ci95": [
+            0.1329085654983166,
+            0.25204671713282056
+          ],
+          "expectancy_r": -0.2879953006312312,
+          "expectancy_r_ci95": [
+            -0.45980622039266533,
+            -0.10546198638616822
+          ],
+          "avg_win_r": 1.9007139869114027,
+          "avg_loss_r": -0.7854292296181934,
+          "profit_factor": 0.5765295071894907,
+          "net_pnl_usd": -19160.6,
+          "max_drawdown_usd": -22619.999999999938,
+          "fees_usd": 3045.6,
+          "slippage_usd": 4425.0,
+          "exits": {
+            "stop": 88,
+            "breakeven": 43,
+            "target": 29,
+            "force_close": 2
+          },
+          "ambiguous": 7
+        }
+      ],
+      "by_session": {
+        "london": {
+          "trades": 244,
+          "win_rate": 0.2336065573770492,
+          "win_rate_ci95": [
+            0.18489515213624105,
+            0.2905762780030092
+          ],
+          "expectancy_r": -0.18821898104004045,
+          "expectancy_r_ci95": [
+            -0.3412144538146987,
+            -0.028241713281757647
+          ],
+          "avg_win_r": 1.9118963716476405,
+          "avg_loss_r": -0.8283610938913657,
+          "profit_factor": 0.7102231957400202,
+          "net_pnl_usd": -10742.199999999997,
+          "max_drawdown_usd": -10742.200000000024,
+          "fees_usd": 4587.200000000002,
+          "slippage_usd": 6465.0,
+          "exits": {
+            "stop": 125,
+            "breakeven": 62,
+            "target": 57
+          },
+          "ambiguous": 4
+        },
+        "ny_am": {
+          "trades": 207,
+          "win_rate": 0.22705314009661837,
+          "win_rate_ci95": [
+            0.17526015068627562,
+            0.28879248408788666
+          ],
+          "expectancy_r": -0.11660281702492271,
+          "expectancy_r_ci95": [
+            -0.2791284987150894,
+            0.04685450670853183
+          ],
+          "avg_win_r": 1.9486345114823729,
+          "avg_loss_r": -0.7232662822739406,
+          "profit_factor": 0.7160541341998167,
+          "net_pnl_usd": -18001.59999999999,
+          "max_drawdown_usd": -21647.799999999956,
+          "fees_usd": 3891.600000000001,
+          "slippage_usd": 5505.0,
+          "exits": {
+            "stop": 103,
+            "breakeven": 56,
+            "target": 47,
+            "force_close": 1
+          },
+          "ambiguous": 8
+        },
+        "ny_pm": {
+          "trades": 200,
+          "win_rate": 0.225,
+          "win_rate_ci95": [
+            0.17262283786915622,
+            0.28774246538592035
+          ],
+          "expectancy_r": -0.15590112921985247,
+          "expectancy_r_ci95": [
+            -0.3108380085125182,
+            0.010287828493790004
+          ],
+          "avg_win_r": 1.8010251402196629,
+          "avg_loss_r": -0.7240410138958407,
+          "profit_factor": 0.708681252040864,
+          "net_pnl_usd": -12490.0,
+          "max_drawdown_usd": -15397.999999999993,
+          "fees_usd": 3760.0000000000005,
+          "slippage_usd": 5385.0,
+          "exits": {
+            "stop": 95,
+            "breakeven": 58,
+            "target": 41,
+            "force_close": 6
+          },
+          "ambiguous": 9
+        }
+      },
+      "events": {
+        "ENTERED": 651,
+        "FAILED_NO_CLOSE_BACK": 511,
+        "INVALIDATED_15M": 288,
+        "WINDOW_ENDED": 91
+      },
+      "skipped_entries": {},
+      "ignored_sweeps": {
+        "outside_window": 10215,
+        "window_done": 350,
+        "setup_active": 272,
+        "position_open": 104
+      },
+      "levels_created": 14054,
+      "force_closes": 7,
+      "ambiguity": {
+        "fill_vs_invalidation": 0,
+        "stop_vs_target": 21,
+        "entry_and_exit_same_minute": 7
+      }
+    },
+    "stop4_slip1": {
+      "stop_offset_ticks": 4,
+      "slippage_ticks": 1,
+      "overall": {
+        "trades": 651,
+        "win_rate": 0.23348694316436253,
+        "win_rate_ci95": [
+          0.20261019445788409,
+          0.2674906665747688
+        ],
+        "expectancy_r": -0.10376423359083196,
+        "expectancy_r_ci95": [
+          -0.19239480479358087,
+          -0.013815312522911212
+        ],
+        "avg_win_r": 1.8910780720311335,
+        "avg_loss_r": -0.7114115892111501,
+        "profit_factor": 0.7584135463980605,
+        "net_pnl_usd": -32848.8,
+        "max_drawdown_usd": -36039.599999999766,
+        "fees_usd": 12238.8,
+        "slippage_usd": 5770.0,
+        "exits": {
+          "stop": 313,
+          "breakeven": 183,
+          "target": 148,
+          "force_close": 7
+        },
+        "ambiguous": 26
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2022-10-02",
+          "end": "2023-04-07",
+          "trades": 157,
+          "win_rate": 0.20382165605095542,
+          "win_rate_ci95": [
+            0.14823821725554062,
+            0.27355316009957154
+          ],
+          "expectancy_r": -0.15755472681314064,
+          "expectancy_r_ci95": [
+            -0.32688754455270363,
+            0.01823047266531724
+          ],
+          "avg_win_r": 1.8835433253464728,
+          "avg_loss_r": -0.6800758281660015,
+          "profit_factor": 0.7264022055444938,
+          "net_pnl_usd": -8931.599999999997,
+          "max_drawdown_usd": -9865.800000000016,
+          "fees_usd": 2951.5999999999995,
+          "slippage_usd": 1415.0,
+          "exits": {
+            "stop": 75,
+            "breakeven": 49,
+            "target": 31,
+            "force_close": 2
+          },
+          "ambiguous": 11
+        },
+        {
+          "fold": 2,
+          "start": "2023-04-07",
+          "end": "2023-10-12",
+          "trades": 173,
+          "win_rate": 0.24855491329479767,
+          "win_rate_ci95": [
+            0.19008569685616644,
+            0.317948611813287
+          ],
+          "expectancy_r": -0.0671953948114249,
+          "expectancy_r_ci95": [
+            -0.2385134579975281,
+            0.11237533622515483
+          ],
+          "avg_win_r": 1.8567706123474237,
+          "avg_loss_r": -0.7035841510255058,
+          "profit_factor": 0.8581969557342148,
+          "net_pnl_usd": -4462.399999999999,
+          "max_drawdown_usd": -7344.599999999999,
+          "fees_usd": 3252.3999999999996,
+          "slippage_usd": 1525.0,
+          "exits": {
+            "stop": 80,
+            "breakeven": 49,
+            "target": 41,
+            "force_close": 3
+          },
+          "ambiguous": 5
+        },
+        {
+          "fold": 3,
+          "start": "2023-10-12",
+          "end": "2024-04-16",
+          "trades": 159,
+          "win_rate": 0.2830188679245283,
+          "win_rate_ci95": [
+            0.21875991541939405,
+            0.35751543436837524
+          ],
+          "expectancy_r": 0.03688824893161024,
+          "expectancy_r_ci95": [
+            -0.14782436067750027,
+            0.2376356709514176
+          ],
+          "avg_win_r": 1.9208162140180096,
+          "avg_loss_r": -0.7067675267603895,
+          "profit_factor": 0.8851943860543136,
+          "net_pnl_usd": -3244.199999999999,
+          "max_drawdown_usd": -7204.400000000009,
+          "fees_usd": 2989.2,
+          "slippage_usd": 1365.0,
+          "exits": {
+            "stop": 71,
+            "target": 45,
+            "breakeven": 43
+          },
+          "ambiguous": 3
+        },
+        {
+          "fold": 4,
+          "start": "2024-04-16",
+          "end": "2024-10-21",
+          "trades": 162,
+          "win_rate": 0.19753086419753085,
+          "win_rate_ci95": [
+            0.14353803306993532,
+            0.2655366502423337
+          ],
+          "expectancy_r": -0.22873365577603721,
+          "expectancy_r_ci95": [
+            -0.40470855601532807,
+            -0.04406275936018234
+          ],
+          "avg_win_r": 1.9028942054967353,
+          "avg_loss_r": -0.7534420523970274,
+          "profit_factor": 0.628188719924769,
+          "net_pnl_usd": -16210.599999999999,
+          "max_drawdown_usd": -20031.799999999956,
+          "fees_usd": 3045.6,
+          "slippage_usd": 1465.0,
+          "exits": {
+            "stop": 87,
+            "breakeven": 42,
+            "target": 31,
+            "force_close": 2
+          },
+          "ambiguous": 7
+        }
+      ],
+      "by_session": {
+        "london": {
+          "trades": 244,
+          "win_rate": 0.25,
+          "win_rate_ci95": [
+            0.19982593157059225,
+            0.30792417979085807
+          ],
+          "expectancy_r": -0.09404516311065378,
+          "expectancy_r_ci95": [
+            -0.24590701379571922,
+            0.06717714508921668
+          ],
+          "avg_win_r": 1.9095856546565624,
+          "avg_loss_r": -0.7619221023663926,
+          "profit_factor": 0.8101887479659515,
+          "net_pnl_usd": -6462.199999999999,
+          "max_drawdown_usd": -6462.200000000014,
+          "fees_usd": 4587.200000000002,
+          "slippage_usd": 2135.0,
+          "exits": {
+            "stop": 119,
+            "breakeven": 64,
+            "target": 61
+          },
+          "ambiguous": 6
+        },
+        "ny_am": {
+          "trades": 207,
+          "win_rate": 0.21739130434782608,
+          "win_rate_ci95": [
+            0.1666264936284419,
+            0.27845455299613314
+          ],
+          "expectancy_r": -0.10907118532127236,
+          "expectancy_r_ci95": [
+            -0.2671629444313188,
+            0.05104116827485823
+          ],
+          "avg_win_r": 1.952048496469287,
+          "avg_loss_r": -0.6816044302630944,
+          "profit_factor": 0.7223347455830501,
+          "net_pnl_usd": -17026.599999999995,
+          "max_drawdown_usd": -19567.799999999963,
+          "fees_usd": 3891.600000000001,
+          "slippage_usd": 1845.0,
+          "exits": {
+            "stop": 101,
+            "breakeven": 60,
+            "target": 45,
+            "force_close": 1
+          },
+          "ambiguous": 10
+        },
+        "ny_pm": {
+          "trades": 200,
+          "win_rate": 0.23,
+          "win_rate_ci95": [
+            0.1770925624139232,
+            0.2930842807819702
+          ],
+          "expectancy_r": -0.11012880453564348,
+          "expectancy_r_ci95": [
+            -0.26570824118559605,
+            0.05826250368702081
+          ],
+          "avg_win_r": 1.806890427686176,
+          "avg_loss_r": -0.6827449388356676,
+          "profit_factor": 0.7694876518278448,
+          "net_pnl_usd": -9360.0,
+          "max_drawdown_usd": -12378.000000000016,
+          "fees_usd": 3760.0000000000005,
+          "slippage_usd": 1790.0,
+          "exits": {
+            "stop": 93,
+            "breakeven": 59,
+            "target": 42,
+            "force_close": 6
+          },
+          "ambiguous": 10
+        }
+      },
+      "events": {
+        "ENTERED": 651,
+        "FAILED_NO_CLOSE_BACK": 511,
+        "INVALIDATED_15M": 288,
+        "WINDOW_ENDED": 91
+      },
+      "skipped_entries": {},
+      "ignored_sweeps": {
+        "outside_window": 10212,
+        "window_done": 349,
+        "setup_active": 272,
+        "position_open": 108
+      },
+      "levels_created": 14054,
+      "force_closes": 7,
+      "ambiguity": {
+        "fill_vs_invalidation": 0,
+        "stop_vs_target": 26,
+        "entry_and_exit_same_minute": 6
+      }
+    },
+    "stop4_slip2": {
+      "stop_offset_ticks": 4,
+      "slippage_ticks": 2,
+      "overall": {
+        "trades": 651,
+        "win_rate": 0.23195084485407066,
+        "win_rate_ci95": [
+          0.2011570032389429,
+          0.26588968408208263
+        ],
+        "expectancy_r": -0.12606534435678943,
+        "expectancy_r_ci95": [
+          -0.21487125908622182,
+          -0.03533018476871213
+        ],
+        "avg_win_r": 1.8931693585688467,
+        "avg_loss_r": -0.7358742246403316,
+        "profit_factor": 0.7519352329774442,
+        "net_pnl_usd": -35083.799999999996,
+        "max_drawdown_usd": -38598.19999999983,
+        "fees_usd": 12238.8,
+        "slippage_usd": 11550.0,
+        "exits": {
+          "stop": 318,
+          "breakeven": 179,
+          "target": 147,
+          "force_close": 7
+        },
+        "ambiguous": 21
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2022-10-02",
+          "end": "2023-04-07",
+          "trades": 157,
+          "win_rate": 0.21656050955414013,
+          "win_rate_ci95": [
+            0.15931387208372824,
+            0.2873466933421318
+          ],
+          "expectancy_r": -0.15538026208629357,
+          "expectancy_r_ci95": [
+            -0.3322275809050219,
+            0.03133746207344658
+          ],
+          "avg_win_r": 1.8851693496801554,
+          "avg_loss_r": -0.7194346263144178,
+          "profit_factor": 0.7493877979383364,
+          "net_pnl_usd": -8596.599999999997,
+          "max_drawdown_usd": -10079.400000000014,
+          "fees_usd": 2951.5999999999995,
+          "slippage_usd": 2810.0,
+          "exits": {
+            "stop": 77,
+            "breakeven": 45,
+            "target": 33,
+            "force_close": 2
+          },
+          "ambiguous": 8
+        },
+        {
+          "fold": 2,
+          "start": "2023-04-07",
+          "end": "2023-10-12",
+          "trades": 173,
+          "win_rate": 0.2543352601156069,
+          "win_rate_ci95": [
+            0.19526466018654676,
+            0.3240792046054479
+          ],
+          "expectancy_r": -0.07322994828617495,
+          "expectancy_r_ci95": [
+            -0.25011148328300775,
+            0.10975521011600378
+          ],
+          "avg_win_r": 1.8601214696332553,
+          "avg_loss_r": -0.732667641219934,
+          "profit_factor": 0.8764573044228617,
+          "net_pnl_usd": -4037.3999999999996,
+          "max_drawdown_usd": -6894.6,
+          "fees_usd": 3252.3999999999996,
+          "slippage_usd": 3040.0,
+          "exits": {
+            "stop": 81,
+            "breakeven": 47,
+            "target": 42,
+            "force_close": 3
+          },
+          "ambiguous": 3
+        },
+        {
+          "fold": 3,
+          "start": "2023-10-12",
+          "end": "2024-04-16",
+          "trades": 159,
+          "win_rate": 0.2578616352201258,
+          "win_rate_ci95": [
+            0.19614084074136878,
+            0.3310070133696201
+          ],
+          "expectancy_r": -0.03185895759570326,
+          "expectancy_r_ci95": [
+            -0.2154341179912708,
+            0.16026452083901246
+          ],
+          "avg_win_r": 1.927587955429412,
+          "avg_loss_r": -0.7126837324603619,
+          "profit_factor": 0.8245046365073228,
+          "net_pnl_usd": -5174.199999999999,
+          "max_drawdown_usd": -8229.400000000009,
+          "fees_usd": 2989.2,
+          "slippage_usd": 2770.0,
+          "exits": {
+            "stop": 72,
+            "breakeven": 46,
+            "target": 41
+          },
+          "ambiguous": 3
+        },
+        {
+          "fold": 4,
+          "start": "2024-04-16",
+          "end": "2024-10-21",
+          "trades": 162,
+          "win_rate": 0.19753086419753085,
+          "win_rate_ci95": [
+            0.14353803306993532,
+            0.2655366502423337
+          ],
+          "expectancy_r": -0.24654001677467138,
+          "expectancy_r_ci95": [
+            -0.42172201277628857,
+            -0.06010619027027729
+          ],
+          "avg_win_r": 1.9030113880719202,
+          "avg_loss_r": -0.775660362583063,
+          "profit_factor": 0.6157904101058626,
+          "net_pnl_usd": -17275.600000000002,
+          "max_drawdown_usd": -20804.999999999945,
+          "fees_usd": 3045.6,
+          "slippage_usd": 2930.0,
+          "exits": {
+            "stop": 88,
+            "breakeven": 41,
+            "target": 31,
+            "force_close": 2
+          },
+          "ambiguous": 7
+        }
+      ],
+      "by_session": {
+        "london": {
+          "trades": 244,
+          "win_rate": 0.2336065573770492,
+          "win_rate_ci95": [
+            0.18489515213624105,
+            0.2905762780030092
+          ],
+          "expectancy_r": -0.15440165686746543,
+          "expectancy_r_ci95": [
+            -0.3059359174678569,
+            0.003452658060461829
+          ],
+          "avg_win_r": 1.9139585539056683,
+          "avg_loss_r": -0.784864394910613,
+          "profit_factor": 0.7401337166396811,
+          "net_pnl_usd": -9437.199999999997,
+          "max_drawdown_usd": -9437.20000000003,
+          "fees_usd": 4587.200000000002,
+          "slippage_usd": 4310.0,
+          "exits": {
+            "stop": 122,
+            "breakeven": 65,
+            "target": 57
+          },
+          "ambiguous": 5
+        },
+        "ny_am": {
+          "trades": 207,
+          "win_rate": 0.22705314009661837,
+          "win_rate_ci95": [
+            0.17526015068627562,
+            0.28879248408788666
+          ],
+          "expectancy_r": -0.1022610210671003,
+          "expectancy_r_ci95": [
+            -0.26106101525797054,
+            0.06132153517617803
+          ],
+          "avg_win_r": 1.9516646030697204,
+          "avg_loss_r": -0.7056016731572912,
+          "profit_factor": 0.7479237738603364,
+          "net_pnl_usd": -15886.599999999993,
+          "max_drawdown_usd": -19642.799999999974,
+          "fees_usd": 3891.600000000001,
+          "slippage_usd": 3670.0,
+          "exits": {
+            "stop": 102,
+            "breakeven": 57,
+            "target": 47,
+            "force_close": 1
+          },
+          "ambiguous": 8
+        },
+        "ny_pm": {
+          "trades": 200,
+          "win_rate": 0.235,
+          "win_rate_ci95": [
+            0.18157345326946356,
+            0.29841492986724655
+          ],
+          "expectancy_r": -0.11613251769859305,
+          "expectancy_r_ci95": [
+            -0.27138658515082237,
+            0.054607983443606026
+          ],
+          "avg_win_r": 1.8094616856807646,
+          "avg_loss_r": -0.7076549200438859,
+          "profit_factor": 0.7681236547133146,
+          "net_pnl_usd": -9760.000000000002,
+          "max_drawdown_usd": -12738.00000000001,
+          "fees_usd": 3760.0000000000005,
+          "slippage_usd": 3570.0,
+          "exits": {
+            "stop": 94,
+            "breakeven": 57,
+            "target": 43,
+            "force_close": 6
+          },
+          "ambiguous": 8
+        }
+      },
+      "events": {
+        "ENTERED": 651,
+        "FAILED_NO_CLOSE_BACK": 511,
+        "INVALIDATED_15M": 288,
+        "WINDOW_ENDED": 91
+      },
+      "skipped_entries": {},
+      "ignored_sweeps": {
+        "outside_window": 10212,
+        "window_done": 348,
+        "setup_active": 272,
+        "position_open": 109
+      },
+      "levels_created": 14054,
+      "force_closes": 7,
+      "ambiguity": {
+        "fill_vs_invalidation": 0,
+        "stop_vs_target": 21,
+        "entry_and_exit_same_minute": 6
+      }
+    },
+    "stop4_slip3": {
+      "stop_offset_ticks": 4,
+      "slippage_ticks": 3,
+      "overall": {
+        "trades": 651,
+        "win_rate": 0.22427035330261136,
+        "win_rate_ci95": [
+          0.19390005953401304,
+          0.25787575922887557
+        ],
+        "expectancy_r": -0.16379183546170356,
+        "expectancy_r_ci95": [
+          -0.2522843134157872,
+          -0.07337842724447441
+        ],
+        "avg_win_r": 1.8936426318144244,
+        "avg_loss_r": -0.7586144735256931,
+        "profit_factor": 0.7049412972002238,
+        "net_pnl_usd": -43703.8,
+        "max_drawdown_usd": -47093.19999999998,
+        "fees_usd": 12238.8,
+        "slippage_usd": 17400.0,
+        "exits": {
+          "stop": 325,
+          "breakeven": 177,
+          "target": 142,
+          "force_close": 7
+        },
+        "ambiguous": 22
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2022-10-02",
+          "end": "2023-04-07",
+          "trades": 157,
+          "win_rate": 0.21019108280254778,
+          "win_rate_ci95": [
+            0.15376493431902044,
+            0.2804610370714657
+          ],
+          "expectancy_r": -0.20515354765489713,
+          "expectancy_r_ci95": [
+            -0.3830436625036285,
+            -0.02055151776504198
+          ],
+          "avg_win_r": 1.888832210772332,
+          "avg_loss_r": -0.7624239511073049,
+          "profit_factor": 0.700359191899491,
+          "net_pnl_usd": -11061.599999999999,
+          "max_drawdown_usd": -12052.799999999994,
+          "fees_usd": 2951.5999999999995,
+          "slippage_usd": 4230.0,
+          "exits": {
+            "stop": 81,
+            "breakeven": 42,
+            "target": 32,
+            "force_close": 2
+          },
+          "ambiguous": 7
+        },
+        {
+          "fold": 2,
+          "start": "2023-04-07",
+          "end": "2023-10-12",
+          "trades": 173,
+          "win_rate": 0.24855491329479767,
+          "win_rate_ci95": [
+            0.19008569685616644,
+            0.317948611813287
+          ],
+          "expectancy_r": -0.11378970315984158,
+          "expectancy_r_ci95": [
+            -0.2893470728111535,
+            0.06908184176005819
+          ],
+          "avg_win_r": 1.8575644439366927,
+          "avg_loss_r": -0.7658529979686952,
+          "profit_factor": 0.7933369932676472,
+          "net_pnl_usd": -7152.399999999997,
+          "max_drawdown_usd": -9569.2,
+          "fees_usd": 3252.3999999999996,
+          "slippage_usd": 4575.0,
+          "exits": {
+            "stop": 84,
+            "breakeven": 45,
+            "target": 41,
+            "force_close": 3
+          },
+          "ambiguous": 4
+        },
+        {
+          "fold": 3,
+          "start": "2023-10-12",
+          "end": "2024-04-16",
+          "trades": 159,
+          "win_rate": 0.25157232704402516,
+          "win_rate_ci95": [
+            0.1905289368296746,
+            0.32433704336211916
+          ],
+          "expectancy_r": -0.05571354371380969,
+          "expectancy_r_ci95": [
+            -0.24009137958590143,
+            0.1403775614993644
+          ],
+          "avg_win_r": 1.9299240357268517,
+          "avg_loss_r": -0.7231547468871412,
+          "profit_factor": 0.8021084970066169,
+          "net_pnl_usd": -6029.199999999999,
+          "max_drawdown_usd": -8364.400000000009,
+          "fees_usd": 2989.2,
+          "slippage_usd": 4170.0,
+          "exits": {
+            "stop": 72,
+            "breakeven": 47,
+            "target": 40
+          },
+          "ambiguous": 4
+        },
+        {
+          "fold": 4,
+          "start": "2024-04-16",
+          "end": "2024-10-21",
+          "trades": 162,
+          "win_rate": 0.18518518518518517,
+          "win_rate_ci95": [
+            0.1329085654983166,
+            0.25204671713282056
+          ],
+          "expectancy_r": -0.2831809000407521,
+          "expectancy_r_ci95": [
+            -0.4547551539555122,
+            -0.10116089484628187
+          ],
+          "avg_win_r": 1.9022709590355722,
+          "avg_loss_r": -0.7798745043762804,
+          "profit_factor": 0.578104607753444,
+          "net_pnl_usd": -19460.6,
+          "max_drawdown_usd": -22979.999999999935,
+          "fees_usd": 3045.6,
+          "slippage_usd": 4425.0,
+          "exits": {
+            "stop": 88,
+            "breakeven": 43,
+            "target": 29,
+            "force_close": 2
+          },
+          "ambiguous": 7
+        }
+      ],
+      "by_session": {
+        "london": {
+          "trades": 244,
+          "win_rate": 0.22950819672131148,
+          "win_rate_ci95": [
+            0.1811790003335207,
+            0.2862227595001796
+          ],
+          "expectancy_r": -0.18522733773425176,
+          "expectancy_r_ci95": [
+            -0.33846132924853445,
+            -0.025819324529297034
+          ],
+          "avg_win_r": 1.9169794826440114,
+          "avg_loss_r": -0.8114166033788408,
+          "profit_factor": 0.7106018390251806,
+          "net_pnl_usd": -11072.199999999997,
+          "max_drawdown_usd": -11072.200000000019,
+          "fees_usd": 4587.200000000002,
+          "slippage_usd": 6480.0,
+          "exits": {
+            "stop": 124,
+            "breakeven": 64,
+            "target": 56
+          },
+          "ambiguous": 6
+        },
+        "ny_am": {
+          "trades": 207,
+          "win_rate": 0.21739130434782608,
+          "win_rate_ci95": [
+            0.1666264936284419,
+            0.27845455299613314
+          ],
+          "expectancy_r": -0.14467848118388588,
+          "expectancy_r_ci95": [
+            -0.30446331575938945,
+            0.01681392114676154
+          ],
+          "avg_win_r": 1.955832395742225,
+          "avg_loss_r": -0.7281537247744724,
+          "profit_factor": 0.697591230697409,
+          "net_pnl_usd": -19951.599999999995,
+          "max_drawdown_usd": -23647.799999999937,
+          "fees_usd": 3891.600000000001,
+          "slippage_usd": 5535.0,
+          "exits": {
+            "stop": 105,
+            "breakeven": 56,
+            "target": 45,
+            "force_close": 1
+          },
+          "ambiguous": 7
+        },
+        "ny_pm": {
+          "trades": 200,
+          "win_rate": 0.225,
+          "win_rate_ci95": [
+            0.17262283786915622,
+            0.28774246538592035
+          ],
+          "expectancy_r": -0.15742284436673612,
+          "expectancy_r_ci95": [
+            -0.31234582109516335,
+            0.011175244214208848
+          ],
+          "avg_win_r": 1.8024114535209155,
+          "avg_loss_r": -0.726406995366377,
+          "profit_factor": 0.7110564214747973,
+          "net_pnl_usd": -12680.0,
+          "max_drawdown_usd": -15617.999999999985,
+          "fees_usd": 3760.0000000000005,
+          "slippage_usd": 5385.0,
+          "exits": {
+            "stop": 96,
+            "breakeven": 57,
+            "target": 41,
+            "force_close": 6
+          },
+          "ambiguous": 9
+        }
+      },
+      "events": {
+        "ENTERED": 651,
+        "FAILED_NO_CLOSE_BACK": 511,
+        "INVALIDATED_15M": 288,
+        "WINDOW_ENDED": 91
+      },
+      "skipped_entries": {},
+      "ignored_sweeps": {
+        "outside_window": 10211,
+        "window_done": 342,
+        "setup_active": 272,
+        "position_open": 116
+      },
+      "levels_created": 14054,
+      "force_closes": 7,
+      "ambiguity": {
+        "fill_vs_invalidation": 0,
+        "stop_vs_target": 22,
+        "entry_and_exit_same_minute": 6
+      }
+    }
+  },
+  "selection": {
+    "rule": "max over stop offsets of the minimum fold expectancy at 2-tick slippage",
+    "worst_fold_by_offset": {
+      "1": -0.24104715809870994,
+      "2": -0.24476560463001237,
+      "4": -0.24654001677467138
+    },
+    "selected_stop_offset": 1
+  }
+}
