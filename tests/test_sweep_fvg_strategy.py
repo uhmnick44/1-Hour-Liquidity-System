@@ -311,3 +311,13 @@ def test_no_lookahead_and_trade_audit_on_real_slice():
         hh = pd.Timestamp(t.entry_ts).tz_convert(NY)
         assert (3 <= hh.hour < 4) or (10 <= hh.hour < 11) or (14 <= hh.hour < 15)
         assert pd.Timestamp(t.exit_ts).tz_convert(NY).time() <= pd.Timestamp("16:00").time()
+
+
+def test_no_swing1m_variant_publishes_no_1m_levels():
+    path = {ny("2024-03-05 10:05"): (20000, 20000.25, 19989.75, 20000.25)}
+    md = synthetic_market(path, "2024-03-03T23:00:00Z", "2024-03-06T00:00:00Z")
+    cfg = base_cfg(); cfg = dataclasses.replace(cfg, sweepfvg=dataclasses.replace(cfg.sweepfvg, use_swing1m=False))
+    res = run_sweep_fvg_backtest(md, cfg)
+    assert not res.levels.sources.str.contains("swing1m").any() and res.levels.sources.str.contains("swing15m|prev_session|prewindow").any()
+    res2 = run_sweep_fvg_backtest(md, base_cfg())
+    assert res2.levels.sources.str.contains("swing1m").any()

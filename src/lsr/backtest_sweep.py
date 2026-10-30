@@ -179,7 +179,7 @@ def run_sweep_fvg_backtest(md: MarketData, cfg: BacktestConfig, start_ts: Option
                     wsm.on_entry_cancelled(t_close, skip, allow_new_setup=False)
                     skipped_entries.append(dict(ts=t_close, reason=skip))
         # ---- 6. pivots and running ranges
-        ph, pl, pts = piv1.feed(t, bar.high, bar.low)
+        ph, pl, pts = piv1.feed(t, bar.high, bar.low) if sc.use_swing1m else (None, None, None)
         if pts is not None:
             exp = pts + pd.Timedelta(minutes=sc.swing1m_eligibility_minutes)
             if ph is not None and exp > t_close:

@@ -27,13 +27,16 @@ from lsr.report import bootstrap_mean_ci, max_drawdown, wilson_interval  # noqa:
 NY = "America/New_York"
 
 
+USE_SWING1M = True
+
+
 def scenario_cfg(offset: int, slip: int) -> BacktestConfig:
     cfg = BacktestConfig()
     return dataclasses.replace(cfg, data=DATASETS["2022_2026"],
                                risk=dataclasses.replace(cfg.risk, fixed_contracts=10, min_stop_points=0.0),
                                strategy=dataclasses.replace(cfg.strategy, exit_mode="be_at_1r_tp_2r"),
                                costs=dataclasses.replace(cfg.costs, slippage_ticks=slip),
-                               sweepfvg=dataclasses.replace(cfg.sweepfvg, stop_offset_ticks=offset))
+                               sweepfvg=dataclasses.replace(cfg.sweepfvg, stop_offset_ticks=offset, use_swing1m=USE_SWING1M))
 
 
 def metrics(tr: pd.DataFrame) -> dict:
@@ -72,7 +75,10 @@ def main() -> int:
     ap.add_argument("--offsets", default="1,2,4"); ap.add_argument("--slips", default="1,2,3")
     ap.add_argument("--folds", type=int, default=4); ap.add_argument("--label", default="dev")
     ap.add_argument("--out", default=str(ROOT / "results" / "sweep_fvg"))
+    ap.add_argument("--no-swing1m", action="store_true", help="remove the 1-minute swing level source")
     args = ap.parse_args()
+    global USE_SWING1M
+    USE_SWING1M = not args.no_swing1m
     offsets = [int(x) for x in args.offsets.split(",")]; slips = [int(x) for x in args.slips.split(",")]
     start = pd.Timestamp(args.start, tz="UTC"); end = pd.Timestamp(args.end, tz="UTC")
     edges = pd.date_range(start, end, periods=args.folds + 1)
