@@ -323,7 +323,15 @@ class Simulator:
         if self.cfg.risk.min_stop_points > 0 and dist < self.cfg.risk.min_stop_points:
             reject("min_stop", f"dist {dist}", fill)
             return
-        if self.cfg.risk.fixed_contracts:
+        if self.cfg.risk.fixed_dollar_risk:
+            rpc = self.risk_per_contract(dist)                   # price risk + fees + stop slippage
+            n = math.floor(self.cfg.risk.fixed_dollar_risk / rpc + 1e-12)
+            if self.cfg.risk.contract_cap:
+                n = min(n, self.cfg.risk.contract_cap)
+            if n < 1:
+                reject("size_below_min", f"rpc {rpc:.2f} budget {self.cfg.risk.fixed_dollar_risk:.2f}", fill)
+                return
+        elif self.cfg.risk.fixed_contracts:
             n = self.cfg.risk.fixed_contracts
             rpc = dist * self.cfg.instrument.point_value          # gross price risk per contract
         else:

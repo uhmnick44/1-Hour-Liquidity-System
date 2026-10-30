@@ -28,12 +28,16 @@ NY = "America/New_York"
 
 
 USE_SWING1M = True
+SIZING = "fixed10"          # or "risk1000"
+ACCOUNT = 100_000.0
 
 
 def scenario_cfg(offset: int, slip: int) -> BacktestConfig:
     cfg = BacktestConfig()
     return dataclasses.replace(cfg, data=DATASETS["2022_2026"],
-                               risk=dataclasses.replace(cfg.risk, fixed_contracts=10, min_stop_points=0.0),
+                               risk=(dataclasses.replace(cfg.risk, fixed_contracts=10, min_stop_points=0.0) if SIZING == "fixed10"
+                                     else dataclasses.replace(cfg.risk, fixed_dollar_risk=1000.0, contract_cap=None, min_stop_points=0.0,
+                                                              starting_equity=ACCOUNT)),
                                strategy=dataclasses.replace(cfg.strategy, exit_mode="be_at_1r_tp_2r"),
                                costs=dataclasses.replace(cfg.costs, slippage_ticks=slip),
                                sweepfvg=dataclasses.replace(cfg.sweepfvg, stop_offset_ticks=offset, use_swing1m=USE_SWING1M))
@@ -48,6 +52,9 @@ def metrics(tr: pd.DataFrame) -> dict:
     dd = float((eq - eq.cummax()).min())
     gp = w.net_pnl_usd.sum(); gl = -l.net_pnl_usd.sum()
     return dict(trades=int(len(tr)), win_rate=len(w) / len(tr), win_rate_ci95=[wl, wh], expectancy_r=float(r.mean()),
+                contracts_min=int(tr.contracts.min()), contracts_median=float(tr.contracts.median()), contracts_max=int(tr.contracts.max()),
+                planned_risk_usd_median=float(tr.planned_risk_usd.median()), return_on_account=float(tr.net_pnl_usd.sum() / ACCOUNT),
+                max_drawdown_pct_of_account=dd / ACCOUNT,
                 expectancy_r_ci95=[lo, hi], avg_win_r=float(w.r_net.mean()) if len(w) else float("nan"),
                 avg_loss_r=float(l.r_net.mean()) if len(l) else float("nan"), profit_factor=float(gp / gl) if gl > 0 else float("inf"),
                 net_pnl_usd=float(tr.net_pnl_usd.sum()), max_drawdown_usd=dd, fees_usd=float(tr.fees_usd.sum()),
@@ -76,9 +83,10 @@ def main() -> int:
     ap.add_argument("--folds", type=int, default=4); ap.add_argument("--label", default="dev")
     ap.add_argument("--out", default=str(ROOT / "results" / "sweep_fvg"))
     ap.add_argument("--no-swing1m", action="store_true", help="remove the 1-minute swing level source")
+    ap.add_argument("--sizing", default="fixed10", choices=["fixed10", "risk1000"])
     args = ap.parse_args()
-    global USE_SWING1M
-    USE_SWING1M = not args.no_swing1m
+    global USE_SWING1M, SIZING
+    USE_SWING1M = not args.no_swing1m; SIZING = args.sizing
     offsets = [int(x) for x in args.offsets.split(",")]; slips = [int(x) for x in args.slips.split(",")]
     start = pd.Timestamp(args.start, tz="UTC"); end = pd.Timestamp(args.end, tz="UTC")
     edges = pd.date_range(start, end, periods=args.folds + 1)

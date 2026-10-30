@@ -321,3 +321,20 @@ def test_no_swing1m_variant_publishes_no_1m_levels():
     assert not res.levels.sources.str.contains("swing1m").any() and res.levels.sources.str.contains("swing15m|prev_session|prewindow").any()
     res2 = run_sweep_fvg_backtest(md, base_cfg())
     assert res2.levels.sources.str.contains("swing1m").any()
+
+
+def test_fixed_dollar_risk_sizing_uses_costs_and_skips_when_one_contract_exceeds_budget():
+    import math
+    cfg = base_cfg()
+    cfg = dataclasses.replace(cfg, risk=dataclasses.replace(cfg.risk, fixed_contracts=None, fixed_dollar_risk=1000.0, contract_cap=None, min_stop_points=0.0))
+    path = {ny("2024-03-05 10:05"): (20000, 20000.25, 19989.75, 19999.0), ny("2024-03-05 10:06"): (19999, 20000.5, 19998, 20000.25),
+            ny("2024-03-05 10:07"): (20000.25, 20001.0, 20000.0, 20000.75), ny("2024-03-05 10:08"): (20000.75, 20003.0, 20000.5, 20002.5),
+            ny("2024-03-05 10:09"): (20002.5, 20004.0, 20001.5, 20003.5), ny("2024-03-05 10:10"): (20003.5, 20004.0, 20003.0, 20003.75)}
+    md = synthetic_market(path, "2024-03-03T23:00:00Z", "2024-03-06T00:00:00Z")
+    res = run_sweep_fvg_backtest(md, cfg)
+    t = res.trades.iloc[0]
+    rpc = t.stop_distance * 2 + 1.88 + 1.0            # 4.5 points -> 9 + 2.88 = 11.88
+    assert t.contracts == math.floor(1000 / rpc) == 84 and np.isclose(t.planned_risk_usd, t.contracts * rpc)
+    cfg2 = dataclasses.replace(cfg, risk=dataclasses.replace(cfg.risk, fixed_dollar_risk=10.0))
+    res2 = run_sweep_fvg_backtest(md, cfg2)
+    assert len(res2.trades) == 0 and (res2.setups.status == "ENTRY_CANCELLED").any() and (res2.setups.reason == "size_below_min").any()

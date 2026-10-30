@@ -72,6 +72,11 @@ class RiskConfig:
     # When set, every trade uses this many contracts and planned risk is the gross
     # price risk (stop distance x point value x contracts), with no compounding.
     fixed_contracts: Optional[int] = None
+    # When set, every trade risks this many dollars: contracts = floor(risk / (stop points x
+    # point value + round-trip fees + stop-exit slippage)). No compounding. ``contract_cap``
+    # limits the size when given; None means uncapped.
+    fixed_dollar_risk: Optional[float] = None
+    contract_cap: Optional[int] = None
 
 
 @dataclass(frozen=True)
