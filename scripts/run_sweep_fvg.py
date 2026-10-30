@@ -82,6 +82,10 @@ def main() -> int:
     print("data:", {k: md.validation[k] for k in ("m1_bars", "h1_bars", "dropped_outside_session", "first_ts", "last_ts")}, flush=True)
     out = Path(args.out) / args.label; out.mkdir(parents=True, exist_ok=True)
     summary = {"label": args.label, "start": str(start), "end": str(end), "folds": [str(e) for e in edges], "scenarios": {}}
+    if (out / "summary.json").exists():   # merge: scenarios already run for this label and range are kept
+        prev = json.loads((out / "summary.json").read_text())
+        if prev.get("start") == str(start) and prev.get("end") == str(end):
+            summary["scenarios"] = prev.get("scenarios", {})
     for off in offsets:
         for sl in slips:
             cfg = scenario_cfg(off, sl)
@@ -109,7 +113,8 @@ def main() -> int:
             print(f"{key}: trades {m.get('trades')} expR {m.get('expectancy_r', float('nan')):+.3f} CI {m.get('expectancy_r_ci95')} PF {m.get('profit_factor', float('nan')):.2f} net {m.get('net_pnl_usd', 0):,.0f} | folds "
                   + " ".join(f"{f['expectancy_r']:+.2f}({f['trades']})" if f.get('trades') else "n/a" for f in folds), flush=True)
     # selection rule, fixed in advance: best worst-fold expectancy at 2-tick slippage
-    cands = {off: min(f["expectancy_r"] for f in summary["scenarios"][f"stop{off}_slip2"]["folds"] if f.get("trades")) for off in offsets if f"stop{off}_slip2" in summary["scenarios"]}
+    all_offsets = sorted({v["stop_offset_ticks"] for v in summary["scenarios"].values()})
+    cands = {off: min(f["expectancy_r"] for f in summary["scenarios"][f"stop{off}_slip2"]["folds"] if f.get("trades")) for off in all_offsets if f"stop{off}_slip2" in summary["scenarios"]}
     if cands:
         best = max(cands, key=cands.get)
         summary["selection"] = dict(rule="max over stop offsets of the minimum fold expectancy at 2-tick slippage", worst_fold_by_offset=cands, selected_stop_offset=best)
