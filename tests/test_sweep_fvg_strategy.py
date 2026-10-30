@@ -338,3 +338,51 @@ def test_fixed_dollar_risk_sizing_uses_costs_and_skips_when_one_contract_exceeds
     cfg2 = dataclasses.replace(cfg, risk=dataclasses.replace(cfg.risk, fixed_dollar_risk=10.0))
     res2 = run_sweep_fvg_backtest(md, cfg2)
     assert len(res2.trades) == 0 and (res2.setups.status == "ENTRY_CANCELLED").any() and (res2.setups.reason == "size_below_min").any()
+
+
+# ------------------------------------------------------------- 5-minute FVG variant
+def test_five_minute_fvg_uses_clock_aligned_candles_and_their_extreme_for_the_stop():
+    """Sweep confirms at 10:06; the 5m candles 10:00, 10:05, 10:10 form a bullish gap completing at 10:15;
+    entry at 10:15 open; stop below the lowest low of the three 5m candles minus 2 ticks."""
+    s = ny("2024-03-05 10:00")
+    path = {}
+    for m in range(0, 5):     # 10:00 5m candle: high 20001, low 19995
+        path[s + pd.Timedelta(minutes=m)] = (19998, 20001.0, 19995.0, 19998)
+    path[s + pd.Timedelta(minutes=5)] = (19998, 19998.25, 19989.75, 19989.75)    # 10:05 sweeps 19990 (background low), no close back
+    path[s + pd.Timedelta(minutes=6)] = (19996, 20002.0, 19995.5, 20001.5)       # 10:06 closes back above 19990: confirmed 10:07
+    for m in range(7, 10):
+        path[s + pd.Timedelta(minutes=m)] = (20001.5, 20003.0, 20001.0, 20002.5) # rest of 10:05 candle: high 20003, low 19989.75
+    for m in range(10, 15):   # 10:10 5m candle: low 20001.25 > 10:00 candle high 20001.0 -> bullish 5m FVG at 10:15
+        path[s + pd.Timedelta(minutes=m)] = (20002.5, 20005.0, 20001.25, 20004.0)
+    for m in range(15, 400):  # after entry: tight range, no exit until 16:00
+        path[s + pd.Timedelta(minutes=m)] = (20004.0, 20004.5, 20003.5, 20004.0)
+    md = synthetic_market(path, "2024-03-03T23:00:00Z", "2024-03-06T00:00:00Z")
+    cfg = base_cfg(); cfg = dataclasses.replace(cfg, sweepfvg=dataclasses.replace(cfg.sweepfvg, fvg_timeframe_minutes=5, use_swing1m=False))
+    res = run_sweep_fvg_backtest(md, cfg)
+    ev = res.setups[res.setups.status == "ENTERED"].iloc[0]; t = res.trades.iloc[0]
+    assert pd.Timestamp(ev.confirmed_at) == ny("2024-03-05 10:07") and pd.Timestamp(ev.fvg_confirmed_at) == ny("2024-03-05 10:15")
+    assert pd.Timestamp(ev.fvg_candle1_ts) == ny("2024-03-05 10:00")
+    assert pd.Timestamp(t.entry_ts) == ny("2024-03-05 10:15") and t.entry_price == 20004.0 + 0.5
+    assert ev.stop_reference == 19989.75 and t.stop == 19989.75 - 0.5             # lowest low across the three 5m candles
+    # the 1-minute variant on the same data would have entered earlier
+    cfg1 = base_cfg(); cfg1 = dataclasses.replace(cfg1, sweepfvg=dataclasses.replace(cfg1.sweepfvg, use_swing1m=False))
+    res1 = run_sweep_fvg_backtest(md, cfg1)
+    assert pd.Timestamp(res1.trades.iloc[0].entry_ts) < ny("2024-03-05 10:15")
+
+
+def test_five_minute_fvg_completed_before_confirmation_is_ignored():
+    s = ny("2024-03-05 10:00")
+    path = {}
+    for m in range(0, 5):
+        path[s + pd.Timedelta(minutes=m)] = (19998, 20001.0, 19995.0, 19998)
+    for m in range(5, 10):
+        path[s + pd.Timedelta(minutes=m)] = (19998, 20003.0, 19997.0, 20002.5)
+    for m in range(10, 15):    # 10:10 candle low 20001.25 > 20001.0: a bullish 5m FVG completes at 10:15, before any sweep
+        path[s + pd.Timedelta(minutes=m)] = (20002.5, 20005.0, 20001.25, 20004.0)
+    path[s + pd.Timedelta(minutes=15)] = (20004, 20004.25, 19989.75, 20000.0)     # sweep + close back at 10:15 -> confirmed 10:16
+    for m in range(16, 60):
+        path[s + pd.Timedelta(minutes=m)] = (20000.0, 20000.5, 19999.5, 20000.0)  # no later 5m gap
+    md = synthetic_market(path, "2024-03-03T23:00:00Z", "2024-03-06T00:00:00Z")
+    cfg = base_cfg(); cfg = dataclasses.replace(cfg, sweepfvg=dataclasses.replace(cfg.sweepfvg, fvg_timeframe_minutes=5, use_swing1m=False))
+    res = run_sweep_fvg_backtest(md, cfg)
+    assert len(res.trades) == 0 and (res.setups.status == "WINDOW_ENDED").any()

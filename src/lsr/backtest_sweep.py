@@ -77,7 +77,7 @@ def run_sweep_fvg_backtest(md: MarketData, cfg: BacktestConfig, start_ts: Option
 
     book = LevelBook()
     sim = Simulator(cfg, md.sessions)
-    wsm = WindowStateMachine(book, tick, sc.close_back_candles, sc.stop_offset_ticks)
+    wsm = WindowStateMachine(book, tick, sc.close_back_candles, sc.stop_offset_ticks, sc.fvg_timeframe_minutes)
     piv1 = PivotDetector(sc.swing1m_left, sc.swing1m_right)
     piv15 = PivotDetector(sc.swing15m_left, sc.swing15m_right)
 

@@ -152,6 +152,7 @@ class SweepFvgConfig:
     rth_start: str = "09:30"
     rth_end: str = "16:00"
     close_back_candles: int = 3            # penetration candle counts as the first
+    fvg_timeframe_minutes: int = 1         # variant of 2026-10-30: 5 = FVG on three clock-aligned 5-minute candles
     use_swing1m: bool = True               # variant of 2026-10-30: False removes the 1-minute swing source entirely
     swing1m_left: int = 2
     swing1m_right: int = 2

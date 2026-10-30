@@ -29,6 +29,7 @@ NY = "America/New_York"
 
 USE_SWING1M = True
 SIZING = "fixed10"          # or "risk1000"
+FVG_TF = 1
 ACCOUNT = 100_000.0
 
 
@@ -40,7 +41,7 @@ def scenario_cfg(offset: int, slip: int) -> BacktestConfig:
                                                               starting_equity=ACCOUNT)),
                                strategy=dataclasses.replace(cfg.strategy, exit_mode="be_at_1r_tp_2r"),
                                costs=dataclasses.replace(cfg.costs, slippage_ticks=slip),
-                               sweepfvg=dataclasses.replace(cfg.sweepfvg, stop_offset_ticks=offset, use_swing1m=USE_SWING1M))
+                               sweepfvg=dataclasses.replace(cfg.sweepfvg, stop_offset_ticks=offset, use_swing1m=USE_SWING1M, fvg_timeframe_minutes=FVG_TF))
 
 
 def metrics(tr: pd.DataFrame) -> dict:
@@ -84,9 +85,10 @@ def main() -> int:
     ap.add_argument("--out", default=str(ROOT / "results" / "sweep_fvg"))
     ap.add_argument("--no-swing1m", action="store_true", help="remove the 1-minute swing level source")
     ap.add_argument("--sizing", default="fixed10", choices=["fixed10", "risk1000"])
+    ap.add_argument("--fvg-tf", type=int, default=1, help="FVG candle timeframe in minutes (1 or 5)")
     args = ap.parse_args()
-    global USE_SWING1M, SIZING
-    USE_SWING1M = not args.no_swing1m; SIZING = args.sizing
+    global USE_SWING1M, SIZING, FVG_TF
+    USE_SWING1M = not args.no_swing1m; SIZING = args.sizing; FVG_TF = args.fvg_tf
     offsets = [int(x) for x in args.offsets.split(",")]; slips = [int(x) for x in args.slips.split(",")]
     start = pd.Timestamp(args.start, tz="UTC"); end = pd.Timestamp(args.end, tz="UTC")
     edges = pd.date_range(start, end, periods=args.folds + 1)

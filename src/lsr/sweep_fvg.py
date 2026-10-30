@@ -105,11 +105,14 @@ class SweepFvgSignal:
 
 
 class WindowStateMachine:
-    def __init__(self, book: LevelBook, tick: float, close_back_candles: int, stop_offset_ticks: int):
+    def __init__(self, book: LevelBook, tick: float, close_back_candles: int, stop_offset_ticks: int, fvg_tf_minutes: int = 1):
         self.book = book
         self.tick = tick
         self.close_back_candles = close_back_candles
         self.stop_offset = stop_offset_ticks * tick
+        self.fvg_tf = fvg_tf_minutes
+        self._tf_recent: List[Candle] = []        # completed FVG-timeframe candles (when fvg_tf > 1)
+        self._tf_cur: Optional[list] = None       # [period_start, o, h, l, c]
         self.events: List[SweepEvent] = []
         self.current: Optional[SweepEvent] = None
         self.window_traded: set = set()           # (session_date, window) with an executed trade
@@ -142,6 +145,18 @@ class WindowStateMachine:
         if len(self._recent) > 3:
             del self._recent[0]
         self.book.purge_expired(c.ts)
+        # higher-timeframe FVG candles: aggregate 1-minute candles into clock-aligned periods
+        tf_completed = False
+        if self.fvg_tf > 1:
+            period = c.ts.floor(f"{self.fvg_tf}min")
+            if self._tf_cur is not None and self._tf_cur[0] != period:      # gap: previous period completed late
+                self._complete_tf(); tf_completed = True
+            if self._tf_cur is None:
+                self._tf_cur = [period, c.open, c.high, c.low, c.close]
+            else:
+                self._tf_cur[2] = max(self._tf_cur[2], c.high); self._tf_cur[3] = min(self._tf_cur[3], c.low); self._tf_cur[4] = c.close
+            if c.close_ts == period + pd.Timedelta(minutes=self.fvg_tf):
+                self._complete_tf(); tf_completed = True
 
         # 1. penetration scan (always: consumption applies everywhere)
         pen_buy = self.book.penetrated(BUY, c.ts, c.high, c.low, self.tick)
@@ -208,23 +223,39 @@ class WindowStateMachine:
                 return None
 
         # 5. first FVG in the reversal direction, confirmed at or after sweep confirmation
-        if len(self._recent) < 3:
-            return None
-        a, b, cc = self._recent
+        if self.fvg_tf > 1:
+            if not tf_completed or len(self._tf_recent) < 3:
+                return None
+            a, b, cc = self._tf_recent
+            confirm_ts = c.close_ts            # the higher-timeframe candle completes at this 1-minute close
+            if confirm_ts < ev.confirmed_at:
+                return None
+        else:
+            if len(self._recent) < 3:
+                return None
+            a, b, cc = self._recent
+            confirm_ts = cc.close_ts
         if fvg_direction(a, cc) != ev.direction:
             return None
-        ev.fvg_confirmed_at = cc.close_ts
+        ev.fvg_confirmed_at = confirm_ts
         ev.fvg_candles = (a, b, cc)
         if ev.direction == LONG:
             ev.stop_reference = min(a.low, b.low, cc.low); ev.stop_price = ev.stop_reference - self.stop_offset
         else:
             ev.stop_reference = max(a.high, b.high, cc.high); ev.stop_price = ev.stop_reference + self.stop_offset
-        ev.scheduled_entry_ts = cc.close_ts
+        ev.scheduled_entry_ts = confirm_ts
         ev.status = EventStatus.ENTRY_SCHEDULED
-        return SweepFvgSignal(bar_ts=cc.ts, close_ts=cc.close_ts, direction=ev.direction, stop_price=ev.stop_price,
+        return SweepFvgSignal(bar_ts=cc.ts, close_ts=confirm_ts, direction=ev.direction, stop_price=ev.stop_price,
                               extreme=ev.stop_reference, sweep_high=max(a.high, b.high, cc.high), sweep_low=min(a.low, b.low, cc.low),
                               close=cc.close, eq=float("nan"), zone="n/a", entry_type="market",
                               level_price=ev.extreme_level, n_levels=len(ev.levels), event_id=ev.event_id)
+
+    def _complete_tf(self) -> None:
+        p = self._tf_cur
+        self._tf_recent.append(Candle(ts=p[0], open=p[1], high=p[2], low=p[3], close=p[4]))
+        if len(self._tf_recent) > 3:
+            del self._tf_recent[0]
+        self._tf_cur = None
 
     # ------------------------------------------------------ entry outcomes
     def on_entered(self, ts: pd.Timestamp, fill: float) -> None:
