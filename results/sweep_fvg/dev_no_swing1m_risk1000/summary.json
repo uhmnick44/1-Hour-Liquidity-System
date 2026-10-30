@@ -1,0 +1,2741 @@
+{
+  "label": "dev_no_swing1m_risk1000",
+  "start": "2022-10-02 00:00:00+00:00",
+  "end": "2024-10-21 00:00:00+00:00",
+  "folds": [
+    "2022-10-02 00:00:00+00:00",
+    "2023-04-07 12:00:00+00:00",
+    "2023-10-12 00:00:00+00:00",
+    "2024-04-16 12:00:00+00:00",
+    "2024-10-21 00:00:00+00:00"
+  ],
+  "scenarios": {
+    "stop1_slip1": {
+      "stop_offset_ticks": 1,
+      "slippage_ticks": 1,
+      "overall": {
+        "trades": 651,
+        "win_rate": 0.22887864823348694,
+        "win_rate_ci95": [
+          0.19825241067428107,
+          0.2626859292234897
+        ],
+        "expectancy_r": -0.10561561167381144,
+        "contracts_min": 4,
+        "contracts_median": 30.0,
+        "contracts_max": 112,
+        "planned_risk_usd_median": 983.4399999999999,
+        "return_on_account": -0.6736059999999999,
+        "max_drawdown_pct_of_account": -0.7193042000000002,
+        "expectancy_r_ci95": [
+          -0.1858223701231385,
+          -0.022961313455158863
+        ],
+        "avg_win_r": 1.7293193524922006,
+        "avg_loss_r": -0.6502477026314524,
+        "profit_factor": 0.7893926106979597,
+        "net_pnl_usd": -67360.59999999999,
+        "max_drawdown_usd": -71930.42000000001,
+        "fees_usd": 40598.59999999999,
+        "slippage_usd": 19073.5,
+        "exits": {
+          "stop": 311,
+          "breakeven": 188,
+          "target": 145,
+          "force_close": 7
+        },
+        "ambiguous": 30
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2022-10-02",
+          "end": "2023-04-07",
+          "trades": 157,
+          "win_rate": 0.2229299363057325,
+          "win_rate_ci95": [
+            0.16488434152646586,
+            0.2942108179347681
+          ],
+          "expectancy_r": -0.11962421476137046,
+          "contracts_min": 4,
+          "contracts_median": 29.0,
+          "contracts_max": 106,
+          "planned_risk_usd_median": 982.5200000000001,
+          "return_on_account": -0.18472020000000003,
+          "max_drawdown_pct_of_account": -0.2250018,
+          "expectancy_r_ci95": [
+            -0.28375380086637547,
+            0.05014313788095129
+          ],
+          "avg_win_r": 1.7410540727410515,
+          "avg_loss_r": -0.653425362815344,
+          "profit_factor": 0.7632463109811196,
+          "net_pnl_usd": -18472.020000000004,
+          "max_drawdown_usd": -22500.18,
+          "fees_usd": 9078.52,
+          "slippage_usd": 4291.0,
+          "exits": {
+            "stop": 76,
+            "breakeven": 45,
+            "target": 34,
+            "force_close": 2
+          },
+          "ambiguous": 9
+        },
+        {
+          "fold": 2,
+          "start": "2023-04-07",
+          "end": "2023-10-12",
+          "trades": 173,
+          "win_rate": 0.24855491329479767,
+          "win_rate_ci95": [
+            0.19008569685616644,
+            0.317948611813287
+          ],
+          "expectancy_r": -0.055830385927416216,
+          "contracts_min": 6,
+          "contracts_median": 32.0,
+          "contracts_max": 112,
+          "planned_risk_usd_median": 983.8399999999999,
+          "return_on_account": -0.09520420000000002,
+          "max_drawdown_pct_of_account": -0.16208740000000002,
+          "expectancy_r_ci95": [
+            -0.21151729016846588,
+            0.11026952452819272
+          ],
+          "avg_win_r": 1.6937469945258392,
+          "avg_loss_r": -0.6345367502311853,
+          "profit_factor": 0.8824806354653351,
+          "net_pnl_usd": -9520.420000000002,
+          "max_drawdown_usd": -16208.740000000002,
+          "fees_usd": 11437.92,
+          "slippage_usd": 5346.0,
+          "exits": {
+            "stop": 78,
+            "breakeven": 51,
+            "target": 41,
+            "force_close": 3
+          },
+          "ambiguous": 7
+        },
+        {
+          "fold": 3,
+          "start": "2023-10-12",
+          "end": "2024-04-16",
+          "trades": 159,
+          "win_rate": 0.25157232704402516,
+          "win_rate_ci95": [
+            0.1905289368296746,
+            0.32433704336211916
+          ],
+          "expectancy_r": -0.03681935633560263,
+          "contracts_min": 9,
+          "contracts_median": 32.0,
+          "contracts_max": 96,
+          "planned_risk_usd_median": 983.4399999999999,
+          "return_on_account": -0.05434999999999998,
+          "max_drawdown_pct_of_account": -0.17211600000000002,
+          "expectancy_r_ci95": [
+            -0.19659902407641602,
+            0.14132728804718978
+          ],
+          "avg_win_r": 1.7401288709511191,
+          "avg_loss_r": -0.634112878112652,
+          "profit_factor": 0.9265376937999166,
+          "net_pnl_usd": -5434.999999999998,
+          "max_drawdown_usd": -17211.600000000002,
+          "fees_usd": 10528.0,
+          "slippage_usd": 4827.0,
+          "exits": {
+            "stop": 72,
+            "breakeven": 47,
+            "target": 40
+          },
+          "ambiguous": 4
+        },
+        {
+          "fold": 4,
+          "start": "2024-04-16",
+          "end": "2024-10-21",
+          "trades": 162,
+          "win_rate": 0.19135802469135801,
+          "win_rate_ci95": [
+            0.13821190769127087,
+            0.2588030752804322
+          ],
+          "expectancy_r": -0.21272732752661885,
+          "contracts_min": 5,
+          "contracts_median": 25.0,
+          "contracts_max": 112,
+          "planned_risk_usd_median": 982.02,
+          "return_on_account": -0.33933159999999996,
+          "max_drawdown_pct_of_account": -0.422244,
+          "expectancy_r_ci95": [
+            -0.37272291477950237,
+            -0.04458249874785086
+          ],
+          "avg_win_r": 1.75146501202404,
+          "avg_loss_r": -0.6775362017714313,
+          "profit_factor": 0.6091665576320255,
+          "net_pnl_usd": -33933.159999999996,
+          "max_drawdown_usd": -42224.4,
+          "fees_usd": 9554.16,
+          "slippage_usd": 4609.5,
+          "exits": {
+            "stop": 85,
+            "breakeven": 45,
+            "target": 30,
+            "force_close": 2
+          },
+          "ambiguous": 10
+        }
+      ],
+      "by_session": {
+        "london": {
+          "trades": 244,
+          "win_rate": 0.2540983606557377,
+          "win_rate_ci95": [
+            0.20357461753981732,
+            0.31224516412718295
+          ],
+          "expectancy_r": -0.07987115145399418,
+          "contracts_min": 12,
+          "contracts_median": 42.0,
+          "contracts_max": 112,
+          "planned_risk_usd_median": 985.1999999999999,
+          "return_on_account": -0.18946019999999994,
+          "max_drawdown_pct_of_account": -0.19336200000000003,
+          "expectancy_r_ci95": [
+            -0.21711683786085934,
+            0.06010288399687333
+          ],
+          "avg_win_r": 1.6940028026182279,
+          "avg_loss_r": -0.6841578830610148,
+          "profit_factor": 0.8456160496557451,
+          "net_pnl_usd": -18946.019999999993,
+          "max_drawdown_usd": -19336.200000000004,
+          "fees_usd": 20405.519999999997,
+          "slippage_usd": 9441.0,
+          "exits": {
+            "stop": 118,
+            "breakeven": 64,
+            "target": 62
+          },
+          "ambiguous": 7
+        },
+        "ny_am": {
+          "trades": 207,
+          "win_rate": 0.2028985507246377,
+          "win_rate_ci95": [
+            0.1537582973984552,
+            0.2628653670017391
+          ],
+          "expectancy_r": -0.14235355948396025,
+          "contracts_min": 5,
+          "contracts_median": 19.0,
+          "contracts_max": 112,
+          "planned_risk_usd_median": 976.36,
+          "return_on_account": -0.2900572,
+          "max_drawdown_pct_of_account": -0.32369979999999987,
+          "expectancy_r_ci95": [
+            -0.28685849932586505,
+            0.003240111929394024
+          ],
+          "avg_win_r": 1.8403888677597822,
+          "avg_loss_r": -0.6470516318732765,
+          "profit_factor": 0.7209782228932816,
+          "net_pnl_usd": -29005.72,
+          "max_drawdown_usd": -32369.97999999999,
+          "fees_usd": 8777.720000000001,
+          "slippage_usd": 4176.0,
+          "exits": {
+            "stop": 103,
+            "breakeven": 61,
+            "target": 42,
+            "force_close": 1
+          },
+          "ambiguous": 12
+        },
+        "ny_pm": {
+          "trades": 200,
+          "win_rate": 0.225,
+          "win_rate_ci95": [
+            0.17262283786915622,
+            0.28774246538592035
+          ],
+          "expectancy_r": -0.09900007715848445,
+          "contracts_min": 4,
+          "contracts_median": 29.5,
+          "contracts_max": 112,
+          "planned_risk_usd_median": 982.5200000000001,
+          "return_on_account": -0.1940886,
+          "max_drawdown_pct_of_account": -0.2328746000000001,
+          "expectancy_r_ci95": [
+            -0.2434831075794098,
+            0.05349560919797471
+          ],
+          "avg_win_r": 1.674312829179931,
+          "avg_loss_r": -0.6138328564180244,
+          "profit_factor": 0.7916710764293267,
+          "net_pnl_usd": -19408.86,
+          "max_drawdown_usd": -23287.46000000001,
+          "fees_usd": 11415.359999999999,
+          "slippage_usd": 5456.5,
+          "exits": {
+            "stop": 90,
+            "breakeven": 63,
+            "target": 41,
+            "force_close": 6
+          },
+          "ambiguous": 11
+        }
+      },
+      "events": {
+        "ENTERED": 651,
+        "FAILED_NO_CLOSE_BACK": 511,
+        "INVALIDATED_15M": 288,
+        "WINDOW_ENDED": 91
+      },
+      "skipped_entries": {},
+      "ignored_sweeps": {
+        "outside_window": 10220,
+        "window_done": 355,
+        "setup_active": 272,
+        "position_open": 94
+      },
+      "levels_created": 14054,
+      "force_closes": 7,
+      "ambiguity": {
+        "fill_vs_invalidation": 0,
+        "stop_vs_target": 30,
+        "entry_and_exit_same_minute": 7
+      }
+    },
+    "stop1_slip2": {
+      "stop_offset_ticks": 1,
+      "slippage_ticks": 2,
+      "overall": {
+        "trades": 651,
+        "win_rate": 0.23348694316436253,
+        "win_rate_ci95": [
+          0.20261019445788409,
+          0.2674906665747688
+        ],
+        "expectancy_r": -0.11649798522043131,
+        "contracts_min": 4,
+        "contracts_median": 29.0,
+        "contracts_max": 101,
+        "planned_risk_usd_median": 984.56,
+        "return_on_account": -0.7403879999999999,
+        "max_drawdown_pct_of_account": -0.7855092000000006,
+        "expectancy_r_ci95": [
+          -0.19668691649083883,
+          -0.03461251478898535
+        ],
+        "avg_win_r": 1.7097673523679864,
+        "avg_loss_r": -0.6727952423615926,
+        "profit_factor": 0.7750686880999748,
+        "net_pnl_usd": -74038.79999999999,
+        "max_drawdown_usd": -78550.92000000006,
+        "fees_usd": 38934.8,
+        "slippage_usd": 36563.0,
+        "exits": {
+          "stop": 319,
+          "breakeven": 177,
+          "target": 148,
+          "force_close": 7
+        },
+        "ambiguous": 24
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2022-10-02",
+          "end": "2023-04-07",
+          "trades": 157,
+          "win_rate": 0.2229299363057325,
+          "win_rate_ci95": [
+            0.16488434152646586,
+            0.2942108179347681
+          ],
+          "expectancy_r": -0.1390547351030028,
+          "contracts_min": 4,
+          "contracts_median": 29.0,
+          "contracts_max": 96,
+          "planned_risk_usd_median": 983.8399999999999,
+          "return_on_account": -0.21851660000000003,
+          "max_drawdown_pct_of_account": -0.2481716,
+          "expectancy_r_ci95": [
+            -0.3007130241093755,
+            0.0306860929231702
+          ],
+          "avg_win_r": 1.7183824184679848,
+          "avg_loss_r": -0.6719260496520566,
+          "profit_factor": 0.7284562225152714,
+          "net_pnl_usd": -21851.660000000003,
+          "max_drawdown_usd": -24817.16,
+          "fees_usd": 8755.16,
+          "slippage_usd": 8281.0,
+          "exits": {
+            "stop": 78,
+            "breakeven": 43,
+            "target": 34,
+            "force_close": 2
+          },
+          "ambiguous": 9
+        },
+        {
+          "fold": 2,
+          "start": "2023-04-07",
+          "end": "2023-10-12",
+          "trades": 173,
+          "win_rate": 0.24277456647398843,
+          "win_rate_ci95": [
+            0.18492149300193772,
+            0.3118032595449744
+          ],
+          "expectancy_r": -0.09204792088371559,
+          "contracts_min": 6,
+          "contracts_median": 31.0,
+          "contracts_max": 101,
+          "planned_risk_usd_median": 986.3999999999999,
+          "return_on_account": -0.1558394,
+          "max_drawdown_pct_of_account": -0.20796779999999998,
+          "expectancy_r_ci95": [
+            -0.24802236703387154,
+            0.06888786103047768
+          ],
+          "avg_win_r": 1.66726901521089,
+          "avg_loss_r": -0.6561037324560318,
+          "profit_factor": 0.8154649143976049,
+          "net_pnl_usd": -15583.939999999999,
+          "max_drawdown_usd": -20796.78,
+          "fees_usd": 10975.440000000002,
+          "slippage_usd": 10294.0,
+          "exits": {
+            "stop": 81,
+            "breakeven": 49,
+            "target": 40,
+            "force_close": 3
+          },
+          "ambiguous": 5
+        },
+        {
+          "fold": 3,
+          "start": "2023-10-12",
+          "end": "2024-04-16",
+          "trades": 159,
+          "win_rate": 0.27044025157232704,
+          "win_rate_ci95": [
+            0.20741683639366337,
+            0.3442947655557157
+          ],
+          "expectancy_r": -0.022777903177427013,
+          "contracts_min": 9,
+          "contracts_median": 31.0,
+          "contracts_max": 87,
+          "planned_risk_usd_median": 983.4799999999999,
+          "return_on_account": -0.03306379999999999,
+          "max_drawdown_pct_of_account": -0.16049640000000004,
+          "expectancy_r_ci95": [
+            -0.1881145224988315,
+            0.15755376065202004
+          ],
+          "avg_win_r": 1.7177544218381522,
+          "avg_loss_r": -0.6679752305538917,
+          "profit_factor": 0.9565237057953051,
+          "net_pnl_usd": -3306.3799999999987,
+          "max_drawdown_usd": -16049.640000000003,
+          "fees_usd": 10059.880000000001,
+          "slippage_usd": 9137.0,
+          "exits": {
+            "stop": 74,
+            "target": 43,
+            "breakeven": 42
+          },
+          "ambiguous": 3
+        },
+        {
+          "fold": 4,
+          "start": "2024-04-16",
+          "end": "2024-10-21",
+          "trades": 162,
+          "win_rate": 0.19753086419753085,
+          "win_rate_ci95": [
+            0.14353803306993532,
+            0.2655366502423337
+          ],
+          "expectancy_r": -0.21273221018046695,
+          "contracts_min": 5,
+          "contracts_median": 25.0,
+          "contracts_max": 101,
+          "planned_risk_usd_median": 983.6599999999999,
+          "return_on_account": -0.33296819999999994,
+          "max_drawdown_pct_of_account": -0.4098380000000001,
+          "expectancy_r_ci95": [
+            -0.3748900134191366,
+            -0.044183422580574075
+          ],
+          "avg_win_r": 1.745391066739268,
+          "avg_loss_r": -0.6947317860376324,
+          "profit_factor": 0.6224419701385442,
+          "net_pnl_usd": -33296.81999999999,
+          "max_drawdown_usd": -40983.80000000001,
+          "fees_usd": 9144.32,
+          "slippage_usd": 8851.0,
+          "exits": {
+            "stop": 86,
+            "breakeven": 43,
+            "target": 31,
+            "force_close": 2
+          },
+          "ambiguous": 7
+        }
+      ],
+      "by_session": {
+        "london": {
+          "trades": 244,
+          "win_rate": 0.2540983606557377,
+          "win_rate_ci95": [
+            0.20357461753981732,
+            0.31224516412718295
+          ],
+          "expectancy_r": -0.10078265422302711,
+          "contracts_min": 12,
+          "contracts_median": 41.0,
+          "contracts_max": 101,
+          "planned_risk_usd_median": 986.04,
+          "return_on_account": -0.2450836,
+          "max_drawdown_pct_of_account": -0.24508359999999993,
+          "expectancy_r_ci95": [
+            -0.23739377718224106,
+            0.042618851319039135
+          ],
+          "avg_win_r": 1.6705369964170218,
+          "avg_loss_r": -0.7041992385069997,
+          "profit_factor": 0.8062515909619132,
+          "net_pnl_usd": -24508.36,
+          "max_drawdown_usd": -24508.359999999993,
+          "fees_usd": 19405.36,
+          "slippage_usd": 18007.0,
+          "exits": {
+            "stop": 121,
+            "target": 62,
+            "breakeven": 61
+          },
+          "ambiguous": 5
+        },
+        "ny_am": {
+          "trades": 207,
+          "win_rate": 0.21739130434782608,
+          "win_rate_ci95": [
+            0.1666264936284419,
+            0.27845455299613314
+          ],
+          "expectancy_r": -0.12150515988291323,
+          "contracts_min": 5,
+          "contracts_median": 19.0,
+          "contracts_max": 101,
+          "planned_risk_usd_median": 980.6999999999999,
+          "return_on_account": -0.24043780000000006,
+          "max_drawdown_pct_of_account": -0.2739656000000001,
+          "expectancy_r_ci95": [
+            -0.2693207614779737,
+            0.026115681257259014
+          ],
+          "avg_win_r": 1.8221145810724915,
+          "avg_loss_r": -0.6613995323705255,
+          "profit_factor": 0.7693072610925709,
+          "net_pnl_usd": -24043.780000000006,
+          "max_drawdown_usd": -27396.56000000001,
+          "fees_usd": 8518.279999999999,
+          "slippage_usd": 8033.0,
+          "exits": {
+            "stop": 103,
+            "breakeven": 58,
+            "target": 45,
+            "force_close": 1
+          },
+          "ambiguous": 9
+        },
+        "ny_pm": {
+          "trades": 200,
+          "win_rate": 0.225,
+          "win_rate_ci95": [
+            0.17262283786915622,
+            0.28774246538592035
+          ],
+          "expectancy_r": -0.13048826326159568,
+          "contracts_min": 4,
+          "contracts_median": 29.0,
+          "contracts_max": 101,
+          "planned_risk_usd_median": 983.9,
+          "return_on_account": -0.2548666,
+          "max_drawdown_pct_of_account": -0.29233420000000016,
+          "expectancy_r_ci95": [
+            -0.27289017081514005,
+            0.024403671687656864
+          ],
+          "avg_win_r": 1.6514708363070332,
+          "avg_loss_r": -0.647831227652488,
+          "profit_factor": 0.7410991026572465,
+          "net_pnl_usd": -25486.66,
+          "max_drawdown_usd": -29233.420000000016,
+          "fees_usd": 11011.16,
+          "slippage_usd": 10523.0,
+          "exits": {
+            "stop": 95,
+            "breakeven": 58,
+            "target": 41,
+            "force_close": 6
+          },
+          "ambiguous": 10
+        }
+      },
+      "events": {
+        "ENTERED": 651,
+        "FAILED_NO_CLOSE_BACK": 511,
+        "INVALIDATED_15M": 288,
+        "WINDOW_ENDED": 91
+      },
+      "skipped_entries": {},
+      "ignored_sweeps": {
+        "outside_window": 10220,
+        "window_done": 349,
+        "setup_active": 272,
+        "position_open": 100
+      },
+      "levels_created": 14054,
+      "force_closes": 7,
+      "ambiguity": {
+        "fill_vs_invalidation": 0,
+        "stop_vs_target": 24,
+        "entry_and_exit_same_minute": 7
+      }
+    },
+    "stop1_slip3": {
+      "stop_offset_ticks": 1,
+      "slippage_ticks": 3,
+      "overall": {
+        "trades": 651,
+        "win_rate": 0.22734254992319508,
+        "win_rate_ci95": [
+          0.19680101765844157,
+          0.26108314852770187
+        ],
+        "expectancy_r": -0.1413826314621273,
+        "contracts_min": 4,
+        "contracts_median": 29.0,
+        "contracts_max": 91,
+        "planned_risk_usd_median": 982.5200000000001,
+        "return_on_account": -0.8918445999999999,
+        "max_drawdown_pct_of_account": -0.9346537999999992,
+        "expectancy_r_ci95": [
+          -0.22044550281203515,
+          -0.06019579627711427
+        ],
+        "avg_win_r": 1.6871412406497848,
+        "avg_loss_r": -0.6793976077495288,
+        "profit_factor": 0.7328737922039349,
+        "net_pnl_usd": -89184.45999999999,
+        "max_drawdown_usd": -93465.37999999992,
+        "fees_usd": 37349.95999999999,
+        "slippage_usd": 52807.5,
+        "exits": {
+          "stop": 323,
+          "breakeven": 177,
+          "target": 144,
+          "force_close": 7
+        },
+        "ambiguous": 21
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2022-10-02",
+          "end": "2023-04-07",
+          "trades": 157,
+          "win_rate": 0.21019108280254778,
+          "win_rate_ci95": [
+            0.15376493431902044,
+            0.2804610370714657
+          ],
+          "expectancy_r": -0.1816377441625931,
+          "contracts_min": 4,
+          "contracts_median": 28.0,
+          "contracts_max": 87,
+          "planned_risk_usd_median": 979.9399999999999,
+          "return_on_account": -0.2767466,
+          "max_drawdown_pct_of_account": -0.2767466,
+          "expectancy_r_ci95": [
+            -0.34305549042579386,
+            -0.01545502468392442
+          ],
+          "avg_win_r": 1.6965850960033115,
+          "avg_loss_r": -0.6814873709809387,
+          "profit_factor": 0.6640398937345432,
+          "net_pnl_usd": -27674.660000000003,
+          "max_drawdown_usd": -27674.66,
+          "fees_usd": 8426.16,
+          "slippage_usd": 12048.0,
+          "exits": {
+            "stop": 80,
+            "breakeven": 43,
+            "target": 32,
+            "force_close": 2
+          },
+          "ambiguous": 7
+        },
+        {
+          "fold": 2,
+          "start": "2023-04-07",
+          "end": "2023-10-12",
+          "trades": 173,
+          "win_rate": 0.24277456647398843,
+          "win_rate_ci95": [
+            0.18492149300193772,
+            0.3118032595449744
+          ],
+          "expectancy_r": -0.10713405500664934,
+          "contracts_min": 6,
+          "contracts_median": 30.0,
+          "contracts_max": 91,
+          "planned_risk_usd_median": 983.4799999999999,
+          "return_on_account": -0.17916859999999996,
+          "max_drawdown_pct_of_account": -0.22096040000000008,
+          "expectancy_r_ci95": [
+            -0.26037620113357457,
+            0.05360472460262716
+          ],
+          "avg_win_r": 1.6378460007177527,
+          "avg_loss_r": -0.6665933095137095,
+          "profit_factor": 0.7904195104970033,
+          "net_pnl_usd": -17916.859999999997,
+          "max_drawdown_usd": -22096.040000000008,
+          "fees_usd": 10522.36,
+          "slippage_usd": 14754.0,
+          "exits": {
+            "stop": 82,
+            "breakeven": 48,
+            "target": 40,
+            "force_close": 3
+          },
+          "ambiguous": 3
+        },
+        {
+          "fold": 3,
+          "start": "2023-10-12",
+          "end": "2024-04-16",
+          "trades": 159,
+          "win_rate": 0.2641509433962264,
+          "win_rate_ci95": [
+            0.2017702715910234,
+            0.33765945643916057
+          ],
+          "expectancy_r": -0.04343972769078366,
+          "contracts_min": 9,
+          "contracts_median": 30.0,
+          "contracts_max": 80,
+          "planned_risk_usd_median": 983.4799999999999,
+          "return_on_account": -0.06644299999999997,
+          "max_drawdown_pct_of_account": -0.16475019999999996,
+          "expectancy_r_ci95": [
+            -0.20637815750645427,
+            0.13484112297124443
+          ],
+          "avg_win_r": 1.694501270691926,
+          "avg_loss_r": -0.6673159835204742,
+          "profit_factor": 0.9131232608111806,
+          "net_pnl_usd": -6644.299999999997,
+          "max_drawdown_usd": -16475.019999999997,
+          "fees_usd": 9653.8,
+          "slippage_usd": 13213.5,
+          "exits": {
+            "stop": 74,
+            "breakeven": 43,
+            "target": 42
+          },
+          "ambiguous": 4
+        },
+        {
+          "fold": 4,
+          "start": "2024-04-16",
+          "end": "2024-10-21",
+          "trades": 162,
+          "win_rate": 0.19135802469135801,
+          "win_rate_ci95": [
+            0.13821190769127087,
+            0.2588030752804322
+          ],
+          "expectancy_r": -0.2350732038847704,
+          "contracts_min": 5,
+          "contracts_median": 24.0,
+          "contracts_max": 91,
+          "planned_risk_usd_median": 983.4399999999999,
+          "return_on_account": -0.3694864,
+          "max_drawdown_pct_of_account": -0.44162760000000023,
+          "expectancy_r_ci95": [
+            -0.3932500318950971,
+            -0.06735399899380395
+          ],
+          "avg_win_r": 1.733903549962979,
+          "avg_loss_r": -0.7010142677724057,
+          "profit_factor": 0.5872709911982159,
+          "net_pnl_usd": -36948.64,
+          "max_drawdown_usd": -44162.760000000024,
+          "fees_usd": 8747.64,
+          "slippage_usd": 12792.0,
+          "exits": {
+            "stop": 87,
+            "breakeven": 43,
+            "target": 30,
+            "force_close": 2
+          },
+          "ambiguous": 7
+        }
+      ],
+      "by_session": {
+        "london": {
+          "trades": 244,
+          "win_rate": 0.24180327868852458,
+          "win_rate_ci95": [
+            0.1923475354948765,
+            0.29926323525547377
+          ],
+          "expectancy_r": -0.13931516903807978,
+          "contracts_min": 12,
+          "contracts_median": 39.0,
+          "contracts_max": 91,
+          "planned_risk_usd_median": 984.8,
+          "return_on_account": -0.33412299999999995,
+          "max_drawdown_pct_of_account": -0.3341230000000002,
+          "expectancy_r_ci95": [
+            -0.27158310275106123,
+            8.291034130629812e-05
+          ],
+          "avg_win_r": 1.647075667316834,
+          "avg_loss_r": -0.7090290033350521,
+          "profit_factor": 0.741358396541733,
+          "net_pnl_usd": -33412.299999999996,
+          "max_drawdown_usd": -33412.300000000025,
+          "fees_usd": 18489.8,
+          "slippage_usd": 25936.5,
+          "exits": {
+            "stop": 123,
+            "breakeven": 62,
+            "target": 59
+          },
+          "ambiguous": 4
+        },
+        "ny_am": {
+          "trades": 207,
+          "win_rate": 0.21256038647342995,
+          "win_rate_ci95": [
+            0.16232586038470087,
+            0.27326939216508056
+          ],
+          "expectancy_r": -0.14243061127212275,
+          "contracts_min": 5,
+          "contracts_median": 19.0,
+          "contracts_max": 91,
+          "planned_risk_usd_median": 973.98,
+          "return_on_account": -0.2806678000000001,
+          "max_drawdown_pct_of_account": -0.3140120000000001,
+          "expectancy_r_ci95": [
+            -0.28842873118756546,
+            0.0036511907174015825
+          ],
+          "avg_win_r": 1.7966759760978064,
+          "avg_loss_r": -0.6658704262676864,
+          "profit_factor": 0.7327131668962087,
+          "net_pnl_usd": -28066.780000000006,
+          "max_drawdown_usd": -31401.20000000001,
+          "fees_usd": 8236.279999999999,
+          "slippage_usd": 11625.0,
+          "exits": {
+            "stop": 104,
+            "breakeven": 58,
+            "target": 44,
+            "force_close": 1
+          },
+          "ambiguous": 8
+        },
+        "ny_pm": {
+          "trades": 200,
+          "win_rate": 0.225,
+          "win_rate_ci95": [
+            0.17262283786915622,
+            0.28774246538592035
+          ],
+          "expectancy_r": -0.14282027651612006,
+          "contracts_min": 4,
+          "contracts_median": 28.0,
+          "contracts_max": 91,
+          "planned_risk_usd_median": 982.5200000000001,
+          "return_on_account": -0.2770538,
+          "max_drawdown_pct_of_account": -0.31313060000000004,
+          "expectancy_r_ci95": [
+            -0.2838659636340484,
+            0.00921392596171002
+          ],
+          "avg_win_r": 1.6325710288038098,
+          "avg_loss_r": -0.6582564619315837,
+          "profit_factor": 0.7220466874900552,
+          "net_pnl_usd": -27705.38,
+          "max_drawdown_usd": -31313.060000000005,
+          "fees_usd": 10623.88,
+          "slippage_usd": 15246.0,
+          "exits": {
+            "stop": 96,
+            "breakeven": 57,
+            "target": 41,
+            "force_close": 6
+          },
+          "ambiguous": 9
+        }
+      },
+      "events": {
+        "ENTERED": 651,
+        "FAILED_NO_CLOSE_BACK": 511,
+        "INVALIDATED_15M": 288,
+        "WINDOW_ENDED": 91
+      },
+      "skipped_entries": {},
+      "ignored_sweeps": {
+        "outside_window": 10216,
+        "window_done": 351,
+        "setup_active": 272,
+        "position_open": 102
+      },
+      "levels_created": 14054,
+      "force_closes": 7,
+      "ambiguity": {
+        "fill_vs_invalidation": 0,
+        "stop_vs_target": 21,
+        "entry_and_exit_same_minute": 7
+      }
+    },
+    "stop2_slip1": {
+      "stop_offset_ticks": 2,
+      "slippage_ticks": 1,
+      "overall": {
+        "trades": 651,
+        "win_rate": 0.23655913978494625,
+        "win_rate_ci95": [
+          0.20551834647456363,
+          0.27069086198134396
+        ],
+        "expectancy_r": -0.09299098159441259,
+        "contracts_min": 4,
+        "contracts_median": 30.0,
+        "contracts_max": 106,
+        "planned_risk_usd_median": 984.48,
+        "return_on_account": -0.5992096,
+        "max_drawdown_pct_of_account": -0.6449042000000001,
+        "expectancy_r_ci95": [
+          -0.17477434520232651,
+          -0.010846970893433902
+        ],
+        "avg_win_r": 1.7343549857346792,
+        "avg_loss_r": -0.6592108587949763,
+        "profit_factor": 0.8136195169339133,
+        "net_pnl_usd": -59920.96,
+        "max_drawdown_usd": -64490.42000000002,
+        "fees_usd": 39746.96,
+        "slippage_usd": 18582.5,
+        "exits": {
+          "stop": 313,
+          "breakeven": 181,
+          "target": 150,
+          "force_close": 7
+        },
+        "ambiguous": 29
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2022-10-02",
+          "end": "2023-04-07",
+          "trades": 157,
+          "win_rate": 0.2229299363057325,
+          "win_rate_ci95": [
+            0.16488434152646586,
+            0.2942108179347681
+          ],
+          "expectancy_r": -0.11879744631012636,
+          "contracts_min": 4,
+          "contracts_median": 29.0,
+          "contracts_max": 101,
+          "planned_risk_usd_median": 983.8399999999999,
+          "return_on_account": -0.1856284,
+          "max_drawdown_pct_of_account": -0.22646540000000004,
+          "expectancy_r_ci95": [
+            -0.28213583865230607,
+            0.05143492112267282
+          ],
+          "avg_win_r": 1.744972579469144,
+          "avg_loss_r": -0.653485568459917,
+          "profit_factor": 0.7625180898731512,
+          "net_pnl_usd": -18562.84,
+          "max_drawdown_usd": -22646.540000000005,
+          "fees_usd": 8916.84,
+          "slippage_usd": 4216.0,
+          "exits": {
+            "stop": 76,
+            "breakeven": 45,
+            "target": 34,
+            "force_close": 2
+          },
+          "ambiguous": 10
+        },
+        {
+          "fold": 2,
+          "start": "2023-04-07",
+          "end": "2023-10-12",
+          "trades": 173,
+          "win_rate": 0.24855491329479767,
+          "win_rate_ci95": [
+            0.19008569685616644,
+            0.317948611813287
+          ],
+          "expectancy_r": -0.05915627313425539,
+          "contracts_min": 6,
+          "contracts_median": 32.0,
+          "contracts_max": 106,
+          "planned_risk_usd_median": 983.4799999999999,
+          "return_on_account": -0.10312880000000003,
+          "max_drawdown_pct_of_account": -0.1562906,
+          "expectancy_r_ci95": [
+            -0.21731819510648506,
+            0.10570425296115535
+          ],
+          "avg_win_r": 1.6992192383698859,
+          "avg_loss_r": -0.640772788477933,
+          "profit_factor": 0.8740400526270277,
+          "net_pnl_usd": -10312.880000000003,
+          "max_drawdown_usd": -15629.06,
+          "fees_usd": 11187.880000000001,
+          "slippage_usd": 5232.5,
+          "exits": {
+            "stop": 79,
+            "breakeven": 50,
+            "target": 41,
+            "force_close": 3
+          },
+          "ambiguous": 7
+        },
+        {
+          "fold": 3,
+          "start": "2023-10-12",
+          "end": "2024-04-16",
+          "trades": 159,
+          "win_rate": 0.2830188679245283,
+          "win_rate_ci95": [
+            0.21875991541939405,
+            0.35751543436837524
+          ],
+          "expectancy_r": 0.021146479559643144,
+          "contracts_min": 9,
+          "contracts_median": 32.0,
+          "contracts_max": 91,
+          "planned_risk_usd_median": 985.68,
+          "return_on_account": 0.03371120000000001,
+          "max_drawdown_pct_of_account": -0.12992920000000002,
+          "expectancy_r_ci95": [
+            -0.14823728287981364,
+            0.20319590708251642
+          ],
+          "avg_win_r": 1.7383432621365462,
+          "avg_loss_r": -0.6566943556680818,
+          "profit_factor": 1.0457984321218305,
+          "net_pnl_usd": 3371.120000000001,
+          "max_drawdown_usd": -12992.920000000002,
+          "fees_usd": 10294.880000000001,
+          "slippage_usd": 4601.5,
+          "exits": {
+            "stop": 72,
+            "target": 45,
+            "breakeven": 42
+          },
+          "ambiguous": 3
+        },
+        {
+          "fold": 4,
+          "start": "2024-04-16",
+          "end": "2024-10-21",
+          "trades": 162,
+          "win_rate": 0.19135802469135801,
+          "win_rate_ci95": [
+            0.13821190769127087,
+            0.2588030752804322
+          ],
+          "expectancy_r": -0.21613694410512246,
+          "contracts_min": 5,
+          "contracts_median": 25.0,
+          "contracts_max": 106,
+          "planned_risk_usd_median": 984.44,
+          "return_on_account": -0.3441636,
+          "max_drawdown_pct_of_account": -0.4227201999999998,
+          "expectancy_r_ci95": [
+            -0.3782849978791573,
+            -0.0458554482300859
+          ],
+          "avg_win_r": 1.7653146282474486,
+          "avg_loss_r": -0.6850300642801583,
+          "profit_factor": 0.608240433316881,
+          "net_pnl_usd": -34416.36,
+          "max_drawdown_usd": -42272.01999999998,
+          "fees_usd": 9347.359999999999,
+          "slippage_usd": 4532.5,
+          "exits": {
+            "stop": 86,
+            "breakeven": 44,
+            "target": 30,
+            "force_close": 2
+          },
+          "ambiguous": 9
+        }
+      ],
+      "by_session": {
+        "london": {
+          "trades": 244,
+          "win_rate": 0.2581967213114754,
+          "win_rate_ci95": [
+            0.20732949550190438,
+            0.31655995647064594
+          ],
+          "expectancy_r": -0.07667874749678395,
+          "contracts_min": 12,
+          "contracts_median": 41.0,
+          "contracts_max": 106,
+          "planned_risk_usd_median": 985.8599999999999,
+          "return_on_account": -0.18843519999999997,
+          "max_drawdown_pct_of_account": -0.19028000000000006,
+          "expectancy_r_ci95": [
+            -0.21313424709559797,
+            0.0692812773466842
+          ],
+          "avg_win_r": 1.7029060082806438,
+          "avg_loss_r": -0.6960922260270489,
+          "profit_factor": 0.8484857841245336,
+          "net_pnl_usd": -18843.519999999997,
+          "max_drawdown_usd": -19028.000000000007,
+          "fees_usd": 19888.519999999997,
+          "slippage_usd": 9189.5,
+          "exits": {
+            "stop": 120,
+            "target": 63,
+            "breakeven": 61
+          },
+          "ambiguous": 6
+        },
+        "ny_am": {
+          "trades": 207,
+          "win_rate": 0.21256038647342995,
+          "win_rate_ci95": [
+            0.16232586038470087,
+            0.27326939216508056
+          ],
+          "expectancy_r": -0.11986128030563463,
+          "contracts_min": 5,
+          "contracts_median": 19.0,
+          "contracts_max": 106,
+          "planned_risk_usd_median": 982.08,
+          "return_on_account": -0.24303120000000009,
+          "max_drawdown_pct_of_account": -0.27707760000000003,
+          "expectancy_r_ci95": [
+            -0.2670730094847162,
+            0.02820971824018019
+          ],
+          "avg_win_r": 1.8409870866226767,
+          "avg_loss_r": -0.6491700419304548,
+          "profit_factor": 0.7645136872654885,
+          "net_pnl_usd": -24303.12000000001,
+          "max_drawdown_usd": -27707.760000000002,
+          "fees_usd": 8646.119999999999,
+          "slippage_usd": 4083.0,
+          "exits": {
+            "stop": 102,
+            "breakeven": 60,
+            "target": 44,
+            "force_close": 1
+          },
+          "ambiguous": 12
+        },
+        "ny_pm": {
+          "trades": 200,
+          "win_rate": 0.235,
+          "win_rate_ci95": [
+            0.18157345326946356,
+            0.29841492986724655
+          ],
+          "expectancy_r": -0.08508114802740473,
+          "contracts_min": 4,
+          "contracts_median": 29.0,
+          "contracts_max": 106,
+          "planned_risk_usd_median": 983.6599999999999,
+          "return_on_account": -0.1677432,
+          "max_drawdown_pct_of_account": -0.20644560000000012,
+          "expectancy_r_ci95": [
+            -0.22936286147658744,
+            0.06950527623870273
+          ],
+          "avg_win_r": 1.6766842014906869,
+          "avg_loss_r": -0.6262770397094329,
+          "profit_factor": 0.8214093465840374,
+          "net_pnl_usd": -16774.32,
+          "max_drawdown_usd": -20644.560000000012,
+          "fees_usd": 11212.32,
+          "slippage_usd": 5310.0,
+          "exits": {
+            "stop": 91,
+            "breakeven": 60,
+            "target": 43,
+            "force_close": 6
+          },
+          "ambiguous": 11
+        }
+      },
+      "events": {
+        "ENTERED": 651,
+        "FAILED_NO_CLOSE_BACK": 511,
+        "INVALIDATED_15M": 288,
+        "WINDOW_ENDED": 91
+      },
+      "skipped_entries": {},
+      "ignored_sweeps": {
+        "outside_window": 10219,
+        "window_done": 351,
+        "setup_active": 272,
+        "position_open": 99
+      },
+      "levels_created": 14054,
+      "force_closes": 7,
+      "ambiguity": {
+        "fill_vs_invalidation": 0,
+        "stop_vs_target": 29,
+        "entry_and_exit_same_minute": 7
+      }
+    },
+    "stop2_slip2": {
+      "stop_offset_ticks": 2,
+      "slippage_ticks": 2,
+      "overall": {
+        "trades": 651,
+        "win_rate": 0.23348694316436253,
+        "win_rate_ci95": [
+          0.20261019445788409,
+          0.2674906665747688
+        ],
+        "expectancy_r": -0.11402157439034455,
+        "contracts_min": 4,
+        "contracts_median": 29.0,
+        "contracts_max": 96,
+        "planned_risk_usd_median": 983.4799999999999,
+        "return_on_account": -0.716105,
+        "max_drawdown_pct_of_account": -0.7602952000000001,
+        "expectancy_r_ci95": [
+          -0.19540518937758133,
+          -0.03124994234367154
+        ],
+        "avg_win_r": 1.7132305310897986,
+        "avg_loss_r": -0.670619410127783,
+        "profit_factor": 0.7811935705030582,
+        "net_pnl_usd": -71610.5,
+        "max_drawdown_usd": -76029.52,
+        "fees_usd": 38117.0,
+        "slippage_usd": 35760.0,
+        "exits": {
+          "stop": 318,
+          "breakeven": 178,
+          "target": 148,
+          "force_close": 7
+        },
+        "ambiguous": 25
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2022-10-02",
+          "end": "2023-04-07",
+          "trades": 157,
+          "win_rate": 0.21019108280254778,
+          "win_rate_ci95": [
+            0.15376493431902044,
+            0.2804610370714657
+          ],
+          "expectancy_r": -0.1560262228315609,
+          "contracts_min": 4,
+          "contracts_median": 28.0,
+          "contracts_max": 91,
+          "planned_risk_usd_median": 982.5200000000001,
+          "return_on_account": -0.23986100000000002,
+          "max_drawdown_pct_of_account": -0.2524977999999999,
+          "expectancy_r_ci95": [
+            -0.3149811737822109,
+            0.008327856341299924
+          ],
+          "avg_win_r": 1.7249031490134383,
+          "avg_loss_r": -0.6565961363064396,
+          "profit_factor": 0.6992027765627445,
+          "net_pnl_usd": -23986.100000000002,
+          "max_drawdown_usd": -25249.779999999988,
+          "fees_usd": 8591.6,
+          "slippage_usd": 8204.0,
+          "exits": {
+            "stop": 77,
+            "breakeven": 46,
+            "target": 32,
+            "force_close": 2
+          },
+          "ambiguous": 10
+        },
+        {
+          "fold": 2,
+          "start": "2023-04-07",
+          "end": "2023-10-12",
+          "trades": 173,
+          "win_rate": 0.24855491329479767,
+          "win_rate_ci95": [
+            0.19008569685616644,
+            0.317948611813287
+          ],
+          "expectancy_r": -0.07991695819201544,
+          "contracts_min": 6,
+          "contracts_median": 31.0,
+          "contracts_max": 96,
+          "planned_risk_usd_median": 983.4,
+          "return_on_account": -0.1357752,
+          "max_drawdown_pct_of_account": -0.18752660000000004,
+          "expectancy_r_ci95": [
+            -0.2349534562643341,
+            0.08160362184925064
+          ],
+          "avg_win_r": 1.6720873293292233,
+          "avg_loss_r": -0.6594260686798097,
+          "profit_factor": 0.8383650507600255,
+          "net_pnl_usd": -13577.52,
+          "max_drawdown_usd": -18752.660000000003,
+          "fees_usd": 10723.52,
+          "slippage_usd": 10014.0,
+          "exits": {
+            "stop": 81,
+            "breakeven": 48,
+            "target": 41,
+            "force_close": 3
+          },
+          "ambiguous": 5
+        },
+        {
+          "fold": 3,
+          "start": "2023-10-12",
+          "end": "2024-04-16",
+          "trades": 159,
+          "win_rate": 0.27672955974842767,
+          "win_rate_ci95": [
+            0.21308016641771516,
+            0.350913309450859
+          ],
+          "expectancy_r": -0.005054733932312585,
+          "contracts_min": 9,
+          "contracts_median": 31.0,
+          "contracts_max": 84,
+          "planned_risk_usd_median": 984.5999999999999,
+          "return_on_account": -0.002278400000000006,
+          "max_drawdown_pct_of_account": -0.13384519999999997,
+          "expectancy_r_ci95": [
+            -0.17271163849285087,
+            0.1742230699381588
+          ],
+          "avg_win_r": 1.7185729284519133,
+          "avg_loss_r": -0.6645296656271469,
+          "profit_factor": 0.9969519259429315,
+          "net_pnl_usd": -227.8400000000006,
+          "max_drawdown_usd": -13384.519999999997,
+          "fees_usd": 9856.84,
+          "slippage_usd": 8886.0,
+          "exits": {
+            "stop": 73,
+            "target": 44,
+            "breakeven": 42
+          },
+          "ambiguous": 3
+        },
+        {
+          "fold": 4,
+          "start": "2024-04-16",
+          "end": "2024-10-21",
+          "trades": 162,
+          "win_rate": 0.19753086419753085,
+          "win_rate_ci95": [
+            0.14353803306993532,
+            0.2655366502423337
+          ],
+          "expectancy_r": -0.21668266346359796,
+          "contracts_min": 5,
+          "contracts_median": 24.0,
+          "contracts_max": 96,
+          "planned_risk_usd_median": 983.4799999999999,
+          "return_on_account": -0.3381904,
+          "max_drawdown_pct_of_account": -0.4159958,
+          "expectancy_r_ci95": [
+            -0.37873106939343326,
+            -0.048450554008052094
+          ],
+          "avg_win_r": 1.7491335248489126,
+          "avg_loss_r": -0.7005758790482159,
+          "profit_factor": 0.6190954171665571,
+          "net_pnl_usd": -33819.04,
+          "max_drawdown_usd": -41599.58,
+          "fees_usd": 8945.039999999999,
+          "slippage_usd": 8656.0,
+          "exits": {
+            "stop": 87,
+            "breakeven": 42,
+            "target": 31,
+            "force_close": 2
+          },
+          "ambiguous": 7
+        }
+      ],
+      "by_session": {
+        "london": {
+          "trades": 244,
+          "win_rate": 0.2459016393442623,
+          "win_rate_ci95": [
+            0.19608353647488563,
+            0.3035969045810146
+          ],
+          "expectancy_r": -0.11640138756633044,
+          "contracts_min": 12,
+          "contracts_median": 40.0,
+          "contracts_max": 96,
+          "planned_risk_usd_median": 985.72,
+          "return_on_account": -0.27892739999999994,
+          "max_drawdown_pct_of_account": -0.2789274,
+          "expectancy_r_ci95": [
+            -0.2506488931105797,
+            0.025421370526108534
+          ],
+          "avg_win_r": 1.677902448665883,
+          "avg_loss_r": -0.7015004645985737,
+          "profit_factor": 0.7808135020078465,
+          "net_pnl_usd": -27892.739999999994,
+          "max_drawdown_usd": -27892.739999999998,
+          "fees_usd": 18937.239999999998,
+          "slippage_usd": 17646.0,
+          "exits": {
+            "stop": 122,
+            "breakeven": 62,
+            "target": 60
+          },
+          "ambiguous": 5
+        },
+        "ny_am": {
+          "trades": 207,
+          "win_rate": 0.2222222222222222,
+          "win_rate_ci95": [
+            0.1709380064062067,
+            0.2836288342931619
+          ],
+          "expectancy_r": -0.10848047506409238,
+          "contracts_min": 5,
+          "contracts_median": 19.0,
+          "contracts_max": 96,
+          "planned_risk_usd_median": 974.08,
+          "return_on_account": -0.20869519999999997,
+          "max_drawdown_pct_of_account": -0.24969280000000002,
+          "expectancy_r_ci95": [
+            -0.2569332606681022,
+            0.04270682956350124
+          ],
+          "avg_win_r": 1.821296686390015,
+          "avg_loss_r": -0.6598453783366945,
+          "profit_factor": 0.7969520507828082,
+          "net_pnl_usd": -20869.519999999997,
+          "max_drawdown_usd": -24969.280000000002,
+          "fees_usd": 8373.519999999999,
+          "slippage_usd": 7852.0,
+          "exits": {
+            "stop": 102,
+            "breakeven": 58,
+            "target": 46,
+            "force_close": 1
+          },
+          "ambiguous": 10
+        },
+        "ny_pm": {
+          "trades": 200,
+          "win_rate": 0.23,
+          "win_rate_ci95": [
+            0.1770925624139232,
+            0.2930842807819702
+          ],
+          "expectancy_r": -0.11685324011831279,
+          "contracts_min": 4,
+          "contracts_median": 28.5,
+          "contracts_max": 96,
+          "planned_risk_usd_median": 983.42,
+          "return_on_account": -0.2284824,
+          "max_drawdown_pct_of_account": -0.265924,
+          "expectancy_r_ci95": [
+            -0.25788672838263027,
+            0.038483469215499624
+          ],
+          "avg_win_r": 1.651244483299039,
+          "avg_loss_r": -0.6449863263338853,
+          "profit_factor": 0.7650346232983494,
+          "net_pnl_usd": -22848.24,
+          "max_drawdown_usd": -26592.399999999998,
+          "fees_usd": 10806.239999999998,
+          "slippage_usd": 10262.0,
+          "exits": {
+            "stop": 94,
+            "breakeven": 58,
+            "target": 42,
+            "force_close": 6
+          },
+          "ambiguous": 10
+        }
+      },
+      "events": {
+        "ENTERED": 651,
+        "FAILED_NO_CLOSE_BACK": 511,
+        "INVALIDATED_15M": 288,
+        "WINDOW_ENDED": 91
+      },
+      "skipped_entries": {},
+      "ignored_sweeps": {
+        "outside_window": 10218,
+        "window_done": 349,
+        "setup_active": 272,
+        "position_open": 102
+      },
+      "levels_created": 14054,
+      "force_closes": 7,
+      "ambiguity": {
+        "fill_vs_invalidation": 0,
+        "stop_vs_target": 25,
+        "entry_and_exit_same_minute": 7
+      }
+    },
+    "stop2_slip3": {
+      "stop_offset_ticks": 2,
+      "slippage_ticks": 3,
+      "overall": {
+        "trades": 651,
+        "win_rate": 0.22887864823348694,
+        "win_rate_ci95": [
+          0.19825241067428107,
+          0.2626859292234897
+        ],
+        "expectancy_r": -0.13765425054524766,
+        "contracts_min": 4,
+        "contracts_median": 28.0,
+        "contracts_max": 87,
+        "planned_risk_usd_median": 982.5200000000001,
+        "return_on_account": -0.8729607999999999,
+        "max_drawdown_pct_of_account": -0.9079339999999997,
+        "expectancy_r_ci95": [
+          -0.21810650183302194,
+          -0.054886589043988326
+        ],
+        "avg_win_r": 1.6897019417719126,
+        "avg_loss_r": -0.680036865396357,
+        "profit_factor": 0.7385759132375649,
+        "net_pnl_usd": -87296.07999999999,
+        "max_drawdown_usd": -90793.39999999997,
+        "fees_usd": 36643.08,
+        "slippage_usd": 51690.0,
+        "exits": {
+          "stop": 323,
+          "breakeven": 176,
+          "target": 145,
+          "force_close": 7
+        },
+        "ambiguous": 21
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2022-10-02",
+          "end": "2023-04-07",
+          "trades": 157,
+          "win_rate": 0.21656050955414013,
+          "win_rate_ci95": [
+            0.15931387208372824,
+            0.2873466933421318
+          ],
+          "expectancy_r": -0.16502056113975505,
+          "contracts_min": 4,
+          "contracts_median": 27.0,
+          "contracts_max": 84,
+          "planned_risk_usd_median": 983.4399999999999,
+          "return_on_account": -0.2514708,
+          "max_drawdown_pct_of_account": -0.2514707999999999,
+          "expectancy_r_ci95": [
+            -0.3272117676666995,
+            0.004799490535192975
+          ],
+          "avg_win_r": 1.6944435384193253,
+          "avg_loss_r": -0.6790187675219398,
+          "profit_factor": 0.6921344501519429,
+          "net_pnl_usd": -25147.08,
+          "max_drawdown_usd": -25147.079999999987,
+          "fees_usd": 8302.079999999998,
+          "slippage_usd": 11778.0,
+          "exits": {
+            "stop": 79,
+            "breakeven": 43,
+            "target": 33,
+            "force_close": 2
+          },
+          "ambiguous": 7
+        },
+        {
+          "fold": 2,
+          "start": "2023-04-07",
+          "end": "2023-10-12",
+          "trades": 173,
+          "win_rate": 0.24855491329479767,
+          "win_rate_ci95": [
+            0.19008569685616644,
+            0.317948611813287
+          ],
+          "expectancy_r": -0.09423721163222182,
+          "contracts_min": 6,
+          "contracts_median": 30.0,
+          "contracts_max": 87,
+          "planned_risk_usd_median": 981.9599999999999,
+          "return_on_account": -0.1584554,
+          "max_drawdown_pct_of_account": -0.20123259999999996,
+          "expectancy_r_ci95": [
+            -0.24985505037941638,
+            0.07042164444805081
+          ],
+          "avg_win_r": 1.6479702086585946,
+          "avg_loss_r": -0.6705058198822612,
+          "profit_factor": 0.8142773154826844,
+          "net_pnl_usd": -15845.539999999999,
+          "max_drawdown_usd": -20123.259999999995,
+          "fees_usd": 10308.04,
+          "slippage_usd": 14431.5,
+          "exits": {
+            "stop": 82,
+            "breakeven": 47,
+            "target": 41,
+            "force_close": 3
+          },
+          "ambiguous": 3
+        },
+        {
+          "fold": 3,
+          "start": "2023-10-12",
+          "end": "2024-04-16",
+          "trades": 159,
+          "win_rate": 0.2641509433962264,
+          "win_rate_ci95": [
+            0.2017702715910234,
+            0.33765945643916057
+          ],
+          "expectancy_r": -0.042250426383761544,
+          "contracts_min": 9,
+          "contracts_median": 30.0,
+          "contracts_max": 77,
+          "planned_risk_usd_median": 983.4399999999999,
+          "return_on_account": -0.06543279999999999,
+          "max_drawdown_pct_of_account": -0.14708040000000003,
+          "expectancy_r_ci95": [
+            -0.21009012715653336,
+            0.13508067652148234
+          ],
+          "avg_win_r": 1.697132847437744,
+          "avg_loss_r": -0.6666444221145582,
+          "profit_factor": 0.9144336858711648,
+          "net_pnl_usd": -6543.279999999999,
+          "max_drawdown_usd": -14708.040000000003,
+          "fees_usd": 9458.279999999999,
+          "slippage_usd": 12918.0,
+          "exits": {
+            "stop": 74,
+            "breakeven": 43,
+            "target": 42
+          },
+          "ambiguous": 4
+        },
+        {
+          "fold": 4,
+          "start": "2024-04-16",
+          "end": "2024-10-21",
+          "trades": 162,
+          "win_rate": 0.18518518518518517,
+          "win_rate_ci95": [
+            0.1329085654983166,
+            0.25204671713282056
+          ],
+          "expectancy_r": -0.2511347753001372,
+          "contracts_min": 5,
+          "contracts_median": 24.0,
+          "contracts_max": 87,
+          "planned_risk_usd_median": 982.11,
+          "return_on_account": -0.3976018,
+          "max_drawdown_pct_of_account": -0.46244100000000027,
+          "expectancy_r_ci95": [
+            -0.40635819000634726,
+            -0.08656135417845744
+          ],
+          "avg_win_r": 1.7337403484351042,
+          "avg_loss_r": -0.7022427579672373,
+          "profit_factor": 0.56044038897754,
+          "net_pnl_usd": -39760.18,
+          "max_drawdown_usd": -46244.10000000003,
+          "fees_usd": 8574.68,
+          "slippage_usd": 12562.5,
+          "exits": {
+            "stop": 88,
+            "breakeven": 43,
+            "target": 29,
+            "force_close": 2
+          },
+          "ambiguous": 7
+        }
+      ],
+      "by_session": {
+        "london": {
+          "trades": 244,
+          "win_rate": 0.2336065573770492,
+          "win_rate_ci95": [
+            0.18489515213624105,
+            0.2905762780030092
+          ],
+          "expectancy_r": -0.15847044740975808,
+          "contracts_min": 12,
+          "contracts_median": 38.0,
+          "contracts_max": 87,
+          "planned_risk_usd_median": 984.5799999999999,
+          "return_on_account": -0.3789228,
+          "max_drawdown_pct_of_account": -0.3789228,
+          "expectancy_r_ci95": [
+            -0.28945587938187406,
+            -0.021382298209100543
+          ],
+          "avg_win_r": 1.6549288105112756,
+          "avg_loss_r": -0.7112178147974527,
+          "profit_factor": 0.7106002381046211,
+          "net_pnl_usd": -37892.28,
+          "max_drawdown_usd": -37892.28,
+          "fees_usd": 18059.279999999995,
+          "slippage_usd": 25446.0,
+          "exits": {
+            "stop": 125,
+            "breakeven": 62,
+            "target": 57
+          },
+          "ambiguous": 4
+        },
+        "ny_am": {
+          "trades": 207,
+          "win_rate": 0.22705314009661837,
+          "win_rate_ci95": [
+            0.17526015068627562,
+            0.28879248408788666
+          ],
+          "expectancy_r": -0.11200134165498295,
+          "contracts_min": 5,
+          "contracts_median": 18.0,
+          "contracts_max": 87,
+          "planned_risk_usd_median": 976.36,
+          "return_on_account": -0.22479040000000006,
+          "max_drawdown_pct_of_account": -0.2689420000000001,
+          "expectancy_r_ci95": [
+            -0.26221385966639266,
+            0.03911534086223255
+          ],
+          "avg_win_r": 1.791486080076286,
+          "avg_loss_r": -0.671150771788543,
+          "profit_factor": 0.7844013467434772,
+          "net_pnl_usd": -22479.040000000005,
+          "max_drawdown_usd": -26894.200000000015,
+          "fees_usd": 8146.039999999999,
+          "slippage_usd": 11332.5,
+          "exits": {
+            "stop": 103,
+            "breakeven": 56,
+            "target": 47,
+            "force_close": 1
+          },
+          "ambiguous": 8
+        },
+        "ny_pm": {
+          "trades": 200,
+          "win_rate": 0.225,
+          "win_rate_ci95": [
+            0.17262283786915622,
+            0.28774246538592035
+          ],
+          "expectancy_r": -0.13880925107196895,
+          "contracts_min": 4,
+          "contracts_median": 27.5,
+          "contracts_max": 87,
+          "planned_risk_usd_median": 981.56,
+          "return_on_account": -0.2692475999999999,
+          "max_drawdown_pct_of_account": -0.3057119999999999,
+          "expectancy_r_ci95": [
+            -0.27855957956974026,
+            0.010785457062567425
+          ],
+          "avg_win_r": 1.6274400302508194,
+          "avg_loss_r": -0.6515913004882623,
+          "profit_factor": 0.727282782471718,
+          "net_pnl_usd": -26924.759999999995,
+          "max_drawdown_usd": -30571.19999999999,
+          "fees_usd": 10437.759999999998,
+          "slippage_usd": 14911.5,
+          "exits": {
+            "stop": 95,
+            "breakeven": 58,
+            "target": 41,
+            "force_close": 6
+          },
+          "ambiguous": 9
+        }
+      },
+      "events": {
+        "ENTERED": 651,
+        "FAILED_NO_CLOSE_BACK": 511,
+        "INVALIDATED_15M": 288,
+        "WINDOW_ENDED": 91
+      },
+      "skipped_entries": {},
+      "ignored_sweeps": {
+        "outside_window": 10215,
+        "window_done": 350,
+        "setup_active": 272,
+        "position_open": 104
+      },
+      "levels_created": 14054,
+      "force_closes": 7,
+      "ambiguity": {
+        "fill_vs_invalidation": 0,
+        "stop_vs_target": 21,
+        "entry_and_exit_same_minute": 7
+      }
+    },
+    "stop4_slip1": {
+      "stop_offset_ticks": 4,
+      "slippage_ticks": 1,
+      "overall": {
+        "trades": 651,
+        "win_rate": 0.23348694316436253,
+        "win_rate_ci95": [
+          0.20261019445788409,
+          0.2674906665747688
+        ],
+        "expectancy_r": -0.09608075512748128,
+        "contracts_min": 4,
+        "contracts_median": 29.0,
+        "contracts_max": 96,
+        "planned_risk_usd_median": 983.4799999999999,
+        "return_on_account": -0.60018,
+        "max_drawdown_pct_of_account": -0.6460252000000006,
+        "expectancy_r_ci95": [
+          -0.17732642499649828,
+          -0.01332376625813259
+        ],
+        "avg_win_r": 1.7429248825894397,
+        "avg_loss_r": -0.656258825133437,
+        "profit_factor": 0.8125549283581175,
+        "net_pnl_usd": -60018.0,
+        "max_drawdown_usd": -64602.52000000006,
+        "fees_usd": 38117.0,
+        "slippage_usd": 17849.0,
+        "exits": {
+          "stop": 313,
+          "breakeven": 183,
+          "target": 148,
+          "force_close": 7
+        },
+        "ambiguous": 26
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2022-10-02",
+          "end": "2023-04-07",
+          "trades": 157,
+          "win_rate": 0.20382165605095542,
+          "win_rate_ci95": [
+            0.14823821725554062,
+            0.27355316009957154
+          ],
+          "expectancy_r": -0.1461562670502554,
+          "contracts_min": 4,
+          "contracts_median": 28.0,
+          "contracts_max": 91,
+          "planned_risk_usd_median": 982.5200000000001,
+          "return_on_account": -0.224041,
+          "max_drawdown_pct_of_account": -0.22404100000000002,
+          "expectancy_r_ci95": [
+            -0.30343030498932094,
+            0.0186816607640326
+          ],
+          "avg_win_r": 1.7489043129866557,
+          "avg_loss_r": -0.6312917755397045,
+          "profit_factor": 0.7100367927033759,
+          "net_pnl_usd": -22404.1,
+          "max_drawdown_usd": -22404.100000000002,
+          "fees_usd": 8591.6,
+          "slippage_usd": 4108.0,
+          "exits": {
+            "stop": 75,
+            "breakeven": 49,
+            "target": 31,
+            "force_close": 2
+          },
+          "ambiguous": 11
+        },
+        {
+          "fold": 2,
+          "start": "2023-04-07",
+          "end": "2023-10-12",
+          "trades": 173,
+          "win_rate": 0.24855491329479767,
+          "win_rate_ci95": [
+            0.19008569685616644,
+            0.317948611813287
+          ],
+          "expectancy_r": -0.06230437065922141,
+          "contracts_min": 6,
+          "contracts_median": 31.0,
+          "contracts_max": 96,
+          "planned_risk_usd_median": 983.4,
+          "return_on_account": -0.10571520000000001,
+          "max_drawdown_pct_of_account": -0.15987659999999998,
+          "expectancy_r_ci95": [
+            -0.2192465599098954,
+            0.10197194891806097
+          ],
+          "avg_win_r": 1.705811274608014,
+          "avg_loss_r": -0.6471426225553072,
+          "profit_factor": 0.871737760482323,
+          "net_pnl_usd": -10571.52,
+          "max_drawdown_usd": -15987.659999999998,
+          "fees_usd": 10723.52,
+          "slippage_usd": 5007.0,
+          "exits": {
+            "stop": 80,
+            "breakeven": 49,
+            "target": 41,
+            "force_close": 3
+          },
+          "ambiguous": 5
+        },
+        {
+          "fold": 3,
+          "start": "2023-10-12",
+          "end": "2024-04-16",
+          "trades": 159,
+          "win_rate": 0.2830188679245283,
+          "win_rate_ci95": [
+            0.21875991541939405,
+            0.35751543436837524
+          ],
+          "expectancy_r": 0.029907725661911102,
+          "contracts_min": 9,
+          "contracts_median": 31.0,
+          "contracts_max": 84,
+          "planned_risk_usd_median": 984.5999999999999,
+          "return_on_account": 0.05274159999999998,
+          "max_drawdown_pct_of_account": -0.12113219999999998,
+          "expectancy_r_ci95": [
+            -0.1399134661346876,
+            0.21349789075422151
+          ],
+          "avg_win_r": 1.7498162212078228,
+          "avg_loss_r": -0.6490035225798961,
+          "profit_factor": 1.0729122486096772,
+          "net_pnl_usd": 5274.159999999998,
+          "max_drawdown_usd": -12113.219999999998,
+          "fees_usd": 9856.84,
+          "slippage_usd": 4406.0,
+          "exits": {
+            "stop": 71,
+            "target": 45,
+            "breakeven": 43
+          },
+          "ambiguous": 3
+        },
+        {
+          "fold": 4,
+          "start": "2024-04-16",
+          "end": "2024-10-21",
+          "trades": 162,
+          "win_rate": 0.19753086419753085,
+          "win_rate_ci95": [
+            0.14353803306993532,
+            0.2655366502423337
+          ],
+          "expectancy_r": -0.20727598714381965,
+          "contracts_min": 5,
+          "contracts_median": 24.0,
+          "contracts_max": 96,
+          "planned_risk_usd_median": 983.4799999999999,
+          "return_on_account": -0.3231654,
+          "max_drawdown_pct_of_account": -0.4050558,
+          "expectancy_r_ci95": [
+            -0.37112390407593737,
+            -0.03637503715684453
+          ],
+          "avg_win_r": 1.777125917985162,
+          "avg_loss_r": -0.6957441484063381,
+          "profit_factor": 0.6334647572430786,
+          "net_pnl_usd": -32316.539999999997,
+          "max_drawdown_usd": -40505.58,
+          "fees_usd": 8945.039999999999,
+          "slippage_usd": 4328.0,
+          "exits": {
+            "stop": 87,
+            "breakeven": 42,
+            "target": 31,
+            "force_close": 2
+          },
+          "ambiguous": 7
+        }
+      ],
+      "by_session": {
+        "london": {
+          "trades": 244,
+          "win_rate": 0.25,
+          "win_rate_ci95": [
+            0.19982593157059225,
+            0.30792417979085807
+          ],
+          "expectancy_r": -0.0836620312147299,
+          "contracts_min": 12,
+          "contracts_median": 40.0,
+          "contracts_max": 96,
+          "planned_risk_usd_median": 985.72,
+          "return_on_account": -0.19992239999999994,
+          "max_drawdown_pct_of_account": -0.19992239999999994,
+          "expectancy_r_ci95": [
+            -0.21989460084846624,
+            0.06103625563975953
+          ],
+          "avg_win_r": 1.7165155042983993,
+          "avg_loss_r": -0.6837212097191062,
+          "profit_factor": 0.8379149326291354,
+          "net_pnl_usd": -19992.239999999994,
+          "max_drawdown_usd": -19992.239999999994,
+          "fees_usd": 18937.239999999998,
+          "slippage_usd": 8786.0,
+          "exits": {
+            "stop": 119,
+            "breakeven": 64,
+            "target": 61
+          },
+          "ambiguous": 6
+        },
+        "ny_am": {
+          "trades": 207,
+          "win_rate": 0.21739130434782608,
+          "win_rate_ci95": [
+            0.1666264936284419,
+            0.27845455299613314
+          ],
+          "expectancy_r": -0.10579472638886805,
+          "contracts_min": 5,
+          "contracts_median": 19.0,
+          "contracts_max": 96,
+          "planned_risk_usd_median": 974.08,
+          "return_on_account": -0.2026952,
+          "max_drawdown_pct_of_account": -0.23701559999999997,
+          "expectancy_r_ci95": [
+            -0.2551727987955944,
+            0.0456128092039522
+          ],
+          "avg_win_r": 1.8430829915645133,
+          "avg_loss_r": -0.647149648042585,
+          "profit_factor": 0.800102958782956,
+          "net_pnl_usd": -20269.52,
+          "max_drawdown_usd": -23701.559999999998,
+          "fees_usd": 8373.519999999999,
+          "slippage_usd": 3932.0,
+          "exits": {
+            "stop": 101,
+            "breakeven": 60,
+            "target": 45,
+            "force_close": 1
+          },
+          "ambiguous": 10
+        },
+        "ny_pm": {
+          "trades": 200,
+          "win_rate": 0.23,
+          "win_rate_ci95": [
+            0.1770925624139232,
+            0.2930842807819702
+          ],
+          "expectancy_r": -0.10117763804550264,
+          "contracts_min": 4,
+          "contracts_median": 28.5,
+          "contracts_max": 96,
+          "planned_risk_usd_median": 983.42,
+          "return_on_account": -0.19756240000000003,
+          "max_drawdown_pct_of_account": -0.236304,
+          "expectancy_r_ci95": [
+            -0.24556832947699814,
+            0.05618329353715453
+          ],
+          "avg_win_r": 1.6799652558910736,
+          "avg_loss_r": -0.6332073336369474,
+          "profit_factor": 0.793011076015015,
+          "net_pnl_usd": -19756.24,
+          "max_drawdown_usd": -23630.399999999998,
+          "fees_usd": 10806.239999999998,
+          "slippage_usd": 5131.0,
+          "exits": {
+            "stop": 93,
+            "breakeven": 59,
+            "target": 42,
+            "force_close": 6
+          },
+          "ambiguous": 10
+        }
+      },
+      "events": {
+        "ENTERED": 651,
+        "FAILED_NO_CLOSE_BACK": 511,
+        "INVALIDATED_15M": 288,
+        "WINDOW_ENDED": 91
+      },
+      "skipped_entries": {},
+      "ignored_sweeps": {
+        "outside_window": 10212,
+        "window_done": 349,
+        "setup_active": 272,
+        "position_open": 108
+      },
+      "levels_created": 14054,
+      "force_closes": 7,
+      "ambiguity": {
+        "fill_vs_invalidation": 0,
+        "stop_vs_target": 26,
+        "entry_and_exit_same_minute": 6
+      }
+    },
+    "stop4_slip2": {
+      "stop_offset_ticks": 4,
+      "slippage_ticks": 2,
+      "overall": {
+        "trades": 651,
+        "win_rate": 0.23195084485407066,
+        "win_rate_ci95": [
+          0.2011570032389429,
+          0.26588968408208263
+        ],
+        "expectancy_r": -0.11406619216543286,
+        "contracts_min": 4,
+        "contracts_median": 28.0,
+        "contracts_max": 87,
+        "planned_risk_usd_median": 982.5200000000001,
+        "return_on_account": -0.7220308,
+        "max_drawdown_pct_of_account": -0.758449,
+        "expectancy_r_ci95": [
+          -0.1941927177832154,
+          -0.03152897696520058
+        ],
+        "avg_win_r": 1.7237920131310467,
+        "avg_loss_r": -0.6690993701649696,
+        "profit_factor": 0.7793300624230898,
+        "net_pnl_usd": -72203.08,
+        "max_drawdown_usd": -75844.90000000001,
+        "fees_usd": 36643.08,
+        "slippage_usd": 34441.0,
+        "exits": {
+          "stop": 318,
+          "breakeven": 179,
+          "target": 147,
+          "force_close": 7
+        },
+        "ambiguous": 21
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2022-10-02",
+          "end": "2023-04-07",
+          "trades": 157,
+          "win_rate": 0.21656050955414013,
+          "win_rate_ci95": [
+            0.15931387208372824,
+            0.2873466933421318
+          ],
+          "expectancy_r": -0.14323794999825318,
+          "contracts_min": 4,
+          "contracts_median": 27.0,
+          "contracts_max": 84,
+          "planned_risk_usd_median": 983.4399999999999,
+          "return_on_account": -0.21787080000000003,
+          "max_drawdown_pct_of_account": -0.21787079999999995,
+          "expectancy_r_ci95": [
+            -0.30478512547147896,
+            0.027234787680485702
+          ],
+          "avg_win_r": 1.7238661135951652,
+          "avg_loss_r": -0.6593480163574095,
+          "profit_factor": 0.7252887502581674,
+          "net_pnl_usd": -21787.08,
+          "max_drawdown_usd": -21787.079999999994,
+          "fees_usd": 8302.079999999998,
+          "slippage_usd": 7852.0,
+          "exits": {
+            "stop": 77,
+            "breakeven": 45,
+            "target": 33,
+            "force_close": 2
+          },
+          "ambiguous": 8
+        },
+        {
+          "fold": 2,
+          "start": "2023-04-07",
+          "end": "2023-10-12",
+          "trades": 173,
+          "win_rate": 0.2543352601156069,
+          "win_rate_ci95": [
+            0.19526466018654676,
+            0.3240792046054479
+          ],
+          "expectancy_r": -0.06607000591905261,
+          "contracts_min": 6,
+          "contracts_median": 30.0,
+          "contracts_max": 87,
+          "planned_risk_usd_median": 981.9599999999999,
+          "return_on_account": -0.11037539999999998,
+          "max_drawdown_pct_of_account": -0.15525759999999997,
+          "expectancy_r_ci95": [
+            -0.22621156112756144,
+            0.09931099808127283
+          ],
+          "avg_win_r": 1.686017002080754,
+          "avg_loss_r": -0.6636810784151107,
+          "profit_factor": 0.8682662359858458,
+          "net_pnl_usd": -11037.539999999999,
+          "max_drawdown_usd": -15525.759999999997,
+          "fees_usd": 10308.04,
+          "slippage_usd": 9609.0,
+          "exits": {
+            "stop": 81,
+            "breakeven": 47,
+            "target": 42,
+            "force_close": 3
+          },
+          "ambiguous": 3
+        },
+        {
+          "fold": 3,
+          "start": "2023-10-12",
+          "end": "2024-04-16",
+          "trades": 159,
+          "win_rate": 0.2578616352201258,
+          "win_rate_ci95": [
+            0.19614084074136878,
+            0.3310070133696201
+          ],
+          "expectancy_r": -0.029512198916670476,
+          "contracts_min": 9,
+          "contracts_median": 30.0,
+          "contracts_max": 77,
+          "planned_risk_usd_median": 983.4399999999999,
+          "return_on_account": -0.045467799999999996,
+          "max_drawdown_pct_of_account": -0.15038300000000004,
+          "expectancy_r_ci95": [
+            -0.1944870908150367,
+            0.14349927692863365
+          ],
+          "avg_win_r": 1.7390460625667807,
+          "avg_loss_r": -0.6440112558727851,
+          "profit_factor": 0.9389597770172106,
+          "net_pnl_usd": -4546.78,
+          "max_drawdown_usd": -15038.300000000005,
+          "fees_usd": 9458.279999999999,
+          "slippage_usd": 8683.0,
+          "exits": {
+            "stop": 72,
+            "breakeven": 46,
+            "target": 41
+          },
+          "ambiguous": 3
+        },
+        {
+          "fold": 4,
+          "start": "2024-04-16",
+          "end": "2024-10-21",
+          "trades": 162,
+          "win_rate": 0.19753086419753085,
+          "win_rate_ci95": [
+            0.14353803306993532,
+            0.2655366502423337
+          ],
+          "expectancy_r": -0.2200381623347181,
+          "contracts_min": 5,
+          "contracts_median": 24.0,
+          "contracts_max": 87,
+          "planned_risk_usd_median": 982.11,
+          "return_on_account": -0.3483167999999999,
+          "max_drawdown_pct_of_account": -0.41691600000000034,
+          "expectancy_r_ci95": [
+            -0.3816136820703172,
+            -0.049688723733513185
+          ],
+          "avg_win_r": 1.7561096707425374,
+          "avg_loss_r": -0.7064745520152733,
+          "profit_factor": 0.611320549226785,
+          "net_pnl_usd": -34831.67999999999,
+          "max_drawdown_usd": -41691.600000000035,
+          "fees_usd": 8574.68,
+          "slippage_usd": 8297.0,
+          "exits": {
+            "stop": 88,
+            "breakeven": 41,
+            "target": 31,
+            "force_close": 2
+          },
+          "ambiguous": 7
+        }
+      ],
+      "by_session": {
+        "london": {
+          "trades": 244,
+          "win_rate": 0.2336065573770492,
+          "win_rate_ci95": [
+            0.18489515213624105,
+            0.2905762780030092
+          ],
+          "expectancy_r": -0.1341632104916672,
+          "contracts_min": 12,
+          "contracts_median": 38.0,
+          "contracts_max": 87,
+          "planned_risk_usd_median": 984.5799999999999,
+          "return_on_account": -0.32018779999999997,
+          "max_drawdown_pct_of_account": -0.3201878000000002,
+          "expectancy_r_ci95": [
+            -0.2677187731116746,
+            0.005538419150510015
+          ],
+          "avg_win_r": 1.6943967856664714,
+          "avg_loss_r": -0.6915317654703512,
+          "profit_factor": 0.748467929067453,
+          "net_pnl_usd": -32018.78,
+          "max_drawdown_usd": -32018.78000000002,
+          "fees_usd": 18059.279999999995,
+          "slippage_usd": 16960.0,
+          "exits": {
+            "stop": 122,
+            "breakeven": 65,
+            "target": 57
+          },
+          "ambiguous": 5
+        },
+        "ny_am": {
+          "trades": 207,
+          "win_rate": 0.22705314009661837,
+          "win_rate_ci95": [
+            0.17526015068627562,
+            0.28879248408788666
+          ],
+          "expectancy_r": -0.0991663501419324,
+          "contracts_min": 5,
+          "contracts_median": 18.0,
+          "contracts_max": 87,
+          "planned_risk_usd_median": 976.36,
+          "return_on_account": -0.19855540000000002,
+          "max_drawdown_pct_of_account": -0.24829700000000007,
+          "expectancy_r_ci95": [
+            -0.2489530210499909,
+            0.05468765038152541
+          ],
+          "avg_win_r": 1.822256232652933,
+          "avg_loss_r": -0.6635842338379241,
+          "profit_factor": 0.8073588004120693,
+          "net_pnl_usd": -19855.54,
+          "max_drawdown_usd": -24829.700000000008,
+          "fees_usd": 8146.039999999999,
+          "slippage_usd": 7595.0,
+          "exits": {
+            "stop": 102,
+            "breakeven": 57,
+            "target": 47,
+            "force_close": 1
+          },
+          "ambiguous": 8
+        },
+        "ny_pm": {
+          "trades": 200,
+          "win_rate": 0.235,
+          "win_rate_ci95": [
+            0.18157345326946356,
+            0.29841492986724655
+          ],
+          "expectancy_r": -0.1049691663017499,
+          "contracts_min": 4,
+          "contracts_median": 27.5,
+          "contracts_max": 87,
+          "planned_risk_usd_median": 981.56,
+          "return_on_account": -0.20328759999999996,
+          "max_drawdown_pct_of_account": -0.2410119999999999,
+          "expectancy_r_ci95": [
+            -0.24740766061035435,
+            0.05146572125730174
+          ],
+          "avg_win_r": 1.6609773247896018,
+          "avg_loss_r": -0.6474494609507272,
+          "profit_factor": 0.7900666664188206,
+          "net_pnl_usd": -20328.759999999995,
+          "max_drawdown_usd": -24101.19999999999,
+          "fees_usd": 10437.759999999998,
+          "slippage_usd": 9886.0,
+          "exits": {
+            "stop": 94,
+            "breakeven": 57,
+            "target": 43,
+            "force_close": 6
+          },
+          "ambiguous": 8
+        }
+      },
+      "events": {
+        "ENTERED": 651,
+        "FAILED_NO_CLOSE_BACK": 511,
+        "INVALIDATED_15M": 288,
+        "WINDOW_ENDED": 91
+      },
+      "skipped_entries": {},
+      "ignored_sweeps": {
+        "outside_window": 10212,
+        "window_done": 348,
+        "setup_active": 272,
+        "position_open": 109
+      },
+      "levels_created": 14054,
+      "force_closes": 7,
+      "ambiguity": {
+        "fill_vs_invalidation": 0,
+        "stop_vs_target": 21,
+        "entry_and_exit_same_minute": 6
+      }
+    },
+    "stop4_slip3": {
+      "stop_offset_ticks": 4,
+      "slippage_ticks": 3,
+      "overall": {
+        "trades": 651,
+        "win_rate": 0.22427035330261136,
+        "win_rate_ci95": [
+          0.19390005953401304,
+          0.25787575922887557
+        ],
+        "expectancy_r": -0.1455049895516838,
+        "contracts_min": 4,
+        "contracts_median": 27.0,
+        "contracts_max": 80,
+        "planned_risk_usd_median": 982.5200000000001,
+        "return_on_account": -0.9247707999999999,
+        "max_drawdown_pct_of_account": -0.9598406000000007,
+        "expectancy_r_ci95": [
+          -0.22453888046905338,
+          -0.06425517324596049
+        ],
+        "avg_win_r": 1.7043499887895683,
+        "avg_loss_r": -0.6803145476463826,
+        "profit_factor": 0.7248638139982573,
+        "net_pnl_usd": -92477.07999999999,
+        "max_drawdown_usd": -95984.06000000007,
+        "fees_usd": 35327.079999999994,
+        "slippage_usd": 50130.0,
+        "exits": {
+          "stop": 325,
+          "breakeven": 177,
+          "target": 142,
+          "force_close": 7
+        },
+        "ambiguous": 22
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2022-10-02",
+          "end": "2023-04-07",
+          "trades": 157,
+          "win_rate": 0.21019108280254778,
+          "win_rate_ci95": [
+            0.15376493431902044,
+            0.2804610370714657
+          ],
+          "expectancy_r": -0.18412732255139477,
+          "contracts_min": 4,
+          "contracts_median": 27.0,
+          "contracts_max": 77,
+          "planned_risk_usd_median": 981.1200000000001,
+          "return_on_account": -0.2836982,
+          "max_drawdown_pct_of_account": -0.2836982000000001,
+          "expectancy_r_ci95": [
+            -0.34610155114466307,
+            -0.015931560761185157
+          ],
+          "avg_win_r": 1.7148914635902057,
+          "avg_loss_r": -0.6895113543471433,
+          "profit_factor": 0.6608650351425907,
+          "net_pnl_usd": -28369.82,
+          "max_drawdown_usd": -28369.82000000001,
+          "fees_usd": 8016.32,
+          "slippage_usd": 11500.5,
+          "exits": {
+            "stop": 81,
+            "breakeven": 42,
+            "target": 32,
+            "force_close": 2
+          },
+          "ambiguous": 7
+        },
+        {
+          "fold": 2,
+          "start": "2023-04-07",
+          "end": "2023-10-12",
+          "trades": 173,
+          "win_rate": 0.24855491329479767,
+          "win_rate_ci95": [
+            0.19008569685616644,
+            0.317948611813287
+          ],
+          "expectancy_r": -0.10155668144506257,
+          "contracts_min": 6,
+          "contracts_median": 29.0,
+          "contracts_max": 80,
+          "planned_risk_usd_median": 984.5999999999999,
+          "return_on_account": -0.17452220000000002,
+          "max_drawdown_pct_of_account": -0.21504239999999994,
+          "expectancy_r_ci95": [
+            -0.25845262097516425,
+            0.061224309289477724
+          ],
+          "avg_win_r": 1.6578187652097602,
+          "avg_loss_r": -0.68350394456935,
+          "profit_factor": 0.8002766246030644,
+          "net_pnl_usd": -17452.22,
+          "max_drawdown_usd": -21504.239999999994,
+          "fees_usd": 9952.720000000001,
+          "slippage_usd": 13938.0,
+          "exits": {
+            "stop": 84,
+            "breakeven": 45,
+            "target": 41,
+            "force_close": 3
+          },
+          "ambiguous": 4
+        },
+        {
+          "fold": 3,
+          "start": "2023-10-12",
+          "end": "2024-04-16",
+          "trades": 159,
+          "win_rate": 0.25157232704402516,
+          "win_rate_ci95": [
+            0.1905289368296746,
+            0.32433704336211916
+          ],
+          "expectancy_r": -0.049809514338798724,
+          "contracts_min": 9,
+          "contracts_median": 29.0,
+          "contracts_max": 72,
+          "planned_risk_usd_median": 982.2600000000001,
+          "return_on_account": -0.07371340000000003,
+          "max_drawdown_pct_of_account": -0.15311579999999997,
+          "expectancy_r_ci95": [
+            -0.21479034441544265,
+            0.12299520155734983
+          ],
+          "avg_win_r": 1.7186261042175048,
+          "avg_loss_r": -0.6442416550299931,
+          "profit_factor": 0.9016858675585266,
+          "net_pnl_usd": -7371.340000000003,
+          "max_drawdown_usd": -15311.579999999998,
+          "fees_usd": 9104.84,
+          "slippage_usd": 12603.0,
+          "exits": {
+            "stop": 72,
+            "breakeven": 47,
+            "target": 40
+          },
+          "ambiguous": 4
+        },
+        {
+          "fold": 4,
+          "start": "2024-04-16",
+          "end": "2024-10-21",
+          "trades": 162,
+          "win_rate": 0.18518518518518517,
+          "win_rate_ci95": [
+            0.1329085654983166,
+            0.25204671713282056
+          ],
+          "expectancy_r": -0.24893049313402701,
+          "contracts_min": 5,
+          "contracts_median": 23.0,
+          "contracts_max": 80,
+          "planned_risk_usd_median": 981.9599999999999,
+          "return_on_account": -0.392837,
+          "max_drawdown_pct_of_account": -0.45829980000000026,
+          "expectancy_r_ci95": [
+            -0.40468026611986546,
+            -0.08387652588494011
+          ],
+          "avg_win_r": 1.7404142997360101,
+          "avg_loss_r": -0.7010543096953992,
+          "profit_factor": 0.5640036323689265,
+          "net_pnl_usd": -39283.7,
+          "max_drawdown_usd": -45829.980000000025,
+          "fees_usd": 8253.2,
+          "slippage_usd": 12088.5,
+          "exits": {
+            "stop": 88,
+            "breakeven": 43,
+            "target": 29,
+            "force_close": 2
+          },
+          "ambiguous": 7
+        }
+      ],
+      "by_session": {
+        "london": {
+          "trades": 244,
+          "win_rate": 0.22950819672131148,
+          "win_rate_ci95": [
+            0.1811790003335207,
+            0.2862227595001796
+          ],
+          "expectancy_r": -0.1576639680474359,
+          "contracts_min": 12,
+          "contracts_median": 37.0,
+          "contracts_max": 80,
+          "planned_risk_usd_median": 984.7199999999999,
+          "return_on_account": -0.3814138,
+          "max_drawdown_pct_of_account": -0.3814138000000002,
+          "expectancy_r_ci95": [
+            -0.2904392654134543,
+            -0.018048769362885516
+          ],
+          "avg_win_r": 1.6716524564806057,
+          "avg_loss_r": -0.7025667328004697,
+          "profit_factor": 0.7071049888490443,
+          "net_pnl_usd": -38141.380000000005,
+          "max_drawdown_usd": -38141.38000000002,
+          "fees_usd": 17297.879999999997,
+          "slippage_usd": 24457.5,
+          "exits": {
+            "stop": 124,
+            "breakeven": 64,
+            "target": 56
+          },
+          "ambiguous": 6
+        },
+        "ny_am": {
+          "trades": 207,
+          "win_rate": 0.21739130434782608,
+          "win_rate_ci95": [
+            0.1666264936284419,
+            0.27845455299613314
+          ],
+          "expectancy_r": -0.13598921928250568,
+          "contracts_min": 5,
+          "contracts_median": 18.0,
+          "contracts_max": 80,
+          "planned_risk_usd_median": 975.8,
+          "return_on_account": -0.2738018,
+          "max_drawdown_pct_of_account": -0.3065374000000002,
+          "expectancy_r_ci95": [
+            -0.28405433788067136,
+            0.015050342141106171
+          ],
+          "avg_win_r": 1.8152942108160715,
+          "avg_loss_r": -0.6780123943098882,
+          "profit_factor": 0.7432941426633892,
+          "net_pnl_usd": -27380.18,
+          "max_drawdown_usd": -30653.740000000016,
+          "fees_usd": 7916.68,
+          "slippage_usd": 11226.0,
+          "exits": {
+            "stop": 105,
+            "breakeven": 56,
+            "target": 45,
+            "force_close": 1
+          },
+          "ambiguous": 7
+        },
+        "ny_pm": {
+          "trades": 200,
+          "win_rate": 0.225,
+          "win_rate_ci95": [
+            0.17262283786915622,
+            0.28774246538592035
+          ],
+          "expectancy_r": -0.14051985801546568,
+          "contracts_min": 4,
+          "contracts_median": 27.0,
+          "contracts_max": 80,
+          "planned_risk_usd_median": 981.52,
+          "return_on_account": -0.2695552,
+          "max_drawdown_pct_of_account": -0.3069723999999998,
+          "expectancy_r_ci95": [
+            -0.2810104951992545,
+            0.011491174260658469
+          ],
+          "avg_win_r": 1.634096029191997,
+          "avg_loss_r": -0.6557309220434387,
+          "profit_factor": 0.7283588129967645,
+          "net_pnl_usd": -26955.52,
+          "max_drawdown_usd": -30697.23999999998,
+          "fees_usd": 10112.519999999999,
+          "slippage_usd": 14446.5,
+          "exits": {
+            "stop": 96,
+            "breakeven": 57,
+            "target": 41,
+            "force_close": 6
+          },
+          "ambiguous": 9
+        }
+      },
+      "events": {
+        "ENTERED": 651,
+        "FAILED_NO_CLOSE_BACK": 511,
+        "INVALIDATED_15M": 288,
+        "WINDOW_ENDED": 91
+      },
+      "skipped_entries": {},
+      "ignored_sweeps": {
+        "outside_window": 10211,
+        "window_done": 342,
+        "setup_active": 272,
+        "position_open": 116
+      },
+      "levels_created": 14054,
+      "force_closes": 7,
+      "ambiguity": {
+        "fill_vs_invalidation": 0,
+        "stop_vs_target": 22,
+        "entry_and_exit_same_minute": 6
+      }
+    }
+  },
+  "selection": {
+    "rule": "max over stop offsets of the minimum fold expectancy at 2-tick slippage",
+    "worst_fold_by_offset": {
+      "1": -0.21273221018046695,
+      "2": -0.21668266346359796,
+      "4": -0.2200381623347181
+    },
+    "selected_stop_offset": 1
+  }
+}
